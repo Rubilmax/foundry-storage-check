@@ -46,7 +46,7 @@ jobs:
       # Add any step generating a storage layout to a temporary file named storage_layout.json
       # For example:
       - name: Generate storage layout
-        run: forge inspect contracts/compound/Morpho.sol:Morpho storage-layout | tee storage_layout.json
+        run: forge inspect contracts/compound/Morpho.sol:Morpho storage-layout | tee storage_layout.json # <- this file name should be unique in your repository!
 
       - name: Check storage layout
         uses: Rubilmax/foundry-storage-diff@v1.0
