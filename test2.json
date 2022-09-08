@@ -1,0 +1,4682 @@
+{
+  "0": {
+    "astId": 16,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_initialized",
+    "offset": 0,
+    "slot": "0",
+    "type": "bool",
+    "startByte": 0,
+    "bytesLength": 1
+  },
+  "1": {
+    "astId": 18,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_initializing",
+    "offset": 1,
+    "slot": "0",
+    "type": "bool",
+    "startByte": 1,
+    "bytesLength": 1
+  },
+  "32": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "33": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "34": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "35": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "36": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "37": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "38": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "39": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "40": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "41": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "42": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "43": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "44": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "45": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "46": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "47": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "48": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "49": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "50": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "51": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "52": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "53": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "54": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "55": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "56": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "57": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "58": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "59": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "60": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "61": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "62": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "63": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "64": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "65": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "66": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "67": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "68": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "69": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "70": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "71": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "72": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "73": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "74": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "75": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "76": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "77": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "78": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "79": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "80": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "81": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "82": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "83": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "84": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "85": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "86": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "87": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "88": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "89": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "90": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "91": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "92": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "93": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "94": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "95": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "96": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "97": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "98": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "99": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "100": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "101": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "102": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "103": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "104": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "105": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "106": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "107": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "108": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "109": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "110": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "111": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "112": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "113": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "114": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "115": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "116": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "117": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "118": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "119": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "120": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "121": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "122": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "123": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "124": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "125": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "126": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "127": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "128": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "129": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "130": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "131": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "132": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "133": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "134": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "135": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "136": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "137": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "138": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "139": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "140": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "141": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "142": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "143": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "144": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "145": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "146": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "147": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "148": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "149": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "150": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "151": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "152": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "153": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "154": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "155": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "156": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "157": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "158": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "159": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "160": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "161": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "162": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "163": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "164": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "165": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "166": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "167": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "168": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "169": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "170": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "171": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "172": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "173": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "174": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "175": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "176": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "177": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "178": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "179": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "180": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "181": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "182": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "183": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "184": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "185": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "186": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "187": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "188": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "189": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "190": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "191": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "192": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "193": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "194": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "195": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "196": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "197": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "198": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "199": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "200": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "201": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "202": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "203": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "204": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "205": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "206": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "207": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "208": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "209": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "210": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "211": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "212": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "213": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "214": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "215": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "216": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "217": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "218": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "219": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "220": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "221": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "222": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "223": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "224": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "225": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "226": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "227": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "228": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "229": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "230": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "231": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "232": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "233": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "234": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "235": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "236": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "237": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "238": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "239": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "240": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "241": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "242": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "243": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "244": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "245": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "246": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "247": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "248": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "249": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "250": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "251": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "252": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "253": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "254": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "255": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "256": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "257": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "258": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "259": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "260": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "261": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "262": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "263": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "264": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "265": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "266": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "267": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "268": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "269": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "270": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "271": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "272": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "273": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "274": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "275": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "276": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "277": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "278": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "279": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "280": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "281": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "282": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "283": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "284": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "285": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "286": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "287": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "288": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "289": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "290": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "291": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "292": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "293": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "294": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "295": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "296": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "297": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "298": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "299": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "300": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "301": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "302": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "303": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "304": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "305": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "306": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "307": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "308": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "309": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "310": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "311": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "312": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "313": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "314": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "315": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "316": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "317": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "318": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "319": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "320": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "321": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "322": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "323": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "324": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "325": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "326": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "327": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "328": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "329": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "330": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "331": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "332": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "333": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "334": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "335": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "336": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "337": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "338": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "339": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "340": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "341": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "342": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "343": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "344": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "345": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "346": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "347": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "348": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "349": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "350": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "351": {
+    "astId": 22,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "__gap",
+    "offset": 0,
+    "slot": "1",
+    "type": "uint256[10]",
+    "startByte": 32,
+    "bytesLength": 320
+  },
+  "352": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "353": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "354": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "355": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "356": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "357": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "358": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "359": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "360": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "361": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "362": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "363": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "364": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "365": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "366": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "367": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "368": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "369": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "370": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "371": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "372": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "373": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "374": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "375": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "376": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "377": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "378": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "379": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "380": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "381": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "382": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "383": {
+    "astId": 26,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "structs",
+    "offset": 0,
+    "slot": "11",
+    "type": "Struct[]",
+    "startByte": 352,
+    "bytesLength": 32
+  },
+  "384": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "385": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "386": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "387": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "388": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "389": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "390": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "391": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "392": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "393": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "394": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "395": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "396": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "397": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "398": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "399": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "400": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "401": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "402": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "403": {
+    "astId": 28,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "_owner",
+    "offset": 0,
+    "slot": "12",
+    "type": "address",
+    "startByte": 384,
+    "bytesLength": 20
+  },
+  "416": {
+    "astId": 3,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.a",
+    "offset": 0,
+    "slot": "13",
+    "type": "bool",
+    "startByte": 416,
+    "bytesLength": 1
+  },
+  "417": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "418": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "419": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "420": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "421": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "422": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "423": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "424": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "425": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "426": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "427": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "428": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "429": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "430": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "431": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "432": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "433": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "434": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "435": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "436": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "437": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "438": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "439": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "440": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "441": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "442": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "443": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "444": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "445": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "446": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "447": {
+    "astId": 31,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "myStruct",
+    "offset": 0,
+    "slot": "13",
+    "type": "Struct",
+    "startByte": 416,
+    "bytesLength": 63
+  },
+  "448": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "449": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "450": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "451": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "452": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "453": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "454": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "455": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "456": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "457": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "458": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "459": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "460": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "461": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "462": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "463": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "464": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "465": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "466": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "467": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "468": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "469": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "470": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "471": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "472": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "473": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "474": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "475": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "476": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "477": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "478": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "479": {
+    "astId": 5,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.b",
+    "offset": 0,
+    "slot": "14",
+    "type": "uint256",
+    "startByte": 448,
+    "bytesLength": 32
+  },
+  "480": {
+    "astId": 7,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.c",
+    "offset": 0,
+    "slot": "15",
+    "type": "uint32",
+    "startByte": 480,
+    "bytesLength": 4
+  },
+  "481": {
+    "astId": 7,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.c",
+    "offset": 0,
+    "slot": "15",
+    "type": "uint32",
+    "startByte": 480,
+    "bytesLength": 4
+  },
+  "482": {
+    "astId": 7,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.c",
+    "offset": 0,
+    "slot": "15",
+    "type": "uint32",
+    "startByte": 480,
+    "bytesLength": 4
+  },
+  "483": {
+    "astId": 7,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.c",
+    "offset": 0,
+    "slot": "15",
+    "type": "uint32",
+    "startByte": 480,
+    "bytesLength": 4
+  },
+  "484": {
+    "astId": 9,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.d",
+    "offset": 4,
+    "slot": "15",
+    "type": "uint32",
+    "startByte": 484,
+    "bytesLength": 4
+  },
+  "485": {
+    "astId": 9,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.d",
+    "offset": 4,
+    "slot": "15",
+    "type": "uint32",
+    "startByte": 484,
+    "bytesLength": 4
+  },
+  "486": {
+    "astId": 9,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.d",
+    "offset": 4,
+    "slot": "15",
+    "type": "uint32",
+    "startByte": 484,
+    "bytesLength": 4
+  },
+  "487": {
+    "astId": 9,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.d",
+    "offset": 4,
+    "slot": "15",
+    "type": "uint32",
+    "startByte": 484,
+    "bytesLength": 4
+  },
+  "488": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "489": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "490": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "491": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "492": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "493": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "494": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "495": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "496": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "497": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "498": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "499": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "500": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "501": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "502": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "503": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "504": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "505": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "506": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "507": {
+    "astId": 11,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.e",
+    "offset": 8,
+    "slot": "15",
+    "type": "address",
+    "startByte": 488,
+    "bytesLength": 20
+  },
+  "508": {
+    "astId": 13,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.f",
+    "offset": 28,
+    "slot": "15",
+    "type": "uint16",
+    "startByte": 508,
+    "bytesLength": 2
+  },
+  "509": {
+    "astId": 13,
+    "contract": "tests/mocks/contracts/StorageStructExtended.sol:Storage",
+    "label": "(Struct)myStruct.f",
+    "offset": 28,
+    "slot": "15",
+    "type": "uint16",
+    "startByte": 508,
+    "bytesLength": 2
+  }
+}
