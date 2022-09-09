@@ -1,6 +1,6 @@
-# 🔥🛠️ Foundry Storage Diff Reporter
+# 🔥🛠️ Foundry Storage Upgrade Seatbelt
 
-- Protect your Smart Contract Proxy from storage collisions when upgrading, by running this action in a CI on each of your Pull Requests!
+- Protect your Smart Contract Proxy from storage collisions upon upgrading, by running this action in a CI on each of your Pull Requests!
 
 ## How it works
 
