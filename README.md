@@ -12,7 +12,7 @@ Once generated, the action will fetch the comparative storage layout stored as a
 
 ### Automatically generate & compare to the previous storage layout on every PR
 
-Add a workflow (`.github/workflows/foundry-storage-diff.yml`):
+Add a workflow (`.github/workflows/foundry-storage-check.yml`):
 
 ```yaml
 name: Check storage layout
@@ -28,7 +28,7 @@ on:
     # - test/**
     # - foundry.toml
     # - remappings.txt
-    # - .github/workflows/foundry-storage-diff.yml
+    # - .github/workflows/foundry-storage-check.yml
 
 jobs:
   check_storage_layout:
@@ -49,7 +49,7 @@ jobs:
         run: forge inspect contracts/compound/Morpho.sol:Morpho storage-layout | tee storage_layout.json # <- this file name should be unique in your repository!
 
       - name: Check storage layout
-        uses: Rubilmax/foundry-storage-diff@v1.0
+        uses: Rubilmax/foundry-storage-check@v1.0
 ```
 
 > :information_source: **An error will appear at first run!**<br/>

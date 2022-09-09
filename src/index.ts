@@ -7,6 +7,7 @@ import * as core from "@actions/core";
 import { context, getOctokit } from "@actions/github";
 
 import { checkLayouts } from "./check";
+import { formatDiff } from "./format";
 import { StorageLayoutReport } from "./types";
 
 const token = process.env.GITHUB_TOKEN || core.getInput("token");
@@ -117,8 +118,8 @@ async function run() {
     core.endGroup();
 
     core.startGroup("Check storage layout");
-    const diff = checkLayouts(sourceLayout, compareLayout);
-    if (diff) return core.setFailed(`Storage layout changes are detected unsafe: ${diff}`);
+    const diff = formatDiff(checkLayouts(sourceLayout, compareLayout));
+    if (diff) return core.setFailed(diff);
     core.endGroup();
   } catch (error: any) {
     core.setFailed(error.message);

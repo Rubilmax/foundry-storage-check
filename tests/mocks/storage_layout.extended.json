@@ -59,8 +59,16 @@
     {
       "astId": 36,
       "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
-      "label": "_testAddress",
+      "label": "added",
       "offset": 0,
+      "slot": "25",
+      "type": "t_uint8"
+    },
+    {
+      "astId": 38,
+      "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+      "label": "_testAddress",
+      "offset": 1,
       "slot": "25",
       "type": "t_address"
     }
@@ -150,6 +158,11 @@
       "encoding": "inplace",
       "label": "uint256",
       "numberOfBytes": "32"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
     }
   }
 }

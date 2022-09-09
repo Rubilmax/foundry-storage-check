@@ -11,76 +11,152 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.checkLayouts = void 0;
-const fs_1 = __importDefault(__nccwpck_require__(7147));
 const range_1 = __importDefault(__nccwpck_require__(9826));
-const getVariableTypeBytesLength = (layout, variableType) => {
-    var _a, _b;
-    const varType = layout.types[variableType];
-    if (!varType) {
-        if (variableType.includes("t_array")) {
-            const [, arrayType, arrayLength] = variableType.match(/t_array\((.*)\)(\d+)/) || [];
-            return getVariableTypeBytesLength(layout, arrayType) * Number(arrayLength) * 32;
-        }
-        return 1;
-    }
-    return ((_b = (_a = varType.members) === null || _a === void 0 ? void 0 : _a.reduce((total, member) => total + getVariableTypeBytesLength(layout, member.type), 0)) !== null && _b !== void 0 ? _b : Number(varType.numberOfBytes));
-};
+const types_1 = __nccwpck_require__(8164);
 const getVariableTypeName = (layout, variableType) => {
-    if (variableType.startsWith("t_array")) {
-        const [, arrayType, arrayLength] = variableType.match(/^t_array\((.*)\)(\d+)?/) || [];
-        return `${getVariableTypeName(layout, arrayType)}[${arrayLength !== null && arrayLength !== void 0 ? arrayLength : ""}]`;
-    }
-    if (variableType.startsWith("t_struct")) {
-        const [, arrayType] = variableType.match(/^t_struct\((.*)\)(\d+|dyn)_storage/) || [];
-        return getVariableTypeName(layout, arrayType);
-    }
+    const type = layout.types[variableType];
+    if (type)
+        return type.label;
     return variableType.replace(/^t_/, "");
 };
 const getStorageVariableBytesMapping = (layout, variable, startByte) => {
     var _a;
-    const variableDetails = Object.assign(Object.assign({}, variable), { type: getVariableTypeName(layout, variable.type), startByte, bytesLength: getVariableTypeBytesLength(layout, variable.type) });
+    const variableDetails = Object.assign(Object.assign({}, variable), { type: getVariableTypeName(layout, variable.type), startByte });
     const varType = layout.types[variable.type];
-    return ((_a = varType === null || varType === void 0 ? void 0 : varType.members) !== null && _a !== void 0 ? _a : []).reduce((acc, member) => (Object.assign(Object.assign({}, acc), getStorageVariableBytesMapping(layout, Object.assign(Object.assign({}, member), { label: `(${variableDetails.type})${variableDetails.label}.${member.label}`, slot: (Number(variableDetails.slot) + Number(member.slot)).toString() }), startByte + Number(member.slot) * 32 + member.offset))), Object.fromEntries((0, range_1.default)(variableDetails.bytesLength).map((byteIndex) => [
-        startByte + byteIndex,
-        variableDetails,
-    ])));
+    return ((_a = varType === null || varType === void 0 ? void 0 : varType.members) !== null && _a !== void 0 ? _a : []).reduce((acc, member) => (Object.assign(Object.assign({}, acc), getStorageVariableBytesMapping(layout, Object.assign(Object.assign({}, member), { label: `(${variableDetails.type})${variableDetails.label}.${member.label}`, slot: (Number(variableDetails.slot) + Number(member.slot)).toString() }), startByte + Number(member.slot) * 32 + member.offset))), 
+    // don't populate if type has members because all reserved bytes may not be actually used: used bytes will get populated via reducing (see above)
+    varType.members
+        ? {}
+        : Object.fromEntries((0, range_1.default)(Number(varType.numberOfBytes)).map((byteIndex) => [
+            startByte + byteIndex,
+            variableDetails,
+        ])));
 };
 const getStorageBytesMapping = (layout) => layout.storage.reduce((acc, variable) => {
     const startByte = Number(variable.slot) * 32 + variable.offset;
     return Object.assign(Object.assign({}, acc), getStorageVariableBytesMapping(layout, variable, startByte));
 }, {});
-const checkLayouts = (sourceLayout, compareLayout) => {
-    const srcMapping = getStorageBytesMapping(sourceLayout);
-    const cmpMapping = getStorageBytesMapping(compareLayout);
-    fs_1.default.writeFileSync("test.json", JSON.stringify(srcMapping, null, 2));
-    fs_1.default.writeFileSync("test2.json", JSON.stringify(cmpMapping, null, 2));
+const checkLayouts = (srcLayout, cmpLayout, checktypes = true) => {
+    const srcMapping = getStorageBytesMapping(srcLayout);
+    const cmpMapping = getStorageBytesMapping(cmpLayout);
     for (const slot of Object.keys(cmpMapping)) {
         const srcSlotVar = srcMapping[slot];
         const cmpSlotVar = cmpMapping[slot];
         if (!srcSlotVar)
             continue; // source slot was unused
-        if (srcSlotVar.label === "__gap" && srcSlotVar.type.includes("uint256["))
-            continue; // source slot was a gap slot
         if (cmpSlotVar.label === srcSlotVar.label &&
             cmpSlotVar.offset === srcSlotVar.offset &&
             cmpSlotVar.slot === srcSlotVar.slot &&
             cmpSlotVar.type === srcSlotVar.type &&
-            cmpSlotVar.startByte === srcSlotVar.startByte &&
-            cmpSlotVar.bytesLength === srcSlotVar.bytesLength)
+            cmpSlotVar.startByte === srcSlotVar.startByte)
             continue; // variable did not change
+        if (srcSlotVar.label === "__gap" || cmpSlotVar.label === "__gap")
+            continue; // source slot was a gap slot or is replaced with a gap slot
         if (cmpSlotVar.label !== srcSlotVar.label) {
             if (cmpSlotVar.label.startsWith(`(${srcSlotVar.type})${srcSlotVar.label}`))
                 continue; // variable is a member of source struct, in empty slot
             if (cmpSlotVar.type === srcSlotVar.type)
-                return `Label diff at storage slot #${srcSlotVar.slot}, bytes #${srcSlotVar.offset}: variable "${srcSlotVar.label}" was renamed to "${cmpSlotVar.label}". Is it intentional?`;
-            return `Variable diff at storage slot #${srcSlotVar.slot}, bytes #${srcSlotVar.offset}: variable "${srcSlotVar.label}" of type "${srcSlotVar.type}" was replaced by variable "${cmpSlotVar.label}" of type "${cmpSlotVar.type}".`;
+                return {
+                    location: {
+                        slot: srcSlotVar.slot,
+                        offset: srcSlotVar.offset,
+                    },
+                    type: types_1.StorageLayoutDiffType.LABEL,
+                    src: srcSlotVar,
+                    cmp: cmpSlotVar,
+                };
+            return {
+                location: {
+                    slot: srcSlotVar.slot,
+                    offset: srcSlotVar.offset,
+                },
+                type: types_1.StorageLayoutDiffType.VARIABLE,
+                src: srcSlotVar,
+                cmp: cmpSlotVar,
+            };
         }
-        if (cmpSlotVar.type !== srcSlotVar.type) {
-            return `Type diff at storage slot #${srcSlotVar.slot}, bytes #${srcSlotVar.offset}: variable "${srcSlotVar.label}" was of type "${srcSlotVar.type}" but is now "${cmpSlotVar.type}".`;
-        }
+        if (cmpSlotVar.type !== srcSlotVar.type)
+            return {
+                location: {
+                    slot: srcSlotVar.slot,
+                    offset: srcSlotVar.offset,
+                },
+                type: types_1.StorageLayoutDiffType.VARIABLE_TYPE,
+                src: srcSlotVar,
+                cmp: cmpSlotVar,
+            };
+    }
+    if (!checktypes)
+        return;
+    // At this point, storage layout is sound but mappings storage may not:
+    // Let's check for type changes to make sure mappings with arrays or structs are not messed up
+    const srcTypesWithMembers = Object.fromEntries(Object.keys(srcLayout.types)
+        .filter((type) => srcLayout.types[type].members)
+        .map((type) => [srcLayout.types[type].label, srcLayout.types[type]]));
+    const cmpTypesWithMembers = Object.fromEntries(Object.keys(cmpLayout.types)
+        .filter((type) => cmpLayout.types[type].members)
+        .map((type) => [cmpLayout.types[type].label, cmpLayout.types[type]]));
+    for (const srcTypeLabel of Object.keys(srcTypesWithMembers)) {
+        const srcType = srcTypesWithMembers[srcTypeLabel];
+        const cmpType = cmpTypesWithMembers[srcTypeLabel];
+        if (!cmpType)
+            return {
+                location: srcType.label,
+                type: types_1.StorageLayoutDiffType.TYPE_REMOVED,
+                src: { label: srcType.label, type: srcType.label },
+                cmp: { label: srcType.label, type: srcType.label },
+            };
+        if (!cmpType.members)
+            return {
+                location: srcType.label,
+                type: types_1.StorageLayoutDiffType.TYPE_CHANGED,
+                src: { label: srcType.label, type: srcType.label },
+                cmp: { label: srcType.label, type: srcType.label },
+            };
+        const diff = (0, exports.checkLayouts)(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        { storage: srcType.members, types: srcLayout.types }, { storage: cmpType.members, types: cmpLayout.types }, false);
+        if (diff)
+            return Object.assign(Object.assign({}, diff), { parent: srcType.label });
     }
 };
 exports.checkLayouts = checkLayouts;
+
+
+/***/ }),
+
+/***/ 6610:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.formatDiff = void 0;
+const types_1 = __nccwpck_require__(8164);
+const formatDiff = (diff) => {
+    if (!diff)
+        return;
+    const location = (diff.parent || "storage") +
+        " " +
+        (typeof diff.location === "string"
+            ? diff.location
+            : `slot #${diff.location.slot}, byte #${diff.location.offset}`);
+    switch (diff.type) {
+        case types_1.StorageLayoutDiffType.LABEL:
+            return `Label diff at ${location}: variable "${diff.src.label}" was renamed to "${diff.cmp.label}". Is it intentional?`;
+        case types_1.StorageLayoutDiffType.VARIABLE_TYPE:
+            return `Variable type diff at ${location}: variable "${diff.src.label}" was of type "${diff.src.type}" but is now "${diff.cmp.type}".`;
+        case types_1.StorageLayoutDiffType.TYPE_REMOVED:
+            return `Type diff: type "${diff.src.label}" was removed.`;
+        case types_1.StorageLayoutDiffType.TYPE_CHANGED:
+            return `Type diff: type "${diff.src.label}" was changed.`;
+        case types_1.StorageLayoutDiffType.VARIABLE:
+            return `Variable diff at ${location}: variable "${diff.src.label}" of type "${diff.src.type}" was replaced by variable "${diff.cmp.label}" of type "${diff.cmp.type}".`;
+        default:
+            return `Storage layout diff at ${location}: variable "${diff.src.label}" of type "${diff.src.type}" was replaced by variable "${diff.cmp.label}" of type "${diff.cmp.type}".`;
+    }
+};
+exports.formatDiff = formatDiff;
 
 
 /***/ }),
@@ -140,6 +216,7 @@ const artifact = __importStar(__nccwpck_require__(2605));
 const core = __importStar(__nccwpck_require__(2186));
 const github_1 = __nccwpck_require__(5438);
 const check_1 = __nccwpck_require__(7657);
+const format_1 = __nccwpck_require__(6610);
 const token = process.env.GITHUB_TOKEN || core.getInput("token");
 const report = core.getInput("report");
 const baseBranch = core.getInput("base");
@@ -237,9 +314,9 @@ function run() {
             const compareLayout = JSON.parse(cmpContent);
             core.endGroup();
             core.startGroup("Check storage layout");
-            const diff = (0, check_1.checkLayouts)(sourceLayout, compareLayout);
+            const diff = (0, format_1.formatDiff)((0, check_1.checkLayouts)(sourceLayout, compareLayout));
             if (diff)
-                return core.setFailed(`Storage layout changes are detected unsafe: ${diff}`);
+                return core.setFailed(diff);
             core.endGroup();
         }
         catch (error) {
@@ -248,6 +325,26 @@ function run() {
     });
 }
 run();
+
+
+/***/ }),
+
+/***/ 8164:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StorageLayoutDiffType = void 0;
+var StorageLayoutDiffType;
+(function (StorageLayoutDiffType) {
+    StorageLayoutDiffType["LABEL"] = "LABEL";
+    StorageLayoutDiffType["TYPE_REMOVED"] = "TYPE_REMOVED";
+    StorageLayoutDiffType["TYPE_CHANGED"] = "TYPE_CHANGED";
+    StorageLayoutDiffType["SLOT"] = "SLOT";
+    StorageLayoutDiffType["VARIABLE"] = "VARIABLE";
+    StorageLayoutDiffType["VARIABLE_TYPE"] = "VARIABLE_TYPE";
+})(StorageLayoutDiffType = exports.StorageLayoutDiffType || (exports.StorageLayoutDiffType = {}));
 
 
 /***/ }),

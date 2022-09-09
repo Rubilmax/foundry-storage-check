@@ -5,18 +5,16 @@ contract Storage {
   struct Struct {
     bool a;
     uint256 b;
-    uint16 c;
-    uint16 d;
+    uint32 c;
+    uint32 d;
     address e;
+    uint16 f;
   }
 
   bool _initialized;
   bool _initializing;
+  mapping(address => mapping(address => mapping(uint256 => Struct))) nestedMapping;
   uint256[10] __gap;
-  Struct[] structs;
   address _owner;
-  Struct[3] fixedStructs;
-  Struct myStruct;
-  uint8 added;
-  address _testAddress;
+  mapping(address => Struct) structOf;
 }

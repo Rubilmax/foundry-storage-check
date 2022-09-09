@@ -17,4 +17,5 @@ contract Storage {
   address _owner;
   Struct[3] fixedStructs;
   Struct myStruct;
+  uint8 added;
 }

@@ -55,6 +55,14 @@
       "offset": 0,
       "slot": "22",
       "type": "t_struct(Struct)12_storage"
+    },
+    {
+      "astId": 36,
+      "contract": "tests/mocks/contracts/StorageRef.sol:Storage",
+      "label": "added",
+      "offset": 0,
+      "slot": "25",
+      "type": "t_uint8"
     }
   ],
   "types": {
@@ -142,6 +150,11 @@
       "encoding": "inplace",
       "label": "uint256",
       "numberOfBytes": "32"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
     }
   }
 }

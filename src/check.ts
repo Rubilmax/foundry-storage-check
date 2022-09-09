@@ -1,49 +1,23 @@
-import fs from "fs";
 import _range from "lodash/range";
 
-import { StorageLayoutReport, StorageVariable } from "./types";
+import {
+  StorageLayoutDiff,
+  StorageLayoutDiffType,
+  StorageLayoutReport,
+  StorageVariable,
+} from "./types";
 
 interface StorageVariableDetails extends StorageVariable {
   startByte: number;
-  bytesLength: number;
 }
 
 interface StorageBytesMapping {
   [byte: string]: StorageVariableDetails;
 }
 
-const getVariableTypeBytesLength = (layout: StorageLayoutReport, variableType: string): number => {
-  const varType = layout.types[variableType];
-
-  if (!varType) {
-    if (variableType.includes("t_array")) {
-      const [, arrayType, arrayLength] = variableType.match(/t_array\((.*)\)(\d+)/) || [];
-      return getVariableTypeBytesLength(layout, arrayType) * Number(arrayLength) * 32;
-    }
-
-    return 1;
-  }
-
-  return (
-    varType.members?.reduce(
-      (total, member) => total + getVariableTypeBytesLength(layout, member.type),
-      0
-    ) ?? Number(varType.numberOfBytes)
-  );
-};
-
 const getVariableTypeName = (layout: StorageLayoutReport, variableType: string): string => {
-  if (variableType.startsWith("t_array")) {
-    const [, arrayType, arrayLength] = variableType.match(/^t_array\((.*)\)(\d+)?/) || [];
-
-    return `${getVariableTypeName(layout, arrayType)}[${arrayLength ?? ""}]`;
-  }
-
-  if (variableType.startsWith("t_struct")) {
-    const [, arrayType] = variableType.match(/^t_struct\((.*)\)(\d+|dyn)_storage/) || [];
-
-    return getVariableTypeName(layout, arrayType);
-  }
+  const type = layout.types[variableType];
+  if (type) return type.label;
 
   return variableType.replace(/^t_/, "");
 };
@@ -57,7 +31,6 @@ const getStorageVariableBytesMapping = (
     ...variable,
     type: getVariableTypeName(layout, variable.type),
     startByte,
-    bytesLength: getVariableTypeBytesLength(layout, variable.type),
   };
 
   const varType = layout.types[variable.type];
@@ -74,12 +47,15 @@ const getStorageVariableBytesMapping = (
         startByte + Number(member.slot) * 32 + member.offset
       ),
     }),
-    Object.fromEntries(
-      _range(variableDetails.bytesLength).map((byteIndex) => [
-        startByte + byteIndex,
-        variableDetails,
-      ])
-    )
+    // don't populate if type has members because all reserved bytes may not be actually used: used bytes will get populated via reducing (see above)
+    varType.members
+      ? {}
+      : Object.fromEntries(
+          _range(Number(varType.numberOfBytes)).map((byteIndex) => [
+            startByte + byteIndex,
+            variableDetails,
+          ])
+        )
   );
 };
 
@@ -94,42 +70,104 @@ const getStorageBytesMapping = (layout: StorageLayoutReport): StorageBytesMappin
   }, {});
 
 export const checkLayouts = (
-  sourceLayout: StorageLayoutReport,
-  compareLayout: StorageLayoutReport
-): string | undefined => {
-  const srcMapping = getStorageBytesMapping(sourceLayout);
-  const cmpMapping = getStorageBytesMapping(compareLayout);
-
-  fs.writeFileSync("test.json", JSON.stringify(srcMapping, null, 2));
-  fs.writeFileSync("test2.json", JSON.stringify(cmpMapping, null, 2));
+  srcLayout: StorageLayoutReport,
+  cmpLayout: StorageLayoutReport,
+  checktypes = true
+): StorageLayoutDiff | undefined => {
+  const srcMapping = getStorageBytesMapping(srcLayout);
+  const cmpMapping = getStorageBytesMapping(cmpLayout);
 
   for (const slot of Object.keys(cmpMapping)) {
     const srcSlotVar = srcMapping[slot];
     const cmpSlotVar = cmpMapping[slot];
 
     if (!srcSlotVar) continue; // source slot was unused
-    if (srcSlotVar.label === "__gap" && srcSlotVar.type.includes("uint256[")) continue; // source slot was a gap slot
     if (
       cmpSlotVar.label === srcSlotVar.label &&
       cmpSlotVar.offset === srcSlotVar.offset &&
       cmpSlotVar.slot === srcSlotVar.slot &&
       cmpSlotVar.type === srcSlotVar.type &&
-      cmpSlotVar.startByte === srcSlotVar.startByte &&
-      cmpSlotVar.bytesLength === srcSlotVar.bytesLength
+      cmpSlotVar.startByte === srcSlotVar.startByte
     )
       continue; // variable did not change
+    if (srcSlotVar.label === "__gap" || cmpSlotVar.label === "__gap") continue; // source slot was a gap slot or is replaced with a gap slot
 
     if (cmpSlotVar.label !== srcSlotVar.label) {
       if (cmpSlotVar.label.startsWith(`(${srcSlotVar.type})${srcSlotVar.label}`)) continue; // variable is a member of source struct, in empty slot
 
       if (cmpSlotVar.type === srcSlotVar.type)
-        return `Label diff at storage slot #${srcSlotVar.slot}, bytes #${srcSlotVar.offset}: variable "${srcSlotVar.label}" was renamed to "${cmpSlotVar.label}". Is it intentional?`;
+        return {
+          location: {
+            slot: srcSlotVar.slot,
+            offset: srcSlotVar.offset,
+          },
+          type: StorageLayoutDiffType.LABEL,
+          src: srcSlotVar,
+          cmp: cmpSlotVar,
+        };
 
-      return `Variable diff at storage slot #${srcSlotVar.slot}, bytes #${srcSlotVar.offset}: variable "${srcSlotVar.label}" of type "${srcSlotVar.type}" was replaced by variable "${cmpSlotVar.label}" of type "${cmpSlotVar.type}".`;
+      return {
+        location: {
+          slot: srcSlotVar.slot,
+          offset: srcSlotVar.offset,
+        },
+        type: StorageLayoutDiffType.VARIABLE,
+        src: srcSlotVar,
+        cmp: cmpSlotVar,
+      };
     }
 
-    if (cmpSlotVar.type !== srcSlotVar.type) {
-      return `Type diff at storage slot #${srcSlotVar.slot}, bytes #${srcSlotVar.offset}: variable "${srcSlotVar.label}" was of type "${srcSlotVar.type}" but is now "${cmpSlotVar.type}".`;
-    }
+    if (cmpSlotVar.type !== srcSlotVar.type)
+      return {
+        location: {
+          slot: srcSlotVar.slot,
+          offset: srcSlotVar.offset,
+        },
+        type: StorageLayoutDiffType.VARIABLE_TYPE,
+        src: srcSlotVar,
+        cmp: cmpSlotVar,
+      };
+  }
+
+  if (!checktypes) return;
+
+  // At this point, storage layout is sound but mappings storage may not:
+  // Let's check for type changes to make sure mappings with arrays or structs are not messed up
+  const srcTypesWithMembers = Object.fromEntries(
+    Object.keys(srcLayout.types)
+      .filter((type) => srcLayout.types[type].members)
+      .map((type) => [srcLayout.types[type].label, srcLayout.types[type]])
+  );
+  const cmpTypesWithMembers = Object.fromEntries(
+    Object.keys(cmpLayout.types)
+      .filter((type) => cmpLayout.types[type].members)
+      .map((type) => [cmpLayout.types[type].label, cmpLayout.types[type]])
+  );
+  for (const srcTypeLabel of Object.keys(srcTypesWithMembers)) {
+    const srcType = srcTypesWithMembers[srcTypeLabel];
+    const cmpType = cmpTypesWithMembers[srcTypeLabel];
+
+    if (!cmpType)
+      return {
+        location: srcType.label,
+        type: StorageLayoutDiffType.TYPE_REMOVED,
+        src: { label: srcType.label, type: srcType.label },
+        cmp: { label: srcType.label, type: srcType.label },
+      };
+    if (!cmpType.members)
+      return {
+        location: srcType.label,
+        type: StorageLayoutDiffType.TYPE_CHANGED,
+        src: { label: srcType.label, type: srcType.label },
+        cmp: { label: srcType.label, type: srcType.label },
+      };
+
+    const diff = checkLayouts(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      { storage: srcType.members!, types: srcLayout.types },
+      { storage: cmpType.members, types: cmpLayout.types },
+      false
+    );
+    if (diff) return { ...diff, parent: srcType.label };
   }
 };

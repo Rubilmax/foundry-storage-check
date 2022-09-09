@@ -1,17 +1,17 @@
 {
   "abi": [],
   "bytecode": {
-    "object": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220a8d3ee06d09853c4bc2a00105e37ac3931a591bc706063aaa10172ffa8abaeae64736f6c63430008100033",
-    "sourceMap": "64:299:0:-:0;;;;;;;;;;;;;;;;;;;",
+    "object": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220fe402d01f78f2441aeed6c077293392bd5e466da38d626c56d8832ed75503b3364736f6c63430008100033",
+    "sourceMap": "64:318:0:-:0;;;;;;;;;;;;;;;;;;;",
     "linkReferences": {}
   },
   "deployedBytecode": {
-    "object": "0x6080604052600080fdfea2646970667358221220a8d3ee06d09853c4bc2a00105e37ac3931a591bc706063aaa10172ffa8abaeae64736f6c63430008100033",
-    "sourceMap": "64:299:0:-:0;;;;;",
+    "object": "0x6080604052600080fdfea2646970667358221220fe402d01f78f2441aeed6c077293392bd5e466da38d626c56d8832ed75503b3364736f6c63430008100033",
+    "sourceMap": "64:318:0:-:0;;;;;",
     "linkReferences": {}
   },
   "methodIdentifiers": {},
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.16+commit.07a7930e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"tests/mocks/contracts/StorageExtended.sol\":\"Storage\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"tests/mocks/contracts/StorageExtended.sol\":{\"keccak256\":\"0xd26e3b35794610cb5bbaf1268b48da5466efc7c8394d44a4de04c1ce5b390787\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://c34bd844b6f2374b05695096ab8ef52ff5d9e85f9feb2321ae2a43cb22a35949\",\"dweb:/ipfs/QmPYXkToFnuuV6E7ZLZ95MtyqjmXdFUmLLNzaVGQwp7eEy\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.16+commit.07a7930e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"tests/mocks/contracts/StorageMappingRef.sol\":\"Storage\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"tests/mocks/contracts/StorageMappingRef.sol\":{\"keccak256\":\"0xdbac988086a92e117a65bcf9da858f29fb6398f8719eb3a302d0f53009840d05\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://8e526186dba61adf4474944b0874f7f168f29d701628851152908e511c327b77\",\"dweb:/ipfs/QmTCVkW3xZLExyZVYu777hnPtxfVx7LpQar3oyvzG67kf4\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.16+commit.07a7930e"
@@ -40,16 +40,16 @@
         "bytecodeHash": "ipfs"
       },
       "compilationTarget": {
-        "tests/mocks/contracts/StorageExtended.sol": "Storage"
+        "tests/mocks/contracts/StorageMappingRef.sol": "Storage"
       },
       "libraries": {}
     },
     "sources": {
-      "tests/mocks/contracts/StorageExtended.sol": {
-        "keccak256": "0xd26e3b35794610cb5bbaf1268b48da5466efc7c8394d44a4de04c1ce5b390787",
+      "tests/mocks/contracts/StorageMappingRef.sol": {
+        "keccak256": "0xdbac988086a92e117a65bcf9da858f29fb6398f8719eb3a302d0f53009840d05",
         "urls": [
-          "bzz-raw://c34bd844b6f2374b05695096ab8ef52ff5d9e85f9feb2321ae2a43cb22a35949",
-          "dweb:/ipfs/QmPYXkToFnuuV6E7ZLZ95MtyqjmXdFUmLLNzaVGQwp7eEy"
+          "bzz-raw://8e526186dba61adf4474944b0874f7f168f29d701628851152908e511c327b77",
+          "dweb:/ipfs/QmTCVkW3xZLExyZVYu777hnPtxfVx7LpQar3oyvzG67kf4"
         ],
         "license": "UNLICENSED"
       }
@@ -60,7 +60,7 @@
     "storage": [
       {
         "astId": 14,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+        "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
         "label": "_initialized",
         "offset": 0,
         "slot": "0",
@@ -68,67 +68,43 @@
       },
       {
         "astId": 16,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+        "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
         "label": "_initializing",
         "offset": 1,
         "slot": "0",
         "type": "t_bool"
       },
       {
-        "astId": 20,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
-        "label": "__gap",
+        "astId": 25,
+        "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
+        "label": "nestedMapping",
         "offset": 0,
         "slot": "1",
+        "type": "t_mapping(t_address,t_mapping(t_address,t_mapping(t_uint256,t_struct(Struct)12_storage)))"
+      },
+      {
+        "astId": 29,
+        "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
+        "label": "__gap",
+        "offset": 0,
+        "slot": "2",
         "type": "t_array(t_uint256)10_storage"
       },
       {
-        "astId": 24,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
-        "label": "structs",
-        "offset": 0,
-        "slot": "11",
-        "type": "t_array(t_struct(Struct)12_storage)dyn_storage"
-      },
-      {
-        "astId": 26,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+        "astId": 31,
+        "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
         "label": "_owner",
         "offset": 0,
         "slot": "12",
         "type": "t_address"
       },
       {
-        "astId": 31,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
-        "label": "fixedStructs",
+        "astId": 36,
+        "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
+        "label": "structOf",
         "offset": 0,
         "slot": "13",
-        "type": "t_array(t_struct(Struct)12_storage)3_storage"
-      },
-      {
-        "astId": 34,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
-        "label": "myStruct",
-        "offset": 0,
-        "slot": "22",
-        "type": "t_struct(Struct)12_storage"
-      },
-      {
-        "astId": 36,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
-        "label": "added",
-        "offset": 0,
-        "slot": "25",
-        "type": "t_uint8"
-      },
-      {
-        "astId": 38,
-        "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
-        "label": "_testAddress",
-        "offset": 1,
-        "slot": "25",
-        "type": "t_address"
+        "type": "t_mapping(t_address,t_struct(Struct)12_storage)"
       }
     ],
     "types": {
@@ -136,18 +112,6 @@
         "encoding": "inplace",
         "label": "address",
         "numberOfBytes": "20"
-      },
-      "t_array(t_struct(Struct)12_storage)3_storage": {
-        "encoding": "inplace",
-        "label": "struct Storage.Struct[3]",
-        "numberOfBytes": "288",
-        "base": "t_struct(Struct)12_storage"
-      },
-      "t_array(t_struct(Struct)12_storage)dyn_storage": {
-        "encoding": "dynamic_array",
-        "label": "struct Storage.Struct[]",
-        "numberOfBytes": "32",
-        "base": "t_struct(Struct)12_storage"
       },
       "t_array(t_uint256)10_storage": {
         "encoding": "inplace",
@@ -160,6 +124,34 @@
         "label": "bool",
         "numberOfBytes": "1"
       },
+      "t_mapping(t_address,t_mapping(t_address,t_mapping(t_uint256,t_struct(Struct)12_storage)))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct)))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_mapping(t_uint256,t_struct(Struct)12_storage))"
+      },
+      "t_mapping(t_address,t_mapping(t_uint256,t_struct(Struct)12_storage))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(uint256 => struct Storage.Struct))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_uint256,t_struct(Struct)12_storage)"
+      },
+      "t_mapping(t_address,t_struct(Struct)12_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct Storage.Struct)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Struct)12_storage"
+      },
+      "t_mapping(t_uint256,t_struct(Struct)12_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct Storage.Struct)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Struct)12_storage"
+      },
       "t_struct(Struct)12_storage": {
         "encoding": "inplace",
         "label": "struct Storage.Struct",
@@ -167,7 +159,7 @@
         "members": [
           {
             "astId": 3,
-            "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+            "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
             "label": "a",
             "offset": 0,
             "slot": "0",
@@ -175,7 +167,7 @@
           },
           {
             "astId": 5,
-            "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+            "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
             "label": "b",
             "offset": 0,
             "slot": "1",
@@ -183,57 +175,52 @@
           },
           {
             "astId": 7,
-            "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+            "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
             "label": "c",
             "offset": 0,
             "slot": "2",
-            "type": "t_uint16"
+            "type": "t_uint32"
           },
           {
             "astId": 9,
-            "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+            "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
             "label": "d",
-            "offset": 2,
+            "offset": 4,
             "slot": "2",
-            "type": "t_uint16"
+            "type": "t_uint32"
           },
           {
             "astId": 11,
-            "contract": "tests/mocks/contracts/StorageExtended.sol:Storage",
+            "contract": "tests/mocks/contracts/StorageMappingRef.sol:Storage",
             "label": "e",
-            "offset": 4,
+            "offset": 8,
             "slot": "2",
             "type": "t_address"
           }
         ]
-      },
-      "t_uint16": {
-        "encoding": "inplace",
-        "label": "uint16",
-        "numberOfBytes": "2"
       },
       "t_uint256": {
         "encoding": "inplace",
         "label": "uint256",
         "numberOfBytes": "32"
       },
-      "t_uint8": {
+      "t_uint32": {
         "encoding": "inplace",
-        "label": "uint8",
-        "numberOfBytes": "1"
+        "label": "uint32",
+        "numberOfBytes": "4"
       }
     }
   },
   "ast": {
-    "absolutePath": "tests/mocks/contracts/StorageExtended.sol",
-    "id": 40,
+    "absolutePath": "tests/mocks/contracts/StorageMappingRef.sol",
+    "id": 38,
     "exportedSymbols": {
       "Storage": [
-        39
+        37
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "39:325:0",
+    "src": "39:344:0",
     "nodes": [
       {
         "id": 1,
@@ -246,9 +233,9 @@
         ]
       },
       {
-        "id": 39,
+        "id": 37,
         "nodeType": "ContractDefinition",
-        "src": "64:299:0",
+        "src": "64:318:0",
         "nodes": [
           {
             "id": 12,
@@ -322,17 +309,17 @@
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_uint16",
-                  "typeString": "uint16"
+                  "typeIdentifier": "t_uint32",
+                  "typeString": "uint32"
                 },
                 "typeName": {
                   "id": 6,
-                  "name": "uint16",
+                  "name": "uint32",
                   "nodeType": "ElementaryTypeName",
                   "src": "132:6:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_uint16",
-                    "typeString": "uint16"
+                    "typeIdentifier": "t_uint32",
+                    "typeString": "uint32"
                   }
                 },
                 "visibility": "internal"
@@ -349,17 +336,17 @@
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_uint16",
-                  "typeString": "uint16"
+                  "typeIdentifier": "t_uint32",
+                  "typeString": "uint32"
                 },
                 "typeName": {
                   "id": 8,
-                  "name": "uint16",
+                  "name": "uint32",
                   "nodeType": "ElementaryTypeName",
                   "src": "146:6:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_uint16",
-                    "typeString": "uint16"
+                    "typeIdentifier": "t_uint32",
+                    "typeString": "uint32"
                   }
                 },
                 "visibility": "internal"
@@ -395,7 +382,7 @@
             ],
             "name": "Struct",
             "nameLocation": "92:6:0",
-            "scope": 39,
+            "scope": 37,
             "visibility": "public"
           },
           {
@@ -406,7 +393,7 @@
             "mutability": "mutable",
             "name": "_initialized",
             "nameLocation": "183:12:0",
-            "scope": 39,
+            "scope": 37,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -433,7 +420,7 @@
             "mutability": "mutable",
             "name": "_initializing",
             "nameLocation": "204:13:0",
-            "scope": 39,
+            "scope": 37,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -453,14 +440,108 @@
             "visibility": "internal"
           },
           {
-            "id": 20,
+            "id": 25,
             "nodeType": "VariableDeclaration",
-            "src": "221:17:0",
+            "src": "221:80:0",
+            "constant": false,
+            "mutability": "mutable",
+            "name": "nestedMapping",
+            "nameLocation": "288:13:0",
+            "scope": 37,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_uint256_$_t_struct$_Struct_$12_storage_$_$_$",
+              "typeString": "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct)))"
+            },
+            "typeName": {
+              "id": 24,
+              "keyType": {
+                "id": 17,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "229:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "221:66:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_mapping$_t_uint256_$_t_struct$_Struct_$12_storage_$_$_$",
+                "typeString": "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct)))"
+              },
+              "valueType": {
+                "id": 23,
+                "keyType": {
+                  "id": 18,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "248:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "240:46:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_uint256_$_t_struct$_Struct_$12_storage_$_$",
+                  "typeString": "mapping(address => mapping(uint256 => struct Storage.Struct))"
+                },
+                "valueType": {
+                  "id": 22,
+                  "keyType": {
+                    "id": 19,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "267:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "259:26:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Struct_$12_storage_$",
+                    "typeString": "mapping(uint256 => struct Storage.Struct)"
+                  },
+                  "valueType": {
+                    "id": 21,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 20,
+                      "name": "Struct",
+                      "nameLocations": [
+                        "278:6:0"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 12,
+                      "src": "278:6:0"
+                    },
+                    "referencedDeclaration": 12,
+                    "src": "278:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Struct_$12_storage_ptr",
+                      "typeString": "struct Storage.Struct"
+                    }
+                  }
+                }
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "id": 29,
+            "nodeType": "VariableDeclaration",
+            "src": "305:17:0",
             "constant": false,
             "mutability": "mutable",
             "name": "__gap",
-            "nameLocation": "233:5:0",
-            "scope": 39,
+            "nameLocation": "317:5:0",
+            "scope": 37,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -469,26 +550,26 @@
             },
             "typeName": {
               "baseType": {
-                "id": 17,
+                "id": 26,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "221:7:0",
+                "src": "305:7:0",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
                 }
               },
-              "id": 19,
+              "id": 28,
               "length": {
                 "hexValue": "3130",
-                "id": 18,
+                "id": 27,
                 "isConstant": false,
                 "isLValue": false,
                 "isPure": true,
                 "kind": "number",
                 "lValueRequested": false,
                 "nodeType": "Literal",
-                "src": "229:2:0",
+                "src": "313:2:0",
                 "typeDescriptions": {
                   "typeIdentifier": "t_rational_10_by_1",
                   "typeString": "int_const 10"
@@ -496,7 +577,7 @@
                 "value": "10"
               },
               "nodeType": "ArrayTypeName",
-              "src": "221:11:0",
+              "src": "305:11:0",
               "typeDescriptions": {
                 "typeIdentifier": "t_array$_t_uint256_$10_storage_ptr",
                 "typeString": "uint256[10]"
@@ -505,60 +586,14 @@
             "visibility": "internal"
           },
           {
-            "id": 24,
+            "id": 31,
             "nodeType": "VariableDeclaration",
-            "src": "242:16:0",
-            "constant": false,
-            "mutability": "mutable",
-            "name": "structs",
-            "nameLocation": "251:7:0",
-            "scope": 39,
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_Struct_$12_storage_$dyn_storage",
-              "typeString": "struct Storage.Struct[]"
-            },
-            "typeName": {
-              "baseType": {
-                "id": 22,
-                "nodeType": "UserDefinedTypeName",
-                "pathNode": {
-                  "id": 21,
-                  "name": "Struct",
-                  "nameLocations": [
-                    "242:6:0"
-                  ],
-                  "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 12,
-                  "src": "242:6:0"
-                },
-                "referencedDeclaration": 12,
-                "src": "242:6:0",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Struct_$12_storage_ptr",
-                  "typeString": "struct Storage.Struct"
-                }
-              },
-              "id": 23,
-              "nodeType": "ArrayTypeName",
-              "src": "242:8:0",
-              "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_Struct_$12_storage_$dyn_storage_ptr",
-                "typeString": "struct Storage.Struct[]"
-              }
-            },
-            "visibility": "internal"
-          },
-          {
-            "id": 26,
-            "nodeType": "VariableDeclaration",
-            "src": "262:14:0",
+            "src": "326:14:0",
             "constant": false,
             "mutability": "mutable",
             "name": "_owner",
-            "nameLocation": "270:6:0",
-            "scope": 39,
+            "nameLocation": "334:6:0",
+            "scope": 37,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -566,113 +601,14 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 25,
+              "id": 30,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "262:7:0",
+              "src": "326:7:0",
               "stateMutability": "nonpayable",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
                 "typeString": "address"
-              }
-            },
-            "visibility": "internal"
-          },
-          {
-            "id": 31,
-            "nodeType": "VariableDeclaration",
-            "src": "280:22:0",
-            "constant": false,
-            "mutability": "mutable",
-            "name": "fixedStructs",
-            "nameLocation": "290:12:0",
-            "scope": 39,
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_Struct_$12_storage_$3_storage",
-              "typeString": "struct Storage.Struct[3]"
-            },
-            "typeName": {
-              "baseType": {
-                "id": 28,
-                "nodeType": "UserDefinedTypeName",
-                "pathNode": {
-                  "id": 27,
-                  "name": "Struct",
-                  "nameLocations": [
-                    "280:6:0"
-                  ],
-                  "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 12,
-                  "src": "280:6:0"
-                },
-                "referencedDeclaration": 12,
-                "src": "280:6:0",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Struct_$12_storage_ptr",
-                  "typeString": "struct Storage.Struct"
-                }
-              },
-              "id": 30,
-              "length": {
-                "hexValue": "33",
-                "id": 29,
-                "isConstant": false,
-                "isLValue": false,
-                "isPure": true,
-                "kind": "number",
-                "lValueRequested": false,
-                "nodeType": "Literal",
-                "src": "287:1:0",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_rational_3_by_1",
-                  "typeString": "int_const 3"
-                },
-                "value": "3"
-              },
-              "nodeType": "ArrayTypeName",
-              "src": "280:9:0",
-              "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_Struct_$12_storage_$3_storage_ptr",
-                "typeString": "struct Storage.Struct[3]"
-              }
-            },
-            "visibility": "internal"
-          },
-          {
-            "id": 34,
-            "nodeType": "VariableDeclaration",
-            "src": "306:15:0",
-            "constant": false,
-            "mutability": "mutable",
-            "name": "myStruct",
-            "nameLocation": "313:8:0",
-            "scope": 39,
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_struct$_Struct_$12_storage",
-              "typeString": "struct Storage.Struct"
-            },
-            "typeName": {
-              "id": 33,
-              "nodeType": "UserDefinedTypeName",
-              "pathNode": {
-                "id": 32,
-                "name": "Struct",
-                "nameLocations": [
-                  "306:6:0"
-                ],
-                "nodeType": "IdentifierPath",
-                "referencedDeclaration": 12,
-                "src": "306:6:0"
-              },
-              "referencedDeclaration": 12,
-              "src": "306:6:0",
-              "typeDescriptions": {
-                "typeIdentifier": "t_struct$_Struct_$12_storage_ptr",
-                "typeString": "struct Storage.Struct"
               }
             },
             "visibility": "internal"
@@ -680,54 +616,55 @@
           {
             "id": 36,
             "nodeType": "VariableDeclaration",
-            "src": "325:11:0",
+            "src": "344:35:0",
             "constant": false,
             "mutability": "mutable",
-            "name": "added",
-            "nameLocation": "331:5:0",
-            "scope": 39,
+            "name": "structOf",
+            "nameLocation": "371:8:0",
+            "scope": 37,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_uint8",
-              "typeString": "uint8"
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_Struct_$12_storage_$",
+              "typeString": "mapping(address => struct Storage.Struct)"
             },
             "typeName": {
               "id": 35,
-              "name": "uint8",
-              "nodeType": "ElementaryTypeName",
-              "src": "325:5:0",
+              "keyType": {
+                "id": 32,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "352:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "344:26:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_uint8",
-                "typeString": "uint8"
-              }
-            },
-            "visibility": "internal"
-          },
-          {
-            "id": 38,
-            "nodeType": "VariableDeclaration",
-            "src": "340:20:0",
-            "constant": false,
-            "mutability": "mutable",
-            "name": "_testAddress",
-            "nameLocation": "348:12:0",
-            "scope": 39,
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_address",
-              "typeString": "address"
-            },
-            "typeName": {
-              "id": 37,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "340:7:0",
-              "stateMutability": "nonpayable",
-              "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_Struct_$12_storage_$",
+                "typeString": "mapping(address => struct Storage.Struct)"
+              },
+              "valueType": {
+                "id": 34,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 33,
+                  "name": "Struct",
+                  "nameLocations": [
+                    "363:6:0"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 12,
+                  "src": "363:6:0"
+                },
+                "referencedDeclaration": 12,
+                "src": "363:6:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Struct_$12_storage_ptr",
+                  "typeString": "struct Storage.Struct"
+                }
               }
             },
             "visibility": "internal"
@@ -740,11 +677,11 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          39
+          37
         ],
         "name": "Storage",
         "nameLocation": "73:7:0",
-        "scope": 40,
+        "scope": 38,
         "usedErrors": []
       }
     ],

@@ -1,5 +1,5 @@
 {
-  "name": "foundry-storage-diff",
+  "name": "foundry-storage-check",
   "version": "1.0.0",
   "description": "Github Action checking the storage layout diff from Foundry storage layout reports",
   "author": {
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rubilmax/foundry-storage-diff.git"
+    "url": "git+https://github.com/Rubilmax/foundry-storage-check.git"
   },
   "bugs": {
-    "url": "https://github.com/Rubilmax/foundry-storage-diff/issues"
+    "url": "https://github.com/Rubilmax/foundry-storage-check/issues"
   },
-  "homepage": "https://github.com/Rubilmax/foundry-storage-diff#readme",
+  "homepage": "https://github.com/Rubilmax/foundry-storage-check#readme",
   "keywords": [
     "foundry",
     "forge",
