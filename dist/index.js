@@ -37,6 +37,7 @@ const getStorageBytesMapping = (layout) => layout.storage.reduce((acc, variable)
     return Object.assign(Object.assign({}, acc), getStorageVariableBytesMapping(layout, variable, startByte));
 }, {});
 const checkLayouts = (srcLayout, cmpLayout, checktypes = true) => {
+    let diffs = [];
     const srcMapping = getStorageBytesMapping(srcLayout);
     const cmpMapping = getStorageBytesMapping(cmpLayout);
     for (const slot of Object.keys(cmpMapping)) {
@@ -55,8 +56,8 @@ const checkLayouts = (srcLayout, cmpLayout, checktypes = true) => {
         if (cmpSlotVar.label !== srcSlotVar.label) {
             if (cmpSlotVar.label.startsWith(`(${srcSlotVar.type})${srcSlotVar.label}`))
                 continue; // variable is a member of source struct, in empty slot
-            if (cmpSlotVar.type === srcSlotVar.type)
-                return {
+            if (cmpSlotVar.type === srcSlotVar.type) {
+                diffs.push({
                     location: {
                         slot: srcSlotVar.slot,
                         offset: srcSlotVar.offset,
@@ -64,8 +65,10 @@ const checkLayouts = (srcLayout, cmpLayout, checktypes = true) => {
                     type: types_1.StorageLayoutDiffType.LABEL,
                     src: srcSlotVar,
                     cmp: cmpSlotVar,
-                };
-            return {
+                });
+                continue;
+            }
+            diffs.push({
                 location: {
                     slot: srcSlotVar.slot,
                     offset: srcSlotVar.offset,
@@ -73,10 +76,11 @@ const checkLayouts = (srcLayout, cmpLayout, checktypes = true) => {
                 type: types_1.StorageLayoutDiffType.VARIABLE,
                 src: srcSlotVar,
                 cmp: cmpSlotVar,
-            };
+            });
+            continue;
         }
-        if (cmpSlotVar.type !== srcSlotVar.type)
-            return {
+        if (cmpSlotVar.type !== srcSlotVar.type) {
+            diffs.push({
                 location: {
                     slot: srcSlotVar.slot,
                     offset: srcSlotVar.offset,
@@ -84,10 +88,12 @@ const checkLayouts = (srcLayout, cmpLayout, checktypes = true) => {
                 type: types_1.StorageLayoutDiffType.VARIABLE_TYPE,
                 src: srcSlotVar,
                 cmp: cmpSlotVar,
-            };
+            });
+            continue;
+        }
     }
     if (!checktypes)
-        return;
+        return diffs;
     // At this point, storage layout is sound but mappings storage may not:
     // Let's check for type changes to make sure mappings with arrays or structs are not messed up
     const srcTypesWithMembers = Object.fromEntries(Object.keys(srcLayout.types)
@@ -99,26 +105,29 @@ const checkLayouts = (srcLayout, cmpLayout, checktypes = true) => {
     for (const srcTypeLabel of Object.keys(srcTypesWithMembers)) {
         const srcType = srcTypesWithMembers[srcTypeLabel];
         const cmpType = cmpTypesWithMembers[srcTypeLabel];
-        if (!cmpType)
-            return {
+        if (!cmpType) {
+            diffs.push({
                 location: srcType.label,
                 type: types_1.StorageLayoutDiffType.TYPE_REMOVED,
                 src: { label: srcType.label, type: srcType.label },
                 cmp: { label: srcType.label, type: srcType.label },
-            };
-        if (!cmpType.members)
-            return {
+            });
+            continue;
+        }
+        if (!cmpType.members) {
+            diffs.push({
                 location: srcType.label,
                 type: types_1.StorageLayoutDiffType.TYPE_CHANGED,
                 src: { label: srcType.label, type: srcType.label },
                 cmp: { label: srcType.label, type: srcType.label },
-            };
-        const diff = (0, exports.checkLayouts)(
+            });
+            continue;
+        }
+        diffs = diffs.concat((0, exports.checkLayouts)(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        { storage: srcType.members, types: srcLayout.types }, { storage: cmpType.members, types: cmpLayout.types }, false);
-        if (diff)
-            return Object.assign(Object.assign({}, diff), { parent: srcType.label });
+        { storage: srcType.members, types: srcLayout.types }, { storage: cmpType.members, types: cmpLayout.types }, false).map((diff) => (Object.assign(Object.assign({}, diff), { parent: srcType.label }))));
     }
+    return diffs;
 };
 exports.checkLayouts = checkLayouts;
 
@@ -134,8 +143,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.formatDiff = void 0;
 const types_1 = __nccwpck_require__(8164);
 const formatDiff = (diff) => {
-    if (!diff)
-        return;
     const location = (diff.parent || "storage") +
         " " +
         (typeof diff.location === "string"
@@ -314,9 +321,12 @@ function run() {
             const compareLayout = JSON.parse(cmpContent);
             core.endGroup();
             core.startGroup("Check storage layout");
-            const diff = (0, format_1.formatDiff)((0, check_1.checkLayouts)(sourceLayout, compareLayout));
-            if (diff)
-                return core.setFailed(diff);
+            const diffs = (0, check_1.checkLayouts)(sourceLayout, compareLayout).map((diff) => {
+                console.error((0, format_1.formatDiff)(diff));
+                return diff;
+            });
+            if (diffs.length > 0)
+                return core.setFailed("Unsafe storage layout changes detected. Please see above for details.");
             core.endGroup();
         }
         catch (error) {

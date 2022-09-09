@@ -1,8 +1,6 @@
 import { StorageLayoutDiff, StorageLayoutDiffType } from "./types";
 
-export const formatDiff = (diff?: StorageLayoutDiff) => {
-  if (!diff) return;
-
+export const formatDiff = (diff: StorageLayoutDiff) => {
   const location =
     (diff.parent || "storage") +
     " " +

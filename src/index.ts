@@ -118,8 +118,14 @@ async function run() {
     core.endGroup();
 
     core.startGroup("Check storage layout");
-    const diff = formatDiff(checkLayouts(sourceLayout, compareLayout));
-    if (diff) return core.setFailed(diff);
+    const diffs = checkLayouts(sourceLayout, compareLayout).map((diff) => {
+      console.error(formatDiff(diff));
+      return diff;
+    });
+    if (diffs.length > 0)
+      return core.setFailed(
+        "Unsafe storage layout changes detected. Please see above for details."
+      );
     core.endGroup();
   } catch (error: any) {
     core.setFailed(error.message);

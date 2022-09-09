@@ -73,7 +73,9 @@ export const checkLayouts = (
   srcLayout: StorageLayoutReport,
   cmpLayout: StorageLayoutReport,
   checktypes = true
-): StorageLayoutDiff | undefined => {
+): StorageLayoutDiff[] => {
+  let diffs: StorageLayoutDiff[] = [];
+
   const srcMapping = getStorageBytesMapping(srcLayout);
   const cmpMapping = getStorageBytesMapping(cmpLayout);
 
@@ -95,8 +97,8 @@ export const checkLayouts = (
     if (cmpSlotVar.label !== srcSlotVar.label) {
       if (cmpSlotVar.label.startsWith(`(${srcSlotVar.type})${srcSlotVar.label}`)) continue; // variable is a member of source struct, in empty slot
 
-      if (cmpSlotVar.type === srcSlotVar.type)
-        return {
+      if (cmpSlotVar.type === srcSlotVar.type) {
+        diffs.push({
           location: {
             slot: srcSlotVar.slot,
             offset: srcSlotVar.offset,
@@ -104,9 +106,11 @@ export const checkLayouts = (
           type: StorageLayoutDiffType.LABEL,
           src: srcSlotVar,
           cmp: cmpSlotVar,
-        };
+        });
+        continue;
+      }
 
-      return {
+      diffs.push({
         location: {
           slot: srcSlotVar.slot,
           offset: srcSlotVar.offset,
@@ -114,11 +118,12 @@ export const checkLayouts = (
         type: StorageLayoutDiffType.VARIABLE,
         src: srcSlotVar,
         cmp: cmpSlotVar,
-      };
+      });
+      continue;
     }
 
-    if (cmpSlotVar.type !== srcSlotVar.type)
-      return {
+    if (cmpSlotVar.type !== srcSlotVar.type) {
+      diffs.push({
         location: {
           slot: srcSlotVar.slot,
           offset: srcSlotVar.offset,
@@ -126,10 +131,12 @@ export const checkLayouts = (
         type: StorageLayoutDiffType.VARIABLE_TYPE,
         src: srcSlotVar,
         cmp: cmpSlotVar,
-      };
+      });
+      continue;
+    }
   }
 
-  if (!checktypes) return;
+  if (!checktypes) return diffs;
 
   // At this point, storage layout is sound but mappings storage may not:
   // Let's check for type changes to make sure mappings with arrays or structs are not messed up
@@ -147,27 +154,35 @@ export const checkLayouts = (
     const srcType = srcTypesWithMembers[srcTypeLabel];
     const cmpType = cmpTypesWithMembers[srcTypeLabel];
 
-    if (!cmpType)
-      return {
+    if (!cmpType) {
+      diffs.push({
         location: srcType.label,
         type: StorageLayoutDiffType.TYPE_REMOVED,
         src: { label: srcType.label, type: srcType.label },
         cmp: { label: srcType.label, type: srcType.label },
-      };
-    if (!cmpType.members)
-      return {
+      });
+      continue;
+    }
+
+    if (!cmpType.members) {
+      diffs.push({
         location: srcType.label,
         type: StorageLayoutDiffType.TYPE_CHANGED,
         src: { label: srcType.label, type: srcType.label },
         cmp: { label: srcType.label, type: srcType.label },
-      };
+      });
+      continue;
+    }
 
-    const diff = checkLayouts(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      { storage: srcType.members!, types: srcLayout.types },
-      { storage: cmpType.members, types: cmpLayout.types },
-      false
+    diffs = diffs.concat(
+      checkLayouts(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        { storage: srcType.members!, types: srcLayout.types },
+        { storage: cmpType.members, types: cmpLayout.types },
+        false
+      ).map((diff) => ({ ...diff, parent: srcType.label }))
     );
-    if (diff) return { ...diff, parent: srcType.label };
   }
+
+  return diffs;
 };

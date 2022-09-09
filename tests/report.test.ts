@@ -14,7 +14,7 @@ describe("Storage layout checks", () => {
 
     it("should not raise diff when comparing source to source", () => {
       const diff = checkLayouts(srcContent, srcContent);
-      expect(diff).toBeUndefined();
+      expect(diff).toEqual([]);
     });
 
     it("should raise label diff when renaming variable", () => {
@@ -22,7 +22,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.renamed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Label diff at storage slot #0, byte #1: variable "_initializing" was renamed to "_initialization". Is it intentional?'
       );
@@ -33,7 +33,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.gap_start.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toBeUndefined();
     });
 
@@ -42,7 +42,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.gap_end.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toBeUndefined();
     });
 
@@ -51,7 +51,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.type_changed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Variable type diff at storage slot #12, byte #0: variable "_owner" was of type "address" but is now "uint192".'
       );
@@ -62,7 +62,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.removed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Variable diff at storage slot #12, byte #0: variable "_owner" of type "address" was replaced by variable "fixedStructs" of type "struct Storage.Struct[3]".'
       );
@@ -73,7 +73,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.extended.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toBeUndefined();
     });
   });
@@ -88,7 +88,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.struct_renamed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Variable type diff at storage slot #11, byte #0: variable "structs" was of type "struct Storage.Struct[]" but is now "struct Storage.Struct2[]".'
       );
@@ -99,7 +99,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.struct_changed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Label diff at storage slot #15, byte #0: variable "(struct Storage.Struct)myStruct.c" was renamed to "(struct Storage.Struct)myStruct.d". Is it intentional?'
       );
@@ -110,7 +110,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.struct_smaller.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toBeUndefined();
     });
 
@@ -119,7 +119,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.struct_type_changed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Variable diff at storage slot #14, byte #0: variable "(struct Storage.Struct)myStruct.b" of type "uint256" was replaced by variable "(struct Storage.Struct)myStruct.e" of type "address".'
       );
@@ -130,7 +130,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.struct_extended.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toBeUndefined();
     });
   });
@@ -145,7 +145,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.mapping_renamed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Label diff at storage slot #13, byte #0: variable "structOf" was renamed to "_structOf". Is it intentional?'
       );
@@ -156,7 +156,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.mapping_changed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Variable type diff at storage slot #1, byte #0: variable "nestedMapping" was of type "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct)))" but is now "mapping(address => mapping(uint256 => mapping(uint256 => struct Storage.Struct)))".'
       );
@@ -167,7 +167,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.mapping_extended.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Variable type diff at storage slot #13, byte #0: variable "structOf" was of type "mapping(address => struct Storage.Struct)" but is now "mapping(address => mapping(address => struct Storage.Struct))".'
       );
@@ -178,7 +178,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.mapping_struct_renamed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Variable type diff at storage slot #1, byte #0: variable "nestedMapping" was of type "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct)))" but is now "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct2)))".'
       );
@@ -189,7 +189,7 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.mapping_struct_changed.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toEqual(
         'Label diff at struct Storage.Struct slot #2, byte #0: variable "c" was renamed to "d". Is it intentional?'
       );
@@ -200,8 +200,24 @@ describe("Storage layout checks", () => {
         fs.readFileSync("tests/mocks/storage_layout.mapping_struct_extended.json", "utf8")
       ) as StorageLayoutReport;
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent));
+      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
       expect(diff).toBeUndefined();
     });
+  });
+
+  it("morpho", () => {
+    const diffs = checkLayouts(
+      JSON.parse(
+        fs.readFileSync("tests/mocks/storage_layout.morpho.json", "utf8")
+      ) as StorageLayoutReport,
+      JSON.parse(
+        fs.readFileSync("tests/mocks/storage_layout.morpho_refactored.json", "utf8")
+      ) as StorageLayoutReport
+    ).map(formatDiff);
+
+    expect(diffs).toEqual([
+      'Label diff at struct Types.MarketStatus slot #0, byte #1: variable "isPaused" was renamed to "isSupplyPaused". Is it intentional?',
+      'Label diff at struct Types.MarketStatus slot #0, byte #2: variable "isPartiallyPaused" was renamed to "isBorrowPaused". Is it intentional?',
+    ]);
   });
 });
