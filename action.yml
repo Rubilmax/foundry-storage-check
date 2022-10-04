@@ -6,6 +6,9 @@ branding:
   color: purple
 
 inputs:
+  contract:
+    description: The path and name of the contract of which to inspect storage layout (e.g. src/Contract.sol:Contract).
+    required: true
   token:
     description: The repository's github token.
     default: ${{ github.token }}
@@ -17,10 +20,6 @@ inputs:
   head:
     description: The storage layout target branch name.
     default: ${{ github.head_ref || github.ref_name }}
-    required: false
-  report:
-    description: Report freshly generated to compare to reference.
-    default: gasreport.ansi
     required: false
 
 runs:

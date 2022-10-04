@@ -4,9 +4,9 @@
 
 ## How it works
 
-Everytime somebody opens a Pull Request, the action expects [Foundry](https://github.com/foundry-rs/foundry) `forge` to generate the storage layout of the Smart Contract you want to check, generating a storage layout to a temporary file (named `storage_layout.json` by default).
+Everytime somebody opens a Pull Request, the action runs [Foundry](https://github.com/foundry-rs/foundry) `forge` to generate the storage layout of the Smart Contract you want to check.
 
-Once generated, the action will fetch the comparative storage layout stored as an artifact from previous runs; parse & compare them, storing the results in the action's outputs as shell and as markdown.
+Once generated, the action will fetch the comparative storage layout stored as an artifact from previous runs; parse & compare them, pinning warnings and errors on the Pull Request.
 
 ## Getting started
 
@@ -33,6 +33,7 @@ on:
 jobs:
   check_storage_layout:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -43,29 +44,21 @@ jobs:
         with:
           version: nightly
 
-      # Add any step generating a storage layout to a temporary file named storage_layout.json
-      # For example:
-      - name: Generate storage layout
-        run: forge inspect contracts/compound/Morpho.sol:Morpho storage-layout | tee storage_layout.json # <- this file name should be unique in your repository!
-
       - name: Check storage layout
         uses: Rubilmax/foundry-storage-check@v1.0
 ```
 
 > :information_source: **An error will appear at first run!**<br/>
-> 🔴 <em>**Error:** No workflow run found with an artifact named "main.storage_layout.json"</em><br/>
-> As the action is expecting a comparative file stored on the base branch and cannot find it (because the action never ran on the target branch and thus has never uploaded any storage layout report)
+> 🔴 <em>**Error:** No workflow run found with an artifact named "..."</em><br/>
+> As the action is expecting a comparative file stored on the base branch and cannot find it (because the action never ran on the target branch and thus has never uploaded any storage layout)
 
 ## Options
 
-### `report` _{string}_
+### `contract` _{string}_
 
-This should correspond to the path of a file where the output of forge's gas report has been logged.
-Only necessary when generating multiple gas reports on the same repository.
+The path and name of the contract of which to inspect storage layout (e.g. src/Contract.sol:Contract).
 
-⚠️ Make sure this file uniquely identifies a gas report, to avoid messing up with a gas report of another workflow on the same repository!
-
-_Defaults to: `gasreport.ansi`_
+_Required_
 
 ### `base` _{string}_
 

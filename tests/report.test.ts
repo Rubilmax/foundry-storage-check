@@ -1,223 +1,195 @@
-import * as fs from "fs";
-
 import { expect } from "@jest/globals";
 
 import { checkLayouts } from "../src/check";
 import { formatDiff } from "../src/format";
-import { StorageLayoutReport } from "../src/types";
+import { createLayout, parseLayout, parseSource } from "../src/input";
 
 describe("Storage layout checks", () => {
   describe("Basic storage", () => {
-    const srcContent = JSON.parse(
-      fs.readFileSync("tests/mocks/storage_layout.ref.json", "utf8")
-    ) as StorageLayoutReport;
+    const srcLayout = parseLayout(createLayout("tests/mocks/basic/StorageRef.sol:Storage"));
 
     it("should not raise diff when comparing source to source", () => {
-      const diff = checkLayouts(srcContent, srcContent);
-      expect(diff).toEqual([]);
+      const diffs = checkLayouts(srcLayout, srcLayout);
+      expect(diffs).toHaveLength(0);
     });
 
     it("should raise label diff when renaming variable", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.renamed.json", "utf8")
-      ) as StorageLayoutReport;
+      const contract = "tests/mocks/StorageRenamed.sol:Storage";
+      const cmpDef = parseSource(contract);
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Label diff at storage slot #0, byte #1: variable "_initializing" was renamed to "_initialization". Is it intentional?'
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(1);
+      expect(formatDiff(cmpDef, diffs[0]).message).toEqual(
+        'variable "_initializing" was renamed to "_initialization". Is it intentional? (storage slot 0x0000000000000000000000000000000000000000000000000000000000000000, byte #1)'
       );
     });
 
-    it("should not raise slot diff because of variable added at start of gap slot", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.gap_start.json", "utf8")
-      ) as StorageLayoutReport;
+    it("should not raise diff when variable added at start of gap slot", () => {
+      const contract = "tests/mocks/basic/StorageGapStart.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toBeUndefined();
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
     });
 
-    it("should not raise slot diff because of variable added at end of gap slot", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.gap_end.json", "utf8")
-      ) as StorageLayoutReport;
+    it("should not raise diff when variable added at end of gap slot", () => {
+      const contract = "tests/mocks/basic/StorageGapEnd.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toBeUndefined();
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
     });
 
     it("should raise type diff when changing type of variable", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.type_changed.json", "utf8")
-      ) as StorageLayoutReport;
+      const contract = "tests/mocks/basic/StorageChanged.sol:Storage";
+      const cmpDef = parseSource(contract);
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Variable type diff at storage slot #12, byte #0: variable "_owner" was of type "address" but is now "uint192".'
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(1);
+      expect(formatDiff(cmpDef, diffs[0]).message).toEqual(
+        'variable "_owner" was of type "address" but is now "uint192" (storage slot 0x000000000000000000000000000000000000000000000000000000000000000c, byte #0)'
       );
     });
 
-    it("should raise variable diff when removing variable", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.removed.json", "utf8")
-      ) as StorageLayoutReport;
+    it("should not raise diff when removing variable", () => {
+      const contract = "tests/mocks/basic/StorageRemoved.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Variable diff at storage slot #12, byte #0: variable "_owner" of type "address" was replaced by variable "fixedStructs" of type "struct Storage.Struct[3]".'
-      );
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
     });
 
-    it("should not raise variable diff when extending storage", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.extended.json", "utf8")
-      ) as StorageLayoutReport;
+    it("should not raise diff when extending storage", () => {
+      const contract = "tests/mocks/basic/StorageExtended.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toBeUndefined();
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
     });
   });
 
   describe("Struct storage", () => {
-    const srcContent = JSON.parse(
-      fs.readFileSync("tests/mocks/storage_layout.struct_ref.json", "utf8")
-    ) as StorageLayoutReport;
+    const srcLayout = parseLayout(createLayout("tests/mocks/struct/StorageStructRef.sol:Storage"));
 
-    it("should raise type diff when changing name of struct", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.struct_renamed.json", "utf8")
-      ) as StorageLayoutReport;
+    it("should not raise diff when changing name of struct", () => {
+      const contract = "tests/mocks/struct/StorageStructRenamed.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Variable type diff at storage slot #11, byte #0: variable "structs" was of type "struct Storage.Struct[]" but is now "struct Storage.Struct2[]".'
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
+    });
+
+    it("should raise label diff when switching struct variables", () => {
+      const contract = "tests/mocks/struct/StorageStructChanged.sol:Storage";
+      const cmpDef = parseSource(contract);
+      const cmpLayout = parseLayout(createLayout(contract));
+
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(4);
+      expect(formatDiff(cmpDef, diffs[0]).message).toEqual(
+        'variable "(Storage.Struct)myStruct.c" was renamed to "(Storage.Struct)myStruct.d". Is it intentional? (storage slot 0x000000000000000000000000000000000000000000000000000000000000000f, byte #0)'
+      );
+      expect(formatDiff(cmpDef, diffs[1]).message).toEqual(
+        'variable "(Storage.Struct)myStruct.d" was renamed to "(Storage.Struct)myStruct.c". Is it intentional? (storage slot 0x000000000000000000000000000000000000000000000000000000000000000f, byte #4)'
+      );
+      expect(formatDiff(cmpDef, diffs[2]).message).toEqual(
+        'variable "(Storage.Struct)structs.c" was renamed to "(Storage.Struct)structs.d". Is it intentional? (storage slot 0x60811857dd566889ff6255277d82526f2d9b3bbcb96076be22a5860765ac3d08, byte #0)'
+      );
+      expect(formatDiff(cmpDef, diffs[3]).message).toEqual(
+        'variable "(Storage.Struct)structs.d" was renamed to "(Storage.Struct)structs.c". Is it intentional? (storage slot 0x60811857dd566889ff6255277d82526f2d9b3bbcb96076be22a5860765ac3d08, byte #4)'
       );
     });
 
-    it("should raise label diff when changing struct", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.struct_changed.json", "utf8")
-      ) as StorageLayoutReport;
+    it("should not raise diff when changing struct for smaller, free storage word", () => {
+      const contract = "tests/mocks/struct/StorageStructSmaller.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Label diff at storage slot #15, byte #0: variable "(struct Storage.Struct)myStruct.c" was renamed to "(struct Storage.Struct)myStruct.d". Is it intentional?'
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
+    });
+
+    it("should raise variable diff when using larger struct", () => {
+      const contract = "tests/mocks/struct/StorageStructLarger.sol:Storage";
+      const cmpDef = parseSource(contract);
+      const cmpLayout = parseLayout(createLayout(contract));
+
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(2);
+      expect(formatDiff(cmpDef, diffs[0]).message).toEqual(
+        'variable "(Storage.Struct)myStruct.b" of type "uint256" was replaced by variable "(Storage.Struct)myStruct.e" of type "address" (storage slot 0x000000000000000000000000000000000000000000000000000000000000000e, byte #0)'
       );
-    });
-
-    it("should raise variable diff when changing struct for smaller", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.struct_smaller.json", "utf8")
-      ) as StorageLayoutReport;
-
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toBeUndefined();
-    });
-
-    it("should raise variable diff when changing struct variable type", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.struct_type_changed.json", "utf8")
-      ) as StorageLayoutReport;
-
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Variable diff at storage slot #14, byte #0: variable "(struct Storage.Struct)myStruct.b" of type "uint256" was replaced by variable "(struct Storage.Struct)myStruct.e" of type "address".'
+      expect(formatDiff(cmpDef, diffs[1]).message).toEqual(
+        'variable "(Storage.Struct)structs.b" of type "uint256" was replaced by variable "(Storage.Struct)structs.e" of type "address" (storage slot 0x60811857dd566889ff6255277d82526f2d9b3bbcb96076be22a5860765ac3d07, byte #0)'
       );
     });
 
     it("should not raise variable diff when extending struct", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.struct_extended.json", "utf8")
-      ) as StorageLayoutReport;
+      const contract = "tests/mocks/struct/StorageStructExtended.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toBeUndefined();
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
     });
   });
 
   describe("Mapping storage", () => {
-    const srcContent = JSON.parse(
-      fs.readFileSync("tests/mocks/storage_layout.mapping_ref.json", "utf8")
-    ) as StorageLayoutReport;
+    const srcLayout = parseLayout(createLayout("tests/mocks/StorageMappingRef.sol:Storage"));
 
     it("should raise label diff when changing name of mapping", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.mapping_renamed.json", "utf8")
-      ) as StorageLayoutReport;
+      const contract = "tests/mocks/mapping/StorageMappingRenamed.sol:Storage";
+      const cmpDef = parseSource(contract);
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Label diff at storage slot #13, byte #0: variable "structOf" was renamed to "_structOf". Is it intentional?'
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(1);
+      expect(formatDiff(cmpDef, diffs[0]).message).toEqual(
+        'variable "structOf" was renamed to "_structOf". Is it intentional? (storage slot 0x000000000000000000000000000000000000000000000000000000000000000d, byte #0)'
       );
     });
 
     it("should raise type diff when changing mapping", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.mapping_changed.json", "utf8")
-      ) as StorageLayoutReport;
+      const contract = "tests/mocks/mapping/StorageMappingChanged.sol:Storage";
+      const cmpDef = parseSource(contract);
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Variable type diff at storage slot #1, byte #0: variable "nestedMapping" was of type "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct)))" but is now "mapping(address => mapping(uint256 => mapping(uint256 => struct Storage.Struct)))".'
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(1);
+      expect(formatDiff(cmpDef, diffs[0]).message).toEqual(
+        'variable "nestedMapping[0]" was of type "mapping(address => mapping(uint256 => Storage.Struct))" but is now "mapping(uint256 => mapping(uint256 => Storage.Struct))" (storage slot 0xc13ad76448cbefd1ee83b801bcd8f33061f2577d6118395e7b44ea21c7ef62e0, byte #0)'
       );
     });
 
     it("should raise type diff when extending mapping", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.mapping_extended.json", "utf8")
-      ) as StorageLayoutReport;
+      const contract = "tests/mocks/mapping/StorageMappingExtended.sol:Storage";
+      const cmpDef = parseSource(contract);
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Variable type diff at storage slot #13, byte #0: variable "structOf" was of type "mapping(address => struct Storage.Struct)" but is now "mapping(address => mapping(address => struct Storage.Struct))".'
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(2);
+      expect(formatDiff(cmpDef, diffs[0]).message).toEqual(
+        'variable "structOf" was of type "mapping(address => Storage.Struct)" but is now "mapping(address => mapping(address => Storage.Struct))" (storage slot 0x000000000000000000000000000000000000000000000000000000000000000d, byte #0)'
+      );
+      expect(formatDiff(cmpDef, diffs[1]).message).toEqual(
+        'variable "(Storage.Struct)structOf[0].a" of type "bool" was replaced by variable "structOf[0]" of type "mapping(address => Storage.Struct)" (storage slot 0x91d3ecd2a4b33a91a2a6360f87f530a38fc3d60e51ba8524f83e3f14addbb728, byte #0)'
       );
     });
 
-    it("should raise type diff when renaming mapping struct", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.mapping_struct_renamed.json", "utf8")
-      ) as StorageLayoutReport;
+    it("should not raise diff when renaming mapping struct", () => {
+      const contract = "tests/mocks/mapping/StorageMappingStructRenamed.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Variable type diff at storage slot #1, byte #0: variable "nestedMapping" was of type "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct)))" but is now "mapping(address => mapping(address => mapping(uint256 => struct Storage.Struct2)))".'
-      );
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
     });
 
-    it("should raise type diff when changing mapping struct", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.mapping_struct_changed.json", "utf8")
-      ) as StorageLayoutReport;
+    it("should not raise diff when extended mapping struct", () => {
+      const contract = "tests/mocks/mapping/StorageMappingStructExtended.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
 
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toEqual(
-        'Label diff at struct Storage.Struct slot #2, byte #0: variable "c" was renamed to "d". Is it intentional?'
-      );
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
     });
-
-    it("should not raise type diff when extended mapping struct", () => {
-      const cmpContent = JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.mapping_struct_extended.json", "utf8")
-      ) as StorageLayoutReport;
-
-      const diff = formatDiff(checkLayouts(srcContent, cmpContent)[0]);
-      expect(diff).toBeUndefined();
-    });
-  });
-
-  it("morpho", () => {
-    const diffs = checkLayouts(
-      JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.morpho.json", "utf8")
-      ) as StorageLayoutReport,
-      JSON.parse(
-        fs.readFileSync("tests/mocks/storage_layout.morpho_refactored.json", "utf8")
-      ) as StorageLayoutReport
-    ).map(formatDiff);
-
-    expect(diffs).toEqual([
-      'Label diff at struct Types.MarketStatus slot #0, byte #1: variable "isPaused" was renamed to "isSupplyPaused". Is it intentional?',
-      'Label diff at struct Types.MarketStatus slot #0, byte #2: variable "isPartiallyPaused" was renamed to "isBorrowPaused". Is it intentional?',
-    ]);
   });
 });

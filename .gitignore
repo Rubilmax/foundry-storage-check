@@ -98,3 +98,4 @@ Thumbs.db
 tests/runner
 lib
 cache
+out

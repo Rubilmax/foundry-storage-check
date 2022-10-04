@@ -36,6 +36,8 @@
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@octokit/core": "^4.0.5",
+    "@solidity-parser/parser": "^0.14.3",
+    "keccak256": "^1.0.6",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
