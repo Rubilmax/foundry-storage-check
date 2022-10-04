@@ -14,7 +14,7 @@ describe("Storage layout checks", () => {
     });
 
     it("should raise label diff when renaming variable", () => {
-      const contract = "tests/mocks/StorageRenamed.sol:Storage";
+      const contract = "tests/mocks/basic/StorageRenamed.sol:Storage";
       const cmpDef = parseSource(contract);
       const cmpLayout = parseLayout(createLayout(contract));
 
@@ -135,7 +135,9 @@ describe("Storage layout checks", () => {
   });
 
   describe("Mapping storage", () => {
-    const srcLayout = parseLayout(createLayout("tests/mocks/StorageMappingRef.sol:Storage"));
+    const srcLayout = parseLayout(
+      createLayout("tests/mocks/mapping/StorageMappingRef.sol:Storage")
+    );
 
     it("should raise label diff when changing name of mapping", () => {
       const contract = "tests/mocks/mapping/StorageMappingRenamed.sol:Storage";
