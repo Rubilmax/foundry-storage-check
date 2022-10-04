@@ -29,4 +29,5 @@ jobs:
 
       - name: Check storage layout
         uses: Rubilmax/foundry-storage-check@v1.10
-        contract: src/Example.sol:Example
+        with:
+          contract: contracts/Example.sol:Example
