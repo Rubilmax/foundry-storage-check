@@ -91,6 +91,7 @@ typings/
 .dynamodb/
 
 # OS metadata
+.vscode
 .DS_Store
 Thumbs.db
 
