@@ -1,6 +1,6 @@
 {
   "name": "foundry-storage-check",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Github Action checking the storage layout diff from Foundry storage layout reports",
   "author": {
     "name": "Romain (Rubilmax) Milon",

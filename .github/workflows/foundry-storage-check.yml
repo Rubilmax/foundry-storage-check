@@ -28,6 +28,6 @@ jobs:
           version: nightly
 
       - name: Check storage layout
-        uses: Rubilmax/foundry-storage-check@v1.10
+        uses: Rubilmax/foundry-storage-check@v2
         with:
           contract: contracts/Example.sol:Example
