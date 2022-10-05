@@ -2,6 +2,13 @@
 
 - Protect your Smart Contract Proxy from storage collisions upon upgrading, by running this action in a CI on each of your Pull Requests!
 
+## Live Example
+
+Checkout [PR #21](/pulls/21) for a live example:
+
+- Action is ran on [contracts/Example.sol:Example](./contracts/Example.sol)
+- Warnings & errors appear on the [Pull Request changes](https://github.com/Rubilmax/foundry-storage-check/pull/21/files)
+
 ## How it works
 
 Everytime somebody opens a Pull Request, the action runs [Foundry](https://github.com/foundry-rs/foundry) `forge` to generate the storage layout of the Smart Contract you want to check.
@@ -46,6 +53,8 @@ jobs:
 
       - name: Check storage layout
         uses: Rubilmax/foundry-storage-check@v1.0
+        with:
+          contract: src/Contract.sol:Contract
 ```
 
 > :information_source: **An error will appear at first run!**<br/>
