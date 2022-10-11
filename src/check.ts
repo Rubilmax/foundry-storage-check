@@ -116,7 +116,7 @@ export const checkLayouts = (
   srcLayout: StorageLayoutReportExact,
   cmpLayout: StorageLayoutReportExact
 ): StorageLayoutDiff[] => {
-  let diffs: StorageLayoutDiff[] = [];
+  const diffs: StorageLayoutDiff[] = [];
 
   const srcMapping = getStorageBytesMapping(srcLayout);
   const cmpMapping = getStorageBytesMapping(cmpLayout);

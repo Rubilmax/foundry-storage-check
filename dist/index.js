@@ -76,7 +76,7 @@ const getStorageBytesMapping = (layout) => layout.storage.reduce((acc, variable)
     ...getStorageVariableBytesMapping(layout, variable, variable.slot * exports.STORAGE_WORD_SIZE + variable.offset),
 }), {});
 const checkLayouts = (srcLayout, cmpLayout) => {
-    let diffs = [];
+    const diffs = [];
     const srcMapping = getStorageBytesMapping(srcLayout);
     const cmpMapping = getStorageBytesMapping(cmpLayout);
     for (const byte of Object.keys(cmpMapping)) {
