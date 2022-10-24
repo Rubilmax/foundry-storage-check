@@ -137,7 +137,6 @@ export const checkLayouts = (
     if (srcSlotVar.label === "__gap" || cmpSlotVar.label === "__gap") continue; // source byte was part of a gap slot or is replaced with a gap slot
 
     if (cmpSlotVar.fullLabel !== srcSlotVar.fullLabel) {
-      // TODO: check this
       if (cmpSlotVar.fullLabel.startsWith(`(${srcSlotVar.typeLabel})${srcSlotVar.label}`)) continue; // variable is a member of source struct, in empty bytes
 
       if (cmpSlotVar.type === srcSlotVar.type) {
@@ -195,7 +194,11 @@ export const checkLayouts = (
             (cmpBaseType.members?.length ?? 0) > 0 // if the value has members, their corresponding bytes will be checked
           )
             continue;
-        }
+        } else if (
+          (srcSlotVar.type.startsWith("t_contract") || srcSlotVar.type === "t_address") &&
+          (cmpSlotVar.type.startsWith("t_contract") || cmpSlotVar.type === "t_address")
+        )
+          continue; // source & target bytes are part of an address variable disguised as an interface
       }
 
       diffs.push({
@@ -207,6 +210,7 @@ export const checkLayouts = (
         src: srcSlotVar,
         cmp: cmpSlotVar,
       });
+
       continue;
     }
   }

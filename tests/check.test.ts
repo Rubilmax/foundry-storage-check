@@ -125,7 +125,7 @@ describe("Storage layout checks", () => {
       );
     });
 
-    it("should not raise variable diff when extending struct", () => {
+    it("should not raise diff when extending struct", () => {
       const contract = "tests/mocks/struct/StorageStructExtended.sol:Storage";
       const cmpLayout = parseLayout(createLayout(contract));
 
@@ -188,6 +188,21 @@ describe("Storage layout checks", () => {
 
     it("should not raise diff when extended mapping struct", () => {
       const contract = "tests/mocks/mapping/StorageMappingStructExtended.sol:Storage";
+      const cmpLayout = parseLayout(createLayout(contract));
+
+      const diffs = checkLayouts(srcLayout, cmpLayout);
+      expect(diffs).toHaveLength(0);
+    });
+  });
+
+  describe("Interface storage", () => {
+    const srcLayout = parseLayout(
+      createLayout("tests/mocks/interface/StorageInterfaceRef.sol:Storage")
+    );
+
+    it("should not raise diff when extending interface", () => {
+      const contract = "tests/mocks/interface/StorageInterfaceExtended.sol:Storage";
+      const cmpDef = parseSource(contract);
       const cmpLayout = parseLayout(createLayout(contract));
 
       const diffs = checkLayouts(srcLayout, cmpLayout);
