@@ -57,7 +57,7 @@
     "@types/lodash": "^4.14.186",
     "@types/node": "^18.11.8",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
-    "@typescript-eslint/parser": "^5.40.1",
+    "@typescript-eslint/parser": "^5.42.0",
     "@vercel/ncc": "^0.34.0",
     "adm-zip": "^0.5.9",
     "colors": "^1.4.0",
