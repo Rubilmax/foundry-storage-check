@@ -55,7 +55,7 @@
     "@types/adm-zip": "^0.5.0",
     "@types/jest": "^28.1.6",
     "@types/lodash": "^4.14.186",
-    "@types/node": "^18.11.8",
+    "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
     "@vercel/ncc": "^0.34.0",
