@@ -73,12 +73,14 @@ async function run() {
         owner,
         repo,
       })) {
-        await new Promise((resolve) => setTimeout(resolve, 200)); // avoid reaching GitHub API rate limit
-
         const artifact = res.data.find(
           (artifact) => !artifact.expired && artifact.name === baseReport
         );
-        if (!artifact) continue;
+        if (!artifact) {
+          await new Promise((resolve) => setTimeout(resolve, 800)); // avoid reaching the API rate limit
+
+          continue;
+        }
 
         artifactId = artifact.id;
         refCommitHash = artifact.workflow_run?.head_sha;
