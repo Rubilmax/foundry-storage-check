@@ -1,18 +1,22 @@
-import keccak256 from "keccak256";
 import _isEqual from "lodash/isEqual";
 import _range from "lodash/range";
+import _sortBy from "lodash/sortBy";
 import _uniqWith from "lodash/uniqWith";
 
+import { Provider } from "@ethersproject/providers";
+import { keccak256 } from "@ethersproject/solidity";
+
 import {
+  StorageLayoutDiffAdded,
   StorageLayoutDiff,
   StorageLayoutDiffType,
   StorageLayoutReportExact,
   StorageVariableDetails,
   StorageVariableExact,
+  StorageLayoutDiffAddedNonZeroSlot,
 } from "./types";
 
 export const STORAGE_WORD_SIZE = 32n;
-export const ZERO_BYTE = "".padStart(64, "0");
 
 interface StorageBytesMapping {
   [byte: string]: StorageVariableDetails;
@@ -29,7 +33,7 @@ const getStorageVariableBytesMapping = (
   let example = {};
   switch (varType.encoding) {
     case "dynamic_array":
-      slot = BigInt("0x" + keccak256("0x" + variable.slot.toString(16)).toString("hex")); // slot of the element at index 0
+      slot = BigInt(keccak256(["uint256"], [variable.slot])); // slot of the element at index 0
       example = getStorageVariableBytesMapping(
         layout,
         {
@@ -39,13 +43,11 @@ const getStorageVariableBytesMapping = (
           type: varType.base!,
           label: variable.label.replace("[]", "[0]"),
         },
-        startByte + slot * STORAGE_WORD_SIZE
+        slot * STORAGE_WORD_SIZE
       );
       break;
     case "mapping":
-      slot = BigInt(
-        "0x" + keccak256("0x" + ZERO_BYTE + variable.slot.toString(16)).toString("hex")
-      ); // slot of the element at key 0
+      slot = BigInt(keccak256(["uint256", "uint256"], [0, variable.slot])); // slot of the element at key 0
       example = getStorageVariableBytesMapping(
         layout,
         {
@@ -55,7 +57,7 @@ const getStorageVariableBytesMapping = (
           type: varType.value!,
           label: `${variable.label}[0]`,
         },
-        startByte + slot * STORAGE_WORD_SIZE
+        slot * STORAGE_WORD_SIZE
       );
       break;
     default:
@@ -65,7 +67,7 @@ const getStorageVariableBytesMapping = (
   const details: StorageVariableDetails = {
     ...variable,
     fullLabel: variable.parent
-      ? `(${variable.parent.typeLabel})${variable.parent.label}.${variable.label}`
+      ? `(${variable.parent.typeLabel} ${variable.parent.label}).${variable.label}`
       : variable.label,
     typeLabel: varType.label.replace(/struct /, ""),
     startByte,
@@ -112,11 +114,17 @@ const getStorageBytesMapping = (layout: StorageLayoutReportExact): StorageBytesM
     {}
   );
 
-export const checkLayouts = (
+export const checkLayouts = async (
   srcLayout: StorageLayoutReportExact,
-  cmpLayout: StorageLayoutReportExact
-): StorageLayoutDiff[] => {
+  cmpLayout: StorageLayoutReportExact,
+  {
+    address,
+    provider,
+    checkRemovals,
+  }: { address?: string; provider?: Provider; checkRemovals?: boolean } = {}
+): Promise<StorageLayoutDiff[]> => {
   const diffs: StorageLayoutDiff[] = [];
+  const added: StorageLayoutDiffAdded[] = [];
 
   const srcMapping = getStorageBytesMapping(srcLayout);
   const cmpMapping = getStorageBytesMapping(cmpLayout);
@@ -125,7 +133,21 @@ export const checkLayouts = (
     const srcSlotVar = srcMapping[byte];
     const cmpSlotVar = cmpMapping[byte];
 
-    if (!srcSlotVar) continue; // source byte was unused
+    const byteIndex = BigInt(byte);
+    const location = {
+      slot: byteIndex / STORAGE_WORD_SIZE,
+      offset: byteIndex % STORAGE_WORD_SIZE,
+    };
+
+    if (!srcSlotVar) {
+      added.push({
+        location,
+        cmp: cmpSlotVar,
+      });
+
+      continue; // source byte was unused
+    }
+
     if (
       cmpSlotVar.type === srcSlotVar.type &&
       cmpSlotVar.fullLabel === srcSlotVar.fullLabel &&
@@ -134,18 +156,30 @@ export const checkLayouts = (
       cmpSlotVar.startByte === srcSlotVar.startByte
     )
       continue; // variable did not change
-    if (srcSlotVar.label === "__gap" || cmpSlotVar.label === "__gap") continue; // source byte was part of a gap slot or is replaced with a gap slot
+
+    if (srcSlotVar.label === "__gap" || cmpSlotVar.label === "__gap") {
+      added.push({
+        location,
+        cmp: cmpSlotVar,
+      });
+
+      continue; // source byte was part of a gap slot or is replaced with a gap slot
+    }
 
     if (cmpSlotVar.fullLabel !== srcSlotVar.fullLabel) {
-      if (cmpSlotVar.fullLabel.startsWith(`(${srcSlotVar.typeLabel})${srcSlotVar.label}`)) continue; // variable is a member of source struct, in empty bytes
+      if (cmpSlotVar.fullLabel.startsWith(`(${srcSlotVar.typeLabel} ${srcSlotVar.label})`)) {
+        added.push({
+          location,
+          cmp: cmpSlotVar,
+        });
+
+        continue; // variable is a member of source struct, in empty bytes
+      }
 
       if (cmpSlotVar.type === srcSlotVar.type) {
         if (cmpSlotVar.label !== srcSlotVar.label)
           diffs.push({
-            location: {
-              slot: srcSlotVar.slot,
-              offset: srcSlotVar.offset,
-            },
+            location,
             type: StorageLayoutDiffType.LABEL,
             src: srcSlotVar,
             cmp: cmpSlotVar,
@@ -155,10 +189,7 @@ export const checkLayouts = (
       }
 
       diffs.push({
-        location: {
-          slot: srcSlotVar.slot,
-          offset: srcSlotVar.offset,
-        },
+        location,
         type: StorageLayoutDiffType.VARIABLE,
         src: srcSlotVar,
         cmp: cmpSlotVar,
@@ -202,10 +233,7 @@ export const checkLayouts = (
       }
 
       diffs.push({
-        location: {
-          slot: srcSlotVar.slot,
-          offset: srcSlotVar.offset,
-        },
+        location,
         type: StorageLayoutDiffType.VARIABLE_TYPE,
         src: srcSlotVar,
         cmp: cmpSlotVar,
@@ -215,5 +243,64 @@ export const checkLayouts = (
     }
   }
 
-  return _uniqWith(diffs, _isEqual);
+  if (checkRemovals) {
+    for (const byte of Object.keys(srcMapping)) {
+      const srcSlotVar = srcMapping[byte];
+      const cmpSlotVar = cmpMapping[byte];
+
+      const byteIndex = BigInt(byte);
+      const location = {
+        slot: byteIndex / STORAGE_WORD_SIZE,
+        offset: byteIndex % STORAGE_WORD_SIZE,
+      };
+
+      if (!cmpSlotVar)
+        diffs.push({
+          location,
+          type: StorageLayoutDiffType.VARIABLE_REMOVED,
+          src: srcSlotVar,
+        });
+    }
+  }
+
+  return _uniqWith(
+    _sortBy(diffs, ["location.slot", "location.offset"]), // make sure it's ordered by storage byte order
+    ({ location: location1, ...diff1 }, { location: location2, ...diff2 }) => _isEqual(diff1, diff2) // only keep first byte diff of a variable, which corresponds to the start byte
+  ).concat(address && provider ? await checkAddedStorageSlots(added, address, provider) : []);
+};
+
+const checkAddedStorageSlots = async (
+  added: StorageLayoutDiffAdded[],
+  address: string,
+  provider: Provider
+): Promise<StorageLayoutDiffAddedNonZeroSlot[]> => {
+  const storage: { [slot: string]: string } = {};
+  const diffs: StorageLayoutDiffAddedNonZeroSlot[] = [];
+
+  for (const diff of _sortBy(added, ["location.slot", "location.offset"])) {
+    const slot = diff.location.slot.toString();
+
+    const memoized = storage[slot];
+    let value = memoized ?? (await provider.getStorageAt(address, slot));
+    if (!memoized) storage[slot] = value;
+
+    const byteIndex = value.length - Number((diff.location.offset + 1n) * 2n);
+    value = value.substring(byteIndex, byteIndex + 2);
+
+    if (value === "00") continue;
+
+    diffs.push({
+      ...diff,
+      type: StorageLayoutDiffType.NON_ZERO_ADDED_SLOT,
+      value,
+    });
+  }
+
+  return _uniqWith(
+    diffs,
+    (
+      { location: location1, value: value1, ...diff1 },
+      { location: location2, value: value2, ...diff2 }
+    ) => _isEqual(diff1, diff2) // only keep first byte diff of a variable, which corresponds to the start byte
+  );
 };

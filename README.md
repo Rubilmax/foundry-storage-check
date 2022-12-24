@@ -4,16 +4,10 @@
 
 ## Live Example
 
-Checkout [PR #21](/pulls/21) for a live example:
+Check out [PR #21](/pulls/21) for a live example:
 
 - Action is ran on [contracts/Example.sol:Example](./contracts/Example.sol)
 - Warnings & errors appear on the [Pull Request changes](https://github.com/Rubilmax/foundry-storage-check/pull/21/files)
-
-## How it works
-
-Everytime somebody opens a Pull Request, the action runs [Foundry](https://github.com/foundry-rs/foundry) `forge` to generate the storage layout of the Smart Contract you want to check.
-
-Once generated, the action will fetch the comparative storage layout stored as an artifact from previous runs; parse & compare them, pinning warnings and errors on the Pull Request.
 
 ## Getting started
 
@@ -52,14 +46,34 @@ jobs:
           version: nightly
 
       - name: Check storage layout
-        uses: Rubilmax/foundry-storage-check@v2.1
+        uses: Rubilmax/foundry-storage-check@v3
         with:
           contract: src/Contract.sol:Contract
+          # settings below are optional, but allows to check whether the added storage slots are empty on the deployed contract
+          rpcUrl: wss://eth-mainnet.g.alchemy.com/v2/<YOUR_ALCHEMY_KEY> # the RPC url to use to query the deployed contract's storage slots
+          address: 0x0000000000000000000000000000000000000000 # the address at which the contract check is deployed
+          failOnRemoval: true # fail the CI when removing storage slots (default: false)
 ```
 
 > :information_source: **An error will appear at first run!**<br/>
 > 🔴 <em>**Error:** No workflow run found with an artifact named "..."</em><br/>
 > As the action is expecting a comparative file stored on the base branch and cannot find it (because the action never ran on the target branch and thus has never uploaded any storage layout)
+
+---
+
+## How it works
+
+Everytime somebody opens a Pull Request, the action runs [Foundry](https://github.com/foundry-rs/foundry) `forge` to generate the storage layout of the Smart Contract you want to check.
+
+Once generated, the action will fetch the comparative storage layout stored as an artifact from previous runs and compare them, to perform a series of checks at each storage byte, and raise a notice accordingly:
+
+- Variable changed: `error`
+- Type definition changed: `error`
+- Type definition removed: `warning`
+- Different variable naming: `warning`
+- Variable removed (optional): `error`
+
+---
 
 ## Options
 
@@ -68,6 +82,20 @@ jobs:
 The path and name of the contract of which to inspect storage layout (e.g. src/Contract.sol:Contract).
 
 _Required_
+
+### `address` _{string}_
+
+The address at which the contract is deployed on the EVM-compatible chain queried via `rpcUrl`.
+
+### `rpcUrl` _{string}_
+
+The HTTP/WS url used to query the EVM-compatible chain for storage slots to check for clashing.
+
+### `failOnRemoval` _{string}_
+
+Whether to fail the CI when removing a storage slot (to only allow added or renamed storage slots).
+
+_Defaults to: `false`_
 
 ### `base` _{string}_
 

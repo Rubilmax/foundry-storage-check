@@ -58,9 +58,11 @@ export enum StorageLayoutDiffType {
   TYPE_CHANGED = "TYPE_CHANGED",
   VARIABLE = "VARIABLE",
   VARIABLE_TYPE = "VARIABLE_TYPE",
+  VARIABLE_REMOVED = "VARIABLE_REMOVED",
+  NON_ZERO_ADDED_SLOT = "NON_ZERO_ADDED_SLOT",
 }
 
-export interface StorageLayoutDiffLocation {
+export interface StorageLayoutLocation {
   slot: bigint;
   offset: bigint;
 }
@@ -71,10 +73,42 @@ export interface StorageVariableDetails extends StorageVariableExact {
   startByte: bigint;
 }
 
-export interface StorageLayoutDiff {
-  type: StorageLayoutDiffType;
-  location: StorageLayoutDiffLocation;
+export interface StorageLayoutDiffBase {
+  type: Exclude<
+    StorageLayoutDiffType,
+    StorageLayoutDiffType.NON_ZERO_ADDED_SLOT | StorageLayoutDiffType.VARIABLE_REMOVED
+  >;
+  location: StorageLayoutLocation;
   src: StorageVariableDetails;
+  cmp: StorageVariableDetails;
+  parent?: string;
+}
+
+export interface StorageLayoutDiffAdded {
+  location: StorageLayoutLocation;
+  cmp: StorageVariableDetails;
+  parent?: string;
+}
+
+export interface StorageLayoutDiffAddedNonZeroSlot extends StorageLayoutDiffAdded {
+  type: StorageLayoutDiffType.NON_ZERO_ADDED_SLOT;
+  value: string;
+}
+
+export interface StorageLayoutDiffRemoved {
+  type: StorageLayoutDiffType.VARIABLE_REMOVED;
+  location: StorageLayoutLocation;
+  src: StorageVariableDetails;
+  parent?: string;
+}
+
+export type StorageLayoutDiff =
+  | StorageLayoutDiffBase
+  | StorageLayoutDiffAddedNonZeroSlot
+  | StorageLayoutDiffRemoved;
+
+export interface StorageLayoutLocationAdded {
+  location: StorageLayoutLocation;
   cmp: StorageVariableDetails;
   parent?: string;
 }

@@ -9,6 +9,16 @@ inputs:
   contract:
     description: The path and name of the contract of which to inspect storage layout (e.g. src/Contract.sol:Contract).
     required: true
+  address:
+    description: The address at which the contract is deployed on the EVM-compatible chain queried via rpcUrl.
+    required: false
+  rpcUrl:
+    description: The HTTP/WS url used to query the EVM-compatible chain for storage slots to check for clashing.
+    required: false
+  failOnRemoval:
+    description: Whether to fail the CI when removing a storage slot (to only allow added or renamed storage slots).
+    required: false
+    default: false
   token:
     description: The repository's github token.
     default: ${{ github.token }}

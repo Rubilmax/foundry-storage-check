@@ -5,15 +5,20 @@ import { dirname, resolve } from "path";
 import * as artifact from "@actions/artifact";
 import * as core from "@actions/core";
 import { context, getOctokit } from "@actions/github";
+import { getDefaultProvider } from "@ethersproject/providers";
 
 import { checkLayouts } from "./check";
-import { diffLevels, formatDiff, formatGitHubDiff } from "./format";
+import { diffLevels, diffTitles, formatDiff } from "./format";
 import { createLayout, parseSource, parseLayout } from "./input";
+import { StorageLayoutDiffType } from "./types";
 
 const token = process.env.GITHUB_TOKEN || core.getInput("token");
 const baseBranch = core.getInput("base");
 const headBranch = core.getInput("head");
 const contract = core.getInput("contract");
+const address = core.getInput("address");
+const rpcUrl = core.getInput("rpcUrl");
+const failOnRemoval = core.getInput("failOnRemoval") === "true";
 
 const contractEscaped = contract.replace(/\//g, "_").replace(/:/g, "-");
 const getReportPath = (branch: string, baseName: string) =>
@@ -27,6 +32,8 @@ const artifactClient = artifact.create();
 
 const { owner, repo } = context.repo;
 const repository = owner + "/" + repo;
+
+const provider = getDefaultProvider(rpcUrl);
 
 let srcContent: string;
 let refCommitHash: string | undefined;
@@ -124,7 +131,11 @@ async function run() {
     core.endGroup();
 
     core.startGroup("Check storage layout");
-    const diffs = checkLayouts(srcLayout, cmpLayout);
+    const diffs = await checkLayouts(srcLayout, cmpLayout, {
+      address,
+      provider,
+      checkRemovals: failOnRemoval,
+    });
 
     if (diffs.length > 0) {
       core.info(`Parse source code`);
@@ -133,16 +144,33 @@ async function run() {
       const formattedDiffs = diffs.map((diff) => {
         const formattedDiff = formatDiff(cmpDef, diff);
 
-        console.log(formatGitHubDiff(cmpDef, formattedDiff));
+        const title = diffTitles[formattedDiff.type];
+        const level = diffLevels[formattedDiff.type] || "error";
+        console.log(
+          core[level](formattedDiff.message, {
+            title,
+            file: cmpDef.path,
+            startLine: formattedDiff.loc.start.line,
+            endLine: formattedDiff.loc.end.line,
+            startColumn: formattedDiff.loc.start.column,
+            endColumn: formattedDiff.loc.end.column,
+          })
+        );
 
         return formattedDiff;
       });
 
-      if (formattedDiffs.filter((diff) => diffLevels[diff.type] === "error").length > 0)
+      if (
+        formattedDiffs.filter((diff) => diffLevels[diff.type] === "error").length > 0 ||
+        (failOnRemoval &&
+          formattedDiffs.filter((diff) => diff.type === StorageLayoutDiffType.VARIABLE_REMOVED)
+            .length > 0)
+      )
         return core.setFailed(
           "Unsafe storage layout changes detected. Please see above for details."
         );
     }
+
     core.endGroup();
   } catch (error: any) {
     core.setFailed(error.message);

@@ -23,7 +23,7 @@ export const diffTitles: { [type in StorageLayoutDiffType]?: string } = {
 
 export const formatDiff = (
   cmpDef: ParsedSource,
-  { type, ...diff }: StorageLayoutDiff
+  diff: StorageLayoutDiff
 ): FormattedStorageLayoutDiff => {
   const location =
     (diff.parent
@@ -32,7 +32,7 @@ export const formatDiff = (
     `, byte #${diff.location.offset.toString()}`;
 
   const loc = cmpDef.tokens.find(
-    (token) => token.type === "Identifier" && token.value === diff.cmp.label
+    (token) => token.type === "Identifier" && "cmp" in diff && token.value === diff.cmp.label
   )?.loc ?? {
     start: {
       line: 0,
@@ -44,6 +44,7 @@ export const formatDiff = (
     },
   };
 
+  const { type } = diff;
   switch (type) {
     case StorageLayoutDiffType.LABEL:
       return {
@@ -56,6 +57,12 @@ export const formatDiff = (
         loc,
         type,
         message: `variable "${diff.src.fullLabel}" was of type "${diff.src.typeLabel}" but is now "${diff.cmp.typeLabel}" (${location})`,
+      };
+    case StorageLayoutDiffType.VARIABLE_REMOVED:
+      return {
+        loc,
+        type,
+        message: `variable "${diff.src.fullLabel}" of type "${diff.src.typeLabel}" was removed (${location})`,
       };
     case StorageLayoutDiffType.TYPE_REMOVED:
       return {
@@ -75,19 +82,17 @@ export const formatDiff = (
         type,
         message: `variable "${diff.src.fullLabel}" of type "${diff.src.typeLabel}" was replaced by variable "${diff.cmp.fullLabel}" of type "${diff.cmp.typeLabel}" (${location})`,
       };
+    case StorageLayoutDiffType.NON_ZERO_ADDED_SLOT:
+      return {
+        loc,
+        type,
+        message: `variable "${diff.cmp.fullLabel}" of type "${diff.cmp.typeLabel}" was added at a non-zero storage byte (${location}: 0x${diff.value})`,
+      };
     default:
       return {
         loc,
         type,
-        message: `Storage layout diff: variable "${diff.src.fullLabel}" of type "${diff.src.type}" was replaced by variable "${diff.cmp.fullLabel}" of type "${diff.cmp.type}" (${location})`,
+        message: `Storage layout diff`,
       };
   }
 };
-
-export const formatGitHubDiff = (
-  cmpDef: ParsedSource,
-  { loc, type, message }: FormattedStorageLayoutDiff
-) =>
-  `::${diffLevels[type] || "error"} file=${cmpDef.path},line=${loc.start.line},endLine=${
-    loc.end.line
-  },col=${loc.start.column},endColumn=${loc.end.column},title=${diffTitles[type]}::${message}`;
