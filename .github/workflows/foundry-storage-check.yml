@@ -1,9 +1,6 @@
 name: Check storage layout
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     # Optionally configure to run only for changes in specific files. For example:
     # paths:
