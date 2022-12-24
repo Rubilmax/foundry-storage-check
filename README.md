@@ -1,6 +1,11 @@
+<p align="center">
+<img width="836" alt="image" src="https://user-images.githubusercontent.com/3147812/209434273-ff5eb5e6-0b32-4bb0-854b-dda2693e0175.png">
+</p>
+
 # 🔥🛠️ Foundry Storage Upgrade Seatbelt
 
 - Protect your Smart Contract Proxy from storage collisions upon upgrading, by running this action in a CI on each of your Pull Requests!
+- Feel safe when extending your storage layout by trusting this action to check that extended layout is zero-ed out on-chain!
 
 ## Live Example
 
@@ -72,6 +77,12 @@ Once generated, the action will fetch the comparative storage layout stored as a
 - Type definition removed: `warning`
 - Different variable naming: `warning`
 - Variable removed (optional): `error`
+
+The action automatically checks for:
+- All canonic storage bytes
+- Array value (32 bytes) at index `#0`
+- Mapping value (32 bytes) at key `0x00`
+- Zero-ed bytes for added storage variables
 
 ---
 
