@@ -146,16 +146,14 @@ async function run() {
 
         const title = diffTitles[formattedDiff.type];
         const level = diffLevels[formattedDiff.type] || "error";
-        console.log(
-          core[level](formattedDiff.message, {
-            title,
-            file: cmpDef.path,
-            startLine: formattedDiff.loc.start.line,
-            endLine: formattedDiff.loc.end.line,
-            startColumn: formattedDiff.loc.start.column,
-            endColumn: formattedDiff.loc.end.column,
-          })
-        );
+        core[level](formattedDiff.message, {
+          title,
+          file: cmpDef.path,
+          startLine: formattedDiff.loc.start.line,
+          endLine: formattedDiff.loc.end.line,
+          startColumn: formattedDiff.loc.start.column,
+          endColumn: formattedDiff.loc.end.column,
+        });
 
         return formattedDiff;
       });

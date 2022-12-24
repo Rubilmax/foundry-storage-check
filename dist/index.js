@@ -461,14 +461,14 @@ async function run() {
                 const formattedDiff = (0, format_1.formatDiff)(cmpDef, diff);
                 const title = format_1.diffTitles[formattedDiff.type];
                 const level = format_1.diffLevels[formattedDiff.type] || "error";
-                console.log(core[level](formattedDiff.message, {
+                core[level](formattedDiff.message, {
                     title,
                     file: cmpDef.path,
                     startLine: formattedDiff.loc.start.line,
                     endLine: formattedDiff.loc.end.line,
                     startColumn: formattedDiff.loc.start.column,
                     endColumn: formattedDiff.loc.end.column,
-                }));
+                });
                 return formattedDiff;
             });
             if (formattedDiffs.filter((diff) => format_1.diffLevels[diff.type] === "error").length > 0 ||
