@@ -374,7 +374,7 @@ const octokit = (0, github_1.getOctokit)(token);
 const artifactClient = artifact.create();
 const { owner, repo } = github_1.context.repo;
 const repository = owner + "/" + repo;
-const provider = (0, providers_1.getDefaultProvider)(rpcUrl);
+const provider = rpcUrl ? (0, providers_1.getDefaultProvider)(rpcUrl) : undefined;
 let srcContent;
 let refCommitHash;
 async function run() {

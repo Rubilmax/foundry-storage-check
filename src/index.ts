@@ -33,7 +33,7 @@ const artifactClient = artifact.create();
 const { owner, repo } = context.repo;
 const repository = owner + "/" + repo;
 
-const provider = getDefaultProvider(rpcUrl);
+const provider = rpcUrl ? getDefaultProvider(rpcUrl) : undefined;
 
 let srcContent: string;
 let refCommitHash: string | undefined;
