@@ -1,6 +1,6 @@
 {
   "name": "foundry-storage-check",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Github Action checking the storage layout diff from Foundry storage layout reports",
   "author": {
     "name": "Romain (Rubilmax) Milon",
@@ -57,11 +57,11 @@
     "@types/adm-zip": "^0.5.0",
     "@types/jest": "^28.1.6",
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.11.17",
+    "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
-    "@typescript-eslint/parser": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.1",
     "@vercel/ncc": "^0.36.0",
-    "adm-zip": "^0.5.9",
+    "adm-zip": "^0.5.10",
     "colors": "^1.4.0",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.5.0",

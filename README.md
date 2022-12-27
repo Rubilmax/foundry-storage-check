@@ -51,7 +51,7 @@ jobs:
           version: nightly
 
       - name: Check storage layout
-        uses: Rubilmax/foundry-storage-check@v3
+        uses: Rubilmax/foundry-storage-check@v3.0.1
         with:
           contract: src/Contract.sol:Contract
           # settings below are optional, but allows to check whether the added storage slots are empty on the deployed contract
@@ -79,6 +79,7 @@ Once generated, the action will fetch the comparative storage layout stored as a
 - Variable removed (optional): `error`
 
 The action automatically checks for:
+
 - All canonic storage bytes
 - Array value (32 bytes) at index `#0`
 - Mapping value (32 bytes) at key `0x00`
