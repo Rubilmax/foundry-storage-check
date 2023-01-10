@@ -51,7 +51,7 @@ jobs:
           version: nightly
 
       - name: Check storage layout
-        uses: Rubilmax/foundry-storage-check@v3.0.1
+        uses: Rubilmax/foundry-storage-check@v3.0.2
         with:
           contract: src/Contract.sol:Contract
           # settings below are optional, but allows to check whether the added storage slots are empty on the deployed contract
