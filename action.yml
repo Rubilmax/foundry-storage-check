@@ -31,6 +31,10 @@ inputs:
     description: The storage layout target branch name.
     default: ${{ github.head_ref || github.ref_name }}
     required: false
+  workingDirectory:
+    description: The directory inside which to run forge inspect.
+    default: .
+    required: false
 
 runs:
   using: node16
