@@ -530,7 +530,7 @@ const exactify = (variable) => ({
     slot: BigInt(variable.slot),
     offset: BigInt(variable.offset),
 });
-const createLayout = (contract, cwd) => {
+const createLayout = (contract, cwd = ".") => {
     return (0, child_process_1.execSync)(`forge inspect ${contract} storage-layout`, {
         encoding: "utf-8",
         cwd,
