@@ -18,10 +18,12 @@ const exactify = (variable: StorageVariable): StorageVariableExact => ({
   offset: BigInt(variable.offset),
 });
 
-export const createLayout = (contract: string) =>
-  execSync(`forge inspect ${contract} storage-layout`, {
+export const createLayout = (contract: string, cwd = ".") => {
+  return execSync(`forge inspect ${contract} storage-layout`, {
     encoding: "utf-8",
+    cwd,
   });
+};
 
 export const parseLayout = (content: string): StorageLayoutReportExact => {
   try {

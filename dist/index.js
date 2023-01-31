@@ -366,6 +366,7 @@ const contract = core.getInput("contract");
 const address = core.getInput("address");
 const rpcUrl = core.getInput("rpcUrl");
 const failOnRemoval = core.getInput("failOnRemoval") === "true";
+const workingDirectory = core.getInput("workingDirectory");
 const contractEscaped = contract.replace(/\//g, "_").replace(/:/g, "-");
 const getReportPath = (branch, baseName) => `${branch.replace(/[/\\]/g, "-")}.${baseName}.json`;
 const baseReport = getReportPath(baseBranch, contractEscaped);
@@ -380,7 +381,7 @@ let refCommitHash;
 async function run() {
     core.startGroup(`Generate storage layout of contract "${contract}" using foundry forge`);
     core.info(`Start forge process`);
-    const cmpContent = (0, input_1.createLayout)(contract);
+    const cmpContent = (0, input_1.createLayout)(contract, workingDirectory);
     core.info(`Parse generated layout`);
     const cmpLayout = (0, input_1.parseLayout)(cmpContent);
     core.endGroup();
@@ -529,9 +530,12 @@ const exactify = (variable) => ({
     slot: BigInt(variable.slot),
     offset: BigInt(variable.offset),
 });
-const createLayout = (contract) => (0, child_process_1.execSync)(`forge inspect ${contract} storage-layout`, {
-    encoding: "utf-8",
-});
+const createLayout = (contract, cwd = ".") => {
+    return (0, child_process_1.execSync)(`forge inspect ${contract} storage-layout`, {
+        encoding: "utf-8",
+        cwd,
+    });
+};
 exports.createLayout = createLayout;
 const parseLayout = (content) => {
     try {

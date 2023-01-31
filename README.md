@@ -51,7 +51,7 @@ jobs:
           version: nightly
 
       - name: Check storage layout
-        uses: Rubilmax/foundry-storage-check@v3.0.2
+        uses: Rubilmax/foundry-storage-check@v3.1.0
         with:
           contract: src/Contract.sol:Contract
           # settings below are optional, but allows to check whether the added storage slots are empty on the deployed contract
@@ -120,6 +120,12 @@ _Defaults to: `${{ github.base_ref || github.ref_name }}`_
 The gas diff target branch name, used to upload the freshly generated gas report.
 
 _Defaults to: `${{ github.head_ref || github.ref_name }}`_
+
+### `workingDirectory` _{string}_
+
+The directory inside which to run forge inspect.
+
+_Defaults to: `.`_
 
 ### `token` _{string}_
 
