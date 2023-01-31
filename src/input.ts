@@ -1,5 +1,6 @@
 import { execSync } from "child_process";
 import fs from "fs";
+import { join } from "path";
 
 import * as parser from "@solidity-parser/parser";
 import { ContractDefinition } from "@solidity-parser/parser/src/ast-types";
@@ -49,8 +50,9 @@ export const parseLayout = (content: string): StorageLayoutReportExact => {
   }
 };
 
-export const parseSource = (contract: string): ParsedSource => {
-  const [path, contractName] = contract.split(":");
+export const parseSource = (contract: string, cwd = ""): ParsedSource => {
+  const [relPath, contractName] = contract.split(":");
+  const path = join(cwd, relPath);
 
   const { children, tokens = [] } = parser.parse(fs.readFileSync(path, { encoding: "utf-8" }), {
     tolerant: true,

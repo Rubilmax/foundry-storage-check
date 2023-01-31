@@ -140,7 +140,7 @@ async function run() {
 
     if (diffs.length > 0) {
       core.info(`Parse source code`);
-      const cmpDef = parseSource(contract);
+      const cmpDef = parseSource(contract, workingDirectory);
 
       const formattedDiffs = diffs.map((diff) => {
         const formattedDiff = formatDiff(cmpDef, diff);
