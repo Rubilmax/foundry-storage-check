@@ -367,7 +367,8 @@ const address = core.getInput("address");
 const rpcUrl = core.getInput("rpcUrl");
 const failOnRemoval = core.getInput("failOnRemoval") === "true";
 const workingDirectory = core.getInput("workingDirectory");
-const contractEscaped = contract.replace(/\//g, "_").replace(/:/g, "-");
+const contractAbs = (0, path_1.join)(workingDirectory, contract);
+const contractEscaped = contractAbs.replace(/\//g, "_").replace(/:/g, "-");
 const getReportPath = (branch, baseName) => `${branch.replace(/[/\\]/g, "-")}.${baseName}.json`;
 const baseReport = getReportPath(baseBranch, contractEscaped);
 const outReport = getReportPath(headBranch, contractEscaped);
@@ -457,7 +458,7 @@ async function run() {
         });
         if (diffs.length > 0) {
             core.info(`Parse source code`);
-            const cmpDef = (0, input_1.parseSource)(contract);
+            const cmpDef = (0, input_1.parseSource)(contractAbs);
             const formattedDiffs = diffs.map((diff) => {
                 const formattedDiff = (0, format_1.formatDiff)(cmpDef, diff);
                 const title = format_1.diffTitles[formattedDiff.type];

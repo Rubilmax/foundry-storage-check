@@ -1,6 +1,6 @@
 import Zip from "adm-zip";
 import * as fs from "fs";
-import { dirname, resolve } from "path";
+import { dirname, join, resolve } from "path";
 
 import * as artifact from "@actions/artifact";
 import * as core from "@actions/core";
@@ -21,7 +21,8 @@ const rpcUrl = core.getInput("rpcUrl");
 const failOnRemoval = core.getInput("failOnRemoval") === "true";
 const workingDirectory = core.getInput("workingDirectory");
 
-const contractEscaped = contract.replace(/\//g, "_").replace(/:/g, "-");
+const contractAbs = join(workingDirectory, contract);
+const contractEscaped = contractAbs.replace(/\//g, "_").replace(/:/g, "-");
 const getReportPath = (branch: string, baseName: string) =>
   `${branch.replace(/[/\\]/g, "-")}.${baseName}.json`;
 
@@ -140,7 +141,7 @@ async function run() {
 
     if (diffs.length > 0) {
       core.info(`Parse source code`);
-      const cmpDef = parseSource(contract, workingDirectory);
+      const cmpDef = parseSource(contractAbs);
 
       const formattedDiffs = diffs.map((diff) => {
         const formattedDiff = formatDiff(cmpDef, diff);

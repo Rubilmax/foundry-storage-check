@@ -10,8 +10,8 @@ describe("Input checks", () => {
     expect(Object.keys(layout.types)).toHaveLength(9);
   });
 
-  it("should execute parseLayout from a custom working directory", async () => {
-    const source = parseSource("StorageRef.sol:Storage", "tests/mocks/basic");
+  it("should execute parseLayout", async () => {
+    const source = parseSource("tests/mocks/basic/StorageRef.sol:Storage");
 
     expect(source.def.name).toBe("Storage");
     expect(source.def.baseContracts).toHaveLength(0);
