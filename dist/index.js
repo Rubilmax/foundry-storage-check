@@ -10,7 +10,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.checkLayouts = exports.STORAGE_WORD_SIZE = void 0;
+exports.checkLayouts = exports.FOUNDRY_TYPE_ID_REGEX = exports.STORAGE_WORD_SIZE = void 0;
 const isEqual_1 = __importDefault(__nccwpck_require__(52));
 const range_1 = __importDefault(__nccwpck_require__(9826));
 const sortBy_1 = __importDefault(__nccwpck_require__(9774));
@@ -18,6 +18,7 @@ const uniqWith_1 = __importDefault(__nccwpck_require__(2854));
 const solidity_1 = __nccwpck_require__(4516);
 const types_1 = __nccwpck_require__(8164);
 exports.STORAGE_WORD_SIZE = 32n;
+exports.FOUNDRY_TYPE_ID_REGEX = /(?<=t_[a-z0-9_]+\([A-Z]\w*\))(\d+)/g;
 const getStorageVariableBytesMapping = (layout, variable, startByte) => {
     const varType = layout.types[variable.type];
     let slot = 0n;
@@ -75,7 +76,7 @@ const getStorageBytesMapping = (layout) => layout.storage.reduce((acc, variable)
     ...acc,
     ...getStorageVariableBytesMapping(layout, variable, variable.slot * exports.STORAGE_WORD_SIZE + variable.offset),
 }), {});
-const checkLayouts = async (srcLayout, cmpLayout, { address, provider, checkRemovals, } = {}) => {
+const checkLayouts = async (srcLayout, cmpLayout, { address, provider, checkRemovals, strictTypes, } = {}) => {
     const diffs = [];
     const added = [];
     const srcMapping = getStorageBytesMapping(srcLayout);
@@ -134,7 +135,8 @@ const checkLayouts = async (srcLayout, cmpLayout, { address, provider, checkRemo
             });
             continue;
         }
-        if (cmpSlotVar.type !== srcSlotVar.type) {
+        if (cmpSlotVar.type.replace(exports.FOUNDRY_TYPE_ID_REGEX, "") !==
+            srcSlotVar.type.replace(exports.FOUNDRY_TYPE_ID_REGEX, "")) {
             const cmpVarType = cmpLayout.types[cmpSlotVar.type];
             if ((cmpVarType.members?.length ?? 0) > 0)
                 continue; // if the type has members, their corresponding bytes will be checked
@@ -162,8 +164,9 @@ const checkLayouts = async (srcLayout, cmpLayout, { address, provider, checkRemo
                         continue;
                 }
                 else if ((srcSlotVar.type.startsWith("t_contract") || srcSlotVar.type === "t_address") &&
-                    (cmpSlotVar.type.startsWith("t_contract") || cmpSlotVar.type === "t_address"))
-                    continue; // source & target bytes are part of an address variable disguised as an interface
+                    (cmpSlotVar.type.startsWith("t_contract") || cmpSlotVar.type === "t_address")) {
+                    continue; // source & target bytes are part of an address disguised as an interface
+                }
             }
             diffs.push({
                 location,

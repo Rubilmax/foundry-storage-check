@@ -17,6 +17,7 @@ import {
 } from "./types";
 
 export const STORAGE_WORD_SIZE = 32n;
+export const FOUNDRY_TYPE_ID_REGEX = /(?<=t_[a-z0-9_]+\([A-Z]\w*\))(\d+)/g;
 
 interface StorageBytesMapping {
   [byte: string]: StorageVariableDetails;
@@ -121,7 +122,8 @@ export const checkLayouts = async (
     address,
     provider,
     checkRemovals,
-  }: { address?: string; provider?: Provider; checkRemovals?: boolean } = {}
+    strictTypes,
+  }: { address?: string; provider?: Provider; checkRemovals?: boolean; strictTypes?: boolean } = {}
 ): Promise<StorageLayoutDiff[]> => {
   const diffs: StorageLayoutDiff[] = [];
   const added: StorageLayoutDiffAdded[] = [];
@@ -198,7 +200,10 @@ export const checkLayouts = async (
       continue;
     }
 
-    if (cmpSlotVar.type !== srcSlotVar.type) {
+    if (
+      cmpSlotVar.type.replace(FOUNDRY_TYPE_ID_REGEX, "") !==
+      srcSlotVar.type.replace(FOUNDRY_TYPE_ID_REGEX, "")
+    ) {
       const cmpVarType = cmpLayout.types[cmpSlotVar.type];
       if ((cmpVarType.members?.length ?? 0) > 0) continue; // if the type has members, their corresponding bytes will be checked
 
@@ -228,8 +233,9 @@ export const checkLayouts = async (
         } else if (
           (srcSlotVar.type.startsWith("t_contract") || srcSlotVar.type === "t_address") &&
           (cmpSlotVar.type.startsWith("t_contract") || cmpSlotVar.type === "t_address")
-        )
-          continue; // source & target bytes are part of an address variable disguised as an interface
+        ) {
+          continue; // source & target bytes are part of an address disguised as an interface
+        }
       }
 
       diffs.push({

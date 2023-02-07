@@ -1,7 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.16;
+pragma solidity ^0.8.0;
 
-contract Storage {
+// not the ones from "./Types.sol"
+library Types {
+  enum TokenType {
+    ERC20,
+    ERC721,
+    ERC1155
+  }
+
   struct Struct {
     bool a;
     uint256 b;
@@ -9,13 +16,16 @@ contract Storage {
     uint16 d;
     address e;
   }
+}
 
+contract Storage {
   bool _initialized;
   bool _initializing;
   uint256[10] __gap;
-  Struct[] structs;
+  Types.Struct[] structs;
   address _owner;
-  Struct[3] fixedStructs;
-  Struct myStruct;
+  Types.TokenType token;
+  Types.Struct[3] fixedStructs;
+  Types.Struct myStruct;
   uint8 added;
 }

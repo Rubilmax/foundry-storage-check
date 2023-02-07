@@ -6,8 +6,8 @@ describe("Input checks", () => {
   it("should execute createLayout from a custom working directory", async () => {
     const layout = parseLayout(createLayout("StorageRef.sol:Storage", "tests/mocks/basic"));
 
-    expect(Object.keys(layout.storage)).toHaveLength(8);
-    expect(Object.keys(layout.types)).toHaveLength(9);
+    expect(Object.keys(layout.storage)).toHaveLength(9);
+    expect(Object.keys(layout.types)).toHaveLength(10);
   });
 
   it("should execute parseLayout", async () => {

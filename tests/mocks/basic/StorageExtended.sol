@@ -1,22 +1,17 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.16;
+pragma solidity ^0.8.0;
+
+import {Types} from "./Types.sol";
 
 contract Storage {
-  struct Struct {
-    bool a;
-    uint256 b;
-    uint16 c;
-    uint16 d;
-    address e;
-  }
-
   bool _initialized;
   bool _initializing;
   uint256[10] __gap;
-  Struct[] structs;
+  Types.Struct[] structs;
   address _owner;
-  Struct[3] fixedStructs;
-  Struct myStruct;
+  Types.TokenType token;
+  Types.Struct[3] fixedStructs;
+  Types.Struct myStruct;
   uint8 added;
   address _testAddress;
 }

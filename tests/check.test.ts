@@ -49,7 +49,7 @@ describe("Storage layout checks", () => {
       const diffs = await checkLayouts(srcLayout, cmpLayout);
       expect(diffs).toHaveLength(1);
       expect(formatDiff(cmpDef, diffs[0]).message).toEqual(
-        'variable "_owner" was of type "address" but is now "uint192" (storage slot 0x000000000000000000000000000000000000000000000000000000000000000c, byte #0)'
+        'variable "_owner" was of type "address" but is now "uint160" (storage slot 0x000000000000000000000000000000000000000000000000000000000000000c, byte #0)'
       );
     });
 
