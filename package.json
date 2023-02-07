@@ -46,7 +46,7 @@
     "@ethersproject/providers": "^5.7.2",
     "@ethersproject/solidity": "^5.7.0",
     "@octokit/core": "^4.2.0",
-    "@solidity-parser/parser": "^0.14.5",
+    "@solidity-parser/parser": "^0.15.0",
     "js-sha3": "^0.8.0",
     "lodash": "^4.17.21"
   },
