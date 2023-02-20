@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@actions/exec": "^1.1.1",
-    "@jest/types": "^29.4.2",
+    "@jest/types": "^29.4.3",
     "@trivago/prettier-plugin-sort-imports": "^3.4.0",
     "@types/adm-zip": "^0.5.0",
     "@types/jest": "^28.1.6",
