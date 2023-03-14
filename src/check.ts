@@ -122,8 +122,7 @@ export const checkLayouts = async (
     address,
     provider,
     checkRemovals,
-    strictTypes,
-  }: { address?: string; provider?: Provider; checkRemovals?: boolean; strictTypes?: boolean } = {}
+  }: { address?: string; provider?: Provider; checkRemovals?: boolean } = {}
 ): Promise<StorageLayoutDiff[]> => {
   const diffs: StorageLayoutDiff[] = [];
   const added: StorageLayoutDiffAdded[] = [];
@@ -272,17 +271,18 @@ export const checkLayouts = async (
   return _uniqWith(
     _sortBy(diffs, ["location.slot", "location.offset"]), // make sure it's ordered by storage byte order
     ({ location: location1, ...diff1 }, { location: location2, ...diff2 }) => _isEqual(diff1, diff2) // only keep first byte diff of a variable, which corresponds to the start byte
-  ).concat(address && provider ? await checkAddedStorageSlots(added, address, provider) : []);
+  ).concat(await checkAddedStorageSlots(added, address, provider));
 };
 
 const checkAddedStorageSlots = async (
   added: StorageLayoutDiffAdded[],
-  address: string,
-  provider: Provider
+  address?: string,
+  provider?: Provider
 ): Promise<StorageLayoutDiffAddedNonZeroSlot[]> => {
-  const storage: { [slot: string]: string } = {};
   const diffs: StorageLayoutDiffAddedNonZeroSlot[] = [];
+  if (!address || !provider) return [];
 
+  const storage: { [slot: string]: string } = {};
   for (const diff of _sortBy(added, ["location.slot", "location.offset"])) {
     const slot = diff.location.slot.toString();
 

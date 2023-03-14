@@ -38,7 +38,7 @@ const repository = owner + "/" + repo;
 const provider = rpcUrl ? getDefaultProvider(rpcUrl) : undefined;
 
 let srcContent: string;
-let refCommitHash: string | undefined;
+let refCommitHash: string | undefined = undefined;
 
 async function run() {
   core.startGroup(`Generate storage layout of contract "${contract}" using foundry forge`);
@@ -118,16 +118,13 @@ async function run() {
           srcContent = zip.readAsText(entry);
         }
         core.endGroup();
-      } else core.error(`No workflow run found with an artifact named "${baseReport}"`);
+      } else return core.error(`No workflow run found with an artifact named "${baseReport}"`);
     } catch (error: any) {
       return core.setFailed(error.message);
     }
   }
 
   try {
-    core.startGroup("Load storage layout reports");
-    srcContent ??= cmpContent; // if no source storage layout report were loaded, defaults to the current storage layout report
-
     core.info(`Mapping reference storage layout report`);
     const srcLayout = parseLayout(srcContent);
     core.endGroup();
