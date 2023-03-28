@@ -115,6 +115,9 @@ const getStorageBytesMapping = (layout: StorageLayoutReportExact): StorageBytesM
     {}
   );
 
+const sortDiffs = <T extends StorageLayoutDiff | StorageLayoutDiffAdded>(diffs: T[]) =>
+  _sortBy(diffs, [({ location }) => location.slot, ({ location }) => location.offset]);
+
 export const checkLayouts = async (
   srcLayout: StorageLayoutReportExact,
   cmpLayout: StorageLayoutReportExact,
@@ -269,7 +272,7 @@ export const checkLayouts = async (
   }
 
   return _uniqWith(
-    _sortBy(diffs, ["location.slot", "location.offset"]), // make sure it's ordered by storage byte order
+    sortDiffs(diffs), // make sure it's ordered by storage byte order
     ({ location: location1, ...diff1 }, { location: location2, ...diff2 }) => _isEqual(diff1, diff2) // only keep first byte diff of a variable, which corresponds to the start byte
   ).concat(await checkAddedStorageSlots(added, address, provider));
 };
@@ -283,7 +286,7 @@ const checkAddedStorageSlots = async (
   if (!address || !provider) return [];
 
   const storage: { [slot: string]: string } = {};
-  for (const diff of _sortBy(added, ["location.slot", "location.offset"])) {
+  for (const diff of sortDiffs(added)) {
     const slot = diff.location.slot.toString();
 
     const memoized = storage[slot];

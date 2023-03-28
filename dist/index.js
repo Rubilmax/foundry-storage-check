@@ -76,6 +76,7 @@ const getStorageBytesMapping = (layout) => layout.storage.reduce((acc, variable)
     ...acc,
     ...getStorageVariableBytesMapping(layout, variable, variable.slot * exports.STORAGE_WORD_SIZE + variable.offset),
 }), {});
+const sortDiffs = (diffs) => (0, sortBy_1.default)(diffs, [({ location }) => location.slot, ({ location }) => location.offset]);
 const checkLayouts = async (srcLayout, cmpLayout, { address, provider, checkRemovals, } = {}) => {
     const diffs = [];
     const added = [];
@@ -194,7 +195,7 @@ const checkLayouts = async (srcLayout, cmpLayout, { address, provider, checkRemo
                 });
         }
     }
-    return (0, uniqWith_1.default)((0, sortBy_1.default)(diffs, ["location.slot", "location.offset"]), // make sure it's ordered by storage byte order
+    return (0, uniqWith_1.default)(sortDiffs(diffs), // make sure it's ordered by storage byte order
     ({ location: location1, ...diff1 }, { location: location2, ...diff2 }) => (0, isEqual_1.default)(diff1, diff2) // only keep first byte diff of a variable, which corresponds to the start byte
     ).concat(await checkAddedStorageSlots(added, address, provider));
 };
@@ -204,7 +205,7 @@ const checkAddedStorageSlots = async (added, address, provider) => {
     if (!address || !provider)
         return [];
     const storage = {};
-    for (const diff of (0, sortBy_1.default)(added, ["location.slot", "location.offset"])) {
+    for (const diff of sortDiffs(added)) {
         const slot = diff.location.slot.toString();
         const memoized = storage[slot];
         let value = memoized ?? (await provider.getStorageAt(address, slot));
@@ -6433,6 +6434,10 @@ function checkBypass(reqUrl) {
     if (!reqUrl.hostname) {
         return false;
     }
+    const reqHost = reqUrl.hostname;
+    if (isLoopbackAddress(reqHost)) {
+        return true;
+    }
     const noProxy = process.env['no_proxy'] || process.env['NO_PROXY'] || '';
     if (!noProxy) {
         return false;
@@ -6458,13 +6463,24 @@ function checkBypass(reqUrl) {
         .split(',')
         .map(x => x.trim().toUpperCase())
         .filter(x => x)) {
-        if (upperReqHosts.some(x => x === upperNoProxyItem)) {
+        if (upperNoProxyItem === '*' ||
+            upperReqHosts.some(x => x === upperNoProxyItem ||
+                x.endsWith(`.${upperNoProxyItem}`) ||
+                (upperNoProxyItem.startsWith('.') &&
+                    x.endsWith(`${upperNoProxyItem}`)))) {
             return true;
         }
     }
     return false;
 }
 exports.checkBypass = checkBypass;
+function isLoopbackAddress(host) {
+    const hostLower = host.toLowerCase();
+    return (hostLower === 'localhost' ||
+        hostLower.startsWith('127.') ||
+        hostLower.startsWith('[::1]') ||
+        hostLower.startsWith('[0:0:0:0:0:0:0:1]'));
+}
 //# sourceMappingURL=proxy.js.map
 
 /***/ }),
