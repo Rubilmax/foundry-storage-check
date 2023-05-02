@@ -48,7 +48,8 @@
     "@octokit/core": "^4.2.0",
     "@solidity-parser/parser": "^0.16.0",
     "js-sha3": "^0.8.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "shell-quote": "^1.8.1"
   },
   "devDependencies": {
     "@actions/exec": "^1.1.1",
@@ -58,6 +59,7 @@
     "@types/jest": "^29.5.1",
     "@types/lodash": "^4.14.194",
     "@types/node": "^18.16.3",
+    "@types/shell-quote": "^1.7.1",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "@vercel/ncc": "^0.36.1",

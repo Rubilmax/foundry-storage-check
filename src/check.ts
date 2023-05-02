@@ -287,7 +287,7 @@ const checkAddedStorageSlots = async (
 
   const storage: { [slot: string]: string } = {};
   for (const diff of sortDiffs(added)) {
-    const slot = diff.location.slot.toString();
+    const slot = "0x" + diff.location.slot.toString(16);
 
     const memoized = storage[slot];
     let value = memoized ?? (await provider.getStorageAt(address, slot));

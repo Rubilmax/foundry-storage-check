@@ -1,5 +1,6 @@
 import { execSync } from "child_process";
 import fs from "fs";
+import { quote } from "shell-quote";
 
 import * as parser from "@solidity-parser/parser";
 import { ContractDefinition } from "@solidity-parser/parser/src/ast-types";
@@ -19,7 +20,7 @@ const exactify = (variable: StorageVariable): StorageVariableExact => ({
 });
 
 export const createLayout = (contract: string, cwd = ".") => {
-  return execSync(`forge inspect ${contract} storage-layout`, {
+  return execSync(quote(["forge", "inspect", contract, "storage-layout"]), {
     encoding: "utf-8",
     cwd,
   });
