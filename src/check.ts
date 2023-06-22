@@ -17,7 +17,7 @@ import {
 } from "./types";
 
 export const STORAGE_WORD_SIZE = 32n;
-export const FOUNDRY_TYPE_ID_REGEX = /(?<=t_[a-z0-9_]+\([A-Z]\w*\))(\d+)/g;
+export const FOUNDRY_TYPE_ID_REGEX = /(?<=t_[a-z]\w*\([A-Z]\w*\))(\d+)/g;
 
 interface StorageBytesMapping {
   [byte: string]: StorageVariableDetails;
