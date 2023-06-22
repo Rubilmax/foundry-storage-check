@@ -18,7 +18,7 @@ const uniqWith_1 = __importDefault(__nccwpck_require__(2854));
 const solidity_1 = __nccwpck_require__(4516);
 const types_1 = __nccwpck_require__(8164);
 exports.STORAGE_WORD_SIZE = 32n;
-exports.FOUNDRY_TYPE_ID_REGEX = /(?<=t_[a-z0-9_]+\([A-Z]\w*\))(\d+)/g;
+exports.FOUNDRY_TYPE_ID_REGEX = /(?<=t_[a-z]\w*\([A-Z]\w*\))(\d+)/g;
 const getStorageVariableBytesMapping = (layout, variable, startByte) => {
     const varType = layout.types[variable.type];
     let slot = 0n;
@@ -595,7 +595,7 @@ var StorageLayoutDiffType;
     StorageLayoutDiffType["VARIABLE_TYPE"] = "VARIABLE_TYPE";
     StorageLayoutDiffType["VARIABLE_REMOVED"] = "VARIABLE_REMOVED";
     StorageLayoutDiffType["NON_ZERO_ADDED_SLOT"] = "NON_ZERO_ADDED_SLOT";
-})(StorageLayoutDiffType = exports.StorageLayoutDiffType || (exports.StorageLayoutDiffType = {}));
+})(StorageLayoutDiffType || (exports.StorageLayoutDiffType = StorageLayoutDiffType = {}));
 
 
 /***/ }),
