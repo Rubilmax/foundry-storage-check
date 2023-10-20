@@ -373,6 +373,7 @@ const address = core.getInput("address");
 const rpcUrl = core.getInput("rpcUrl");
 const failOnRemoval = core.getInput("failOnRemoval") === "true";
 const workingDirectory = core.getInput("workingDirectory");
+const retryDelay = parseInt(core.getInput("retryDelay"));
 const contractAbs = (0, path_1.join)(workingDirectory, contract);
 const contractEscaped = contractAbs.replace(/\//g, "_").replace(/:/g, "-");
 const getReportPath = (branch, baseName) => `${branch.replace(/[/\\]/g, "-")}.${baseName}.json`;
@@ -413,7 +414,7 @@ async function _run() {
     })) {
         const artifact = res.data.find((artifact) => !artifact.expired && artifact.name === baseReport);
         if (!artifact) {
-            await new Promise((resolve) => setTimeout(resolve, 800)); // avoid reaching the API rate limit
+            await new Promise((resolve) => setTimeout(resolve, retryDelay)); // avoid reaching the API rate limit
             continue;
         }
         artifactId = artifact.id;
@@ -626,7 +627,11 @@ exports.create = create;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -639,7 +644,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -654,7 +659,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DefaultArtifactClient = void 0;
-const core = __importStar(__nccwpck_require__(2186));
+const core = __importStar(__nccwpck_require__(5457));
 const upload_specification_1 = __nccwpck_require__(183);
 const upload_http_client_1 = __nccwpck_require__(4354);
 const utils_1 = __nccwpck_require__(6327);
@@ -677,9 +682,9 @@ class DefaultArtifactClient {
         return __awaiter(this, void 0, void 0, function* () {
             core.info(`Starting artifact upload
 For more detailed logs during the artifact upload process, enable step-debugging: https://docs.github.com/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging`);
-            path_and_artifact_name_validation_1.checkArtifactName(name);
+            (0, path_and_artifact_name_validation_1.checkArtifactName)(name);
             // Get specification for the files being uploaded
-            const uploadSpecification = upload_specification_1.getUploadSpecification(name, rootDirectory, files);
+            const uploadSpecification = (0, upload_specification_1.getUploadSpecification)(name, rootDirectory, files);
             const uploadResponse = {
                 artifactName: name,
                 artifactItems: [],
@@ -738,20 +743,20 @@ Note: The size of downloaded zips can differ significantly from the reported siz
             }
             const items = yield downloadHttpClient.getContainerItems(artifactToDownload.name, artifactToDownload.fileContainerResourceUrl);
             if (!path) {
-                path = config_variables_1.getWorkSpaceDirectory();
+                path = (0, config_variables_1.getWorkSpaceDirectory)();
             }
-            path = path_1.normalize(path);
-            path = path_1.resolve(path);
+            path = (0, path_1.normalize)(path);
+            path = (0, path_1.resolve)(path);
             // During upload, empty directories are rejected by the remote server so there should be no artifacts that consist of only empty directories
-            const downloadSpecification = download_specification_1.getDownloadSpecification(name, items.value, path, (options === null || options === void 0 ? void 0 : options.createArtifactFolder) || false);
+            const downloadSpecification = (0, download_specification_1.getDownloadSpecification)(name, items.value, path, (options === null || options === void 0 ? void 0 : options.createArtifactFolder) || false);
             if (downloadSpecification.filesToDownload.length === 0) {
                 core.info(`No downloadable files were found for the artifact: ${artifactToDownload.name}`);
             }
             else {
                 // Create all necessary directories recursively before starting any download
-                yield utils_1.createDirectoriesForArtifact(downloadSpecification.directoryStructure);
-                core.info('Directory structure has been setup for the artifact');
-                yield utils_1.createEmptyFilesForArtifact(downloadSpecification.emptyFilesToCreate);
+                yield (0, utils_1.createDirectoriesForArtifact)(downloadSpecification.directoryStructure);
+                core.info('Directory structure has been set up for the artifact');
+                yield (0, utils_1.createEmptyFilesForArtifact)(downloadSpecification.emptyFilesToCreate);
                 yield downloadHttpClient.downloadSingleArtifact(downloadSpecification.filesToDownload);
             }
             return {
@@ -770,10 +775,10 @@ Note: The size of downloaded zips can differ significantly from the reported siz
                 return response;
             }
             if (!path) {
-                path = config_variables_1.getWorkSpaceDirectory();
+                path = (0, config_variables_1.getWorkSpaceDirectory)();
             }
-            path = path_1.normalize(path);
-            path = path_1.resolve(path);
+            path = (0, path_1.normalize)(path);
+            path = (0, path_1.resolve)(path);
             let downloadedArtifacts = 0;
             while (downloadedArtifacts < artifacts.count) {
                 const currentArtifactToDownload = artifacts.value[downloadedArtifacts];
@@ -781,13 +786,13 @@ Note: The size of downloaded zips can differ significantly from the reported siz
                 core.info(`starting download of artifact ${currentArtifactToDownload.name} : ${downloadedArtifacts}/${artifacts.count}`);
                 // Get container entries for the specific artifact
                 const items = yield downloadHttpClient.getContainerItems(currentArtifactToDownload.name, currentArtifactToDownload.fileContainerResourceUrl);
-                const downloadSpecification = download_specification_1.getDownloadSpecification(currentArtifactToDownload.name, items.value, path, true);
+                const downloadSpecification = (0, download_specification_1.getDownloadSpecification)(currentArtifactToDownload.name, items.value, path, true);
                 if (downloadSpecification.filesToDownload.length === 0) {
                     core.info(`No downloadable files were found for any artifact ${currentArtifactToDownload.name}`);
                 }
                 else {
-                    yield utils_1.createDirectoriesForArtifact(downloadSpecification.directoryStructure);
-                    yield utils_1.createEmptyFilesForArtifact(downloadSpecification.emptyFilesToCreate);
+                    yield (0, utils_1.createDirectoriesForArtifact)(downloadSpecification.directoryStructure);
+                    yield (0, utils_1.createEmptyFilesForArtifact)(downloadSpecification.emptyFilesToCreate);
                     yield downloadHttpClient.downloadSingleArtifact(downloadSpecification.filesToDownload);
                 }
                 response.push({
@@ -810,7 +815,7 @@ exports.DefaultArtifactClient = DefaultArtifactClient;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getRetentionDays = exports.getWorkSpaceDirectory = exports.getWorkFlowRunId = exports.getRuntimeUrl = exports.getRuntimeToken = exports.getDownloadFileConcurrency = exports.getInitialRetryIntervalInMilliseconds = exports.getRetryMultiplier = exports.getRetryLimit = exports.getUploadChunkSize = exports.getUploadFileConcurrency = void 0;
+exports.isGhes = exports.getRetentionDays = exports.getWorkSpaceDirectory = exports.getWorkFlowRunId = exports.getRuntimeUrl = exports.getRuntimeToken = exports.getDownloadFileConcurrency = exports.getInitialRetryIntervalInMilliseconds = exports.getRetryMultiplier = exports.getRetryLimit = exports.getUploadChunkSize = exports.getUploadFileConcurrency = void 0;
 // The number of concurrent uploads that happens at the same time
 function getUploadFileConcurrency() {
     return 2;
@@ -879,6 +884,11 @@ function getRetentionDays() {
     return process.env['GITHUB_RETENTION_DAYS'];
 }
 exports.getRetentionDays = getRetentionDays;
+function isGhes() {
+    const ghUrl = new URL(process.env['GITHUB_SERVER_URL'] || 'https://github.com');
+    return ghUrl.hostname.toUpperCase() !== 'GITHUB.COM';
+}
+exports.isGhes = isGhes;
 //# sourceMappingURL=config-variables.js.map
 
 /***/ }),
@@ -1200,7 +1210,11 @@ exports["default"] = CRC64;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1213,7 +1227,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -1229,7 +1243,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DownloadHttpClient = void 0;
 const fs = __importStar(__nccwpck_require__(7147));
-const core = __importStar(__nccwpck_require__(2186));
+const core = __importStar(__nccwpck_require__(5457));
 const zlib = __importStar(__nccwpck_require__(9796));
 const utils_1 = __nccwpck_require__(6327);
 const url_1 = __nccwpck_require__(7310);
@@ -1240,7 +1254,7 @@ const config_variables_1 = __nccwpck_require__(2222);
 const requestUtils_1 = __nccwpck_require__(755);
 class DownloadHttpClient {
     constructor() {
-        this.downloadHttpManager = new http_manager_1.HttpManager(config_variables_1.getDownloadFileConcurrency(), '@actions/artifact-download');
+        this.downloadHttpManager = new http_manager_1.HttpManager((0, config_variables_1.getDownloadFileConcurrency)(), '@actions/artifact-download');
         // downloads are usually significantly faster than uploads so display status information every second
         this.statusReporter = new status_reporter_1.StatusReporter(1000);
     }
@@ -1249,11 +1263,11 @@ class DownloadHttpClient {
      */
     listArtifacts() {
         return __awaiter(this, void 0, void 0, function* () {
-            const artifactUrl = utils_1.getArtifactUrl();
+            const artifactUrl = (0, utils_1.getArtifactUrl)();
             // use the first client from the httpManager, `keep-alive` is not used so the connection will close immediately
             const client = this.downloadHttpManager.getClient(0);
-            const headers = utils_1.getDownloadHeaders('application/json');
-            const response = yield requestUtils_1.retryHttpClientRequest('List Artifacts', () => __awaiter(this, void 0, void 0, function* () { return client.get(artifactUrl, headers); }));
+            const headers = (0, utils_1.getDownloadHeaders)('application/json');
+            const response = yield (0, requestUtils_1.retryHttpClientRequest)('List Artifacts', () => __awaiter(this, void 0, void 0, function* () { return client.get(artifactUrl, headers); }));
             const body = yield response.readBody();
             return JSON.parse(body);
         });
@@ -1270,8 +1284,8 @@ class DownloadHttpClient {
             resourceUrl.searchParams.append('itemPath', artifactName);
             // use the first client from the httpManager, `keep-alive` is not used so the connection will close immediately
             const client = this.downloadHttpManager.getClient(0);
-            const headers = utils_1.getDownloadHeaders('application/json');
-            const response = yield requestUtils_1.retryHttpClientRequest('Get Container Items', () => __awaiter(this, void 0, void 0, function* () { return client.get(resourceUrl.toString(), headers); }));
+            const headers = (0, utils_1.getDownloadHeaders)('application/json');
+            const response = yield (0, requestUtils_1.retryHttpClientRequest)('Get Container Items', () => __awaiter(this, void 0, void 0, function* () { return client.get(resourceUrl.toString(), headers); }));
             const body = yield response.readBody();
             return JSON.parse(body);
         });
@@ -1282,7 +1296,7 @@ class DownloadHttpClient {
      */
     downloadSingleArtifact(downloadItems) {
         return __awaiter(this, void 0, void 0, function* () {
-            const DOWNLOAD_CONCURRENCY = config_variables_1.getDownloadFileConcurrency();
+            const DOWNLOAD_CONCURRENCY = (0, config_variables_1.getDownloadFileConcurrency)();
             // limit the number of files downloaded at a single time
             core.debug(`Download file concurrency is set to ${DOWNLOAD_CONCURRENCY}`);
             const parallelDownloads = [...new Array(DOWNLOAD_CONCURRENCY).keys()];
@@ -1322,9 +1336,9 @@ class DownloadHttpClient {
     downloadIndividualFile(httpClientIndex, artifactLocation, downloadPath) {
         return __awaiter(this, void 0, void 0, function* () {
             let retryCount = 0;
-            const retryLimit = config_variables_1.getRetryLimit();
+            const retryLimit = (0, config_variables_1.getRetryLimit)();
             let destinationStream = fs.createWriteStream(downloadPath);
-            const headers = utils_1.getDownloadHeaders('application/json', true, true);
+            const headers = (0, utils_1.getDownloadHeaders)('application/json', true, true);
             // a single GET request is used to download a file
             const makeDownloadRequest = () => __awaiter(this, void 0, void 0, function* () {
                 const client = this.downloadHttpManager.getClient(httpClientIndex);
@@ -1348,13 +1362,13 @@ class DownloadHttpClient {
                     if (retryAfterValue) {
                         // Back off by waiting the specified time denoted by the retry-after header
                         core.info(`Backoff due to too many requests, retry #${retryCount}. Waiting for ${retryAfterValue} milliseconds before continuing the download`);
-                        yield utils_1.sleep(retryAfterValue);
+                        yield (0, utils_1.sleep)(retryAfterValue);
                     }
                     else {
                         // Back off using an exponential value that depends on the retry count
-                        const backoffTime = utils_1.getExponentialRetryTimeInMilliseconds(retryCount);
+                        const backoffTime = (0, utils_1.getExponentialRetryTimeInMilliseconds)(retryCount);
                         core.info(`Exponential backoff for retry #${retryCount}. Waiting for ${backoffTime} milliseconds before continuing the download`);
-                        yield utils_1.sleep(backoffTime);
+                        yield (0, utils_1.sleep)(backoffTime);
                     }
                     core.info(`Finished backoff for retry #${retryCount}, continuing with download`);
                 }
@@ -1378,7 +1392,7 @@ class DownloadHttpClient {
                         resolve();
                     }
                 });
-                yield utils_1.rmFile(fileDownloadPath);
+                yield (0, utils_1.rmFile)(fileDownloadPath);
                 destinationStream = fs.createWriteStream(fileDownloadPath);
             });
             // keep trying to download a file until a retry limit has been reached
@@ -1397,7 +1411,7 @@ class DownloadHttpClient {
                     continue;
                 }
                 let forceRetry = false;
-                if (utils_1.isSuccessStatusCode(response.message.statusCode)) {
+                if ((0, utils_1.isSuccessStatusCode)(response.message.statusCode)) {
                     // The body contains the contents of the file however calling response.readBody() causes all the content to be converted to a string
                     // which can cause some gzip encoded data to be lost
                     // Instead of using response.readBody(), response.message is a readableStream that can be directly used to get the raw body contents
@@ -1405,7 +1419,7 @@ class DownloadHttpClient {
                         const isGzipped = isGzip(response.message.headers);
                         yield this.pipeResponseToFile(response, destinationStream, isGzipped);
                         if (isGzipped ||
-                            isAllBytesReceived(response.message.headers['content-length'], yield utils_1.getFileSize(downloadPath))) {
+                            isAllBytesReceived(response.message.headers['content-length'], yield (0, utils_1.getFileSize)(downloadPath))) {
                             return;
                         }
                         else {
@@ -1417,17 +1431,17 @@ class DownloadHttpClient {
                         forceRetry = true;
                     }
                 }
-                if (forceRetry || utils_1.isRetryableStatusCode(response.message.statusCode)) {
+                if (forceRetry || (0, utils_1.isRetryableStatusCode)(response.message.statusCode)) {
                     core.info(`A ${response.message.statusCode} response code has been received while attempting to download an artifact`);
                     resetDestinationStream(downloadPath);
                     // if a throttled status code is received, try to get the retryAfter header value, else differ to standard exponential backoff
-                    utils_1.isThrottledStatusCode(response.message.statusCode)
-                        ? yield backOff(utils_1.tryGetRetryAfterValueTimeInMilliseconds(response.message.headers))
+                    (0, utils_1.isThrottledStatusCode)(response.message.statusCode)
+                        ? yield backOff((0, utils_1.tryGetRetryAfterValueTimeInMilliseconds)(response.message.headers))
                         : yield backOff();
                 }
                 else {
                     // Some unexpected response code, fail immediately and stop the download
-                    utils_1.displayHttpDiagnostics(response);
+                    (0, utils_1.displayHttpDiagnostics)(response);
                     return Promise.reject(new Error(`Unexpected http ${response.message.statusCode} during download for ${artifactLocation}`));
                 }
             }
@@ -1446,14 +1460,14 @@ class DownloadHttpClient {
                     const gunzip = zlib.createGunzip();
                     response.message
                         .on('error', error => {
-                        core.error(`An error occurred while attempting to read the response stream`);
+                        core.info(`An error occurred while attempting to read the response stream`);
                         gunzip.close();
                         destinationStream.close();
                         reject(error);
                     })
                         .pipe(gunzip)
                         .on('error', error => {
-                        core.error(`An error occurred while attempting to decompress the response stream`);
+                        core.info(`An error occurred while attempting to decompress the response stream`);
                         destinationStream.close();
                         reject(error);
                     })
@@ -1462,14 +1476,14 @@ class DownloadHttpClient {
                         resolve();
                     })
                         .on('error', error => {
-                        core.error(`An error occurred while writing a downloaded file to ${destinationStream.path}`);
+                        core.info(`An error occurred while writing a downloaded file to ${destinationStream.path}`);
                         reject(error);
                     });
                 }
                 else {
                     response.message
                         .on('error', error => {
-                        core.error(`An error occurred while attempting to read the response stream`);
+                        core.info(`An error occurred while attempting to read the response stream`);
                         destinationStream.close();
                         reject(error);
                     })
@@ -1478,7 +1492,7 @@ class DownloadHttpClient {
                         resolve();
                     })
                         .on('error', error => {
-                        core.error(`An error occurred while writing a downloaded file to ${destinationStream.path}`);
+                        core.info(`An error occurred while writing a downloaded file to ${destinationStream.path}`);
                         reject(error);
                     });
                 }
@@ -1499,7 +1513,11 @@ exports.DownloadHttpClient = DownloadHttpClient;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1512,7 +1530,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -1590,7 +1608,7 @@ class HttpManager {
             throw new Error('There must be at least one client');
         }
         this.userAgent = userAgent;
-        this.clients = new Array(clientCount).fill(utils_1.createHttpClient(userAgent));
+        this.clients = new Array(clientCount).fill((0, utils_1.createHttpClient)(userAgent));
     }
     getClient(index) {
         return this.clients[index];
@@ -1599,7 +1617,7 @@ class HttpManager {
     // for more information see: https://github.com/actions/http-client/blob/04e5ad73cd3fd1f5610a32116b0759eddf6570d2/index.ts#L292
     disposeAndReplaceClient(index) {
         this.clients[index].dispose();
-        this.clients[index] = utils_1.createHttpClient(this.userAgent);
+        this.clients[index] = (0, utils_1.createHttpClient)(this.userAgent);
     }
     disposeAndReplaceAllClients() {
         for (const [index] of this.clients.entries()) {
@@ -1619,7 +1637,7 @@ exports.HttpManager = HttpManager;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.checkArtifactFilePath = exports.checkArtifactName = void 0;
-const core_1 = __nccwpck_require__(2186);
+const core_1 = __nccwpck_require__(5457);
 /**
  * Invalid characters that cannot be in the artifact name or an uploaded file. Will be rejected
  * from the server if attempted to be sent over. These characters are not allowed due to limitations with certain
@@ -1660,7 +1678,7 @@ Invalid characters include: ${Array.from(invalidArtifactNameCharacters.values())
 These characters are not allowed in the artifact name due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.`);
         }
     }
-    core_1.info(`Artifact name is valid!`);
+    (0, core_1.info)(`Artifact name is valid!`);
 }
 exports.checkArtifactName = checkArtifactName;
 /**
@@ -1693,7 +1711,11 @@ exports.checkArtifactFilePath = checkArtifactFilePath;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1706,7 +1728,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -1722,7 +1744,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.retryHttpClientRequest = exports.retry = void 0;
 const utils_1 = __nccwpck_require__(6327);
-const core = __importStar(__nccwpck_require__(2186));
+const core = __importStar(__nccwpck_require__(5457));
 const config_variables_1 = __nccwpck_require__(2222);
 function retry(name, operation, customErrorMessages, maxAttempts) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -1736,14 +1758,14 @@ function retry(name, operation, customErrorMessages, maxAttempts) {
             try {
                 response = yield operation();
                 statusCode = response.message.statusCode;
-                if (utils_1.isSuccessStatusCode(statusCode)) {
+                if ((0, utils_1.isSuccessStatusCode)(statusCode)) {
                     return response;
                 }
                 // Extra error information that we want to display if a particular response code is hit
                 if (statusCode) {
                     customErrorInformation = customErrorMessages.get(statusCode);
                 }
-                isRetryable = utils_1.isRetryableStatusCode(statusCode);
+                isRetryable = (0, utils_1.isRetryableStatusCode)(statusCode);
                 errorMessage = `Artifact service responded with ${statusCode}`;
             }
             catch (error) {
@@ -1753,16 +1775,16 @@ function retry(name, operation, customErrorMessages, maxAttempts) {
             if (!isRetryable) {
                 core.info(`${name} - Error is not retryable`);
                 if (response) {
-                    utils_1.displayHttpDiagnostics(response);
+                    (0, utils_1.displayHttpDiagnostics)(response);
                 }
                 break;
             }
             core.info(`${name} - Attempt ${attempt} of ${maxAttempts} failed with error: ${errorMessage}`);
-            yield utils_1.sleep(utils_1.getExponentialRetryTimeInMilliseconds(attempt));
+            yield (0, utils_1.sleep)((0, utils_1.getExponentialRetryTimeInMilliseconds)(attempt));
             attempt++;
         }
         if (response) {
-            utils_1.displayHttpDiagnostics(response);
+            (0, utils_1.displayHttpDiagnostics)(response);
         }
         if (customErrorInformation) {
             throw Error(`${name} failed: ${customErrorInformation}`);
@@ -1771,7 +1793,7 @@ function retry(name, operation, customErrorMessages, maxAttempts) {
     });
 }
 exports.retry = retry;
-function retryHttpClientRequest(name, method, customErrorMessages = new Map(), maxAttempts = config_variables_1.getRetryLimit()) {
+function retryHttpClientRequest(name, method, customErrorMessages = new Map(), maxAttempts = (0, config_variables_1.getRetryLimit)()) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield retry(name, method, customErrorMessages, maxAttempts);
     });
@@ -1788,7 +1810,7 @@ exports.retryHttpClientRequest = retryHttpClientRequest;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StatusReporter = void 0;
-const core_1 = __nccwpck_require__(2186);
+const core_1 = __nccwpck_require__(5457);
 /**
  * Status Reporter that displays information about the progress/status of an artifact that is being uploaded or downloaded
  *
@@ -1813,14 +1835,14 @@ class StatusReporter {
         this.totalFileStatus = setInterval(() => {
             // display 1 decimal place without any rounding
             const percentage = this.formatPercentage(this.processedCount, this.totalNumberOfFilesToProcess);
-            core_1.info(`Total file count: ${this.totalNumberOfFilesToProcess} ---- Processed file #${this.processedCount} (${percentage.slice(0, percentage.indexOf('.') + 2)}%)`);
+            (0, core_1.info)(`Total file count: ${this.totalNumberOfFilesToProcess} ---- Processed file #${this.processedCount} (${percentage.slice(0, percentage.indexOf('.') + 2)}%)`);
         }, this.displayFrequencyInMilliseconds);
     }
     // if there is a large file that is being uploaded in chunks, this is used to display extra information about the status of the upload
     updateLargeFileStatus(fileName, chunkStartIndex, chunkEndIndex, totalUploadFileSize) {
         // display 1 decimal place without any rounding
         const percentage = this.formatPercentage(chunkEndIndex, totalUploadFileSize);
-        core_1.info(`Uploaded ${fileName} (${percentage.slice(0, percentage.indexOf('.') + 2)}%) bytes ${chunkStartIndex}:${chunkEndIndex}`);
+        (0, core_1.info)(`Uploaded ${fileName} (${percentage.slice(0, percentage.indexOf('.') + 2)}%) bytes ${chunkStartIndex}:${chunkEndIndex}`);
     }
     stop() {
         if (this.totalFileStatus) {
@@ -1847,7 +1869,11 @@ exports.StatusReporter = StatusReporter;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1860,7 +1886,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -1885,19 +1911,34 @@ exports.createGZipFileInBuffer = exports.createGZipFileOnDisk = void 0;
 const fs = __importStar(__nccwpck_require__(7147));
 const zlib = __importStar(__nccwpck_require__(9796));
 const util_1 = __nccwpck_require__(3837);
-const stat = util_1.promisify(fs.stat);
+const stat = (0, util_1.promisify)(fs.stat);
 /**
  * GZipping certain files that are already compressed will likely not yield further size reductions. Creating large temporary gzip
  * files then will just waste a lot of time before ultimately being discarded (especially for very large files).
  * If any of these types of files are encountered then on-disk gzip creation will be skipped and the original file will be uploaded as-is
  */
 const gzipExemptFileExtensions = [
+    '.gz',
     '.gzip',
+    '.tgz',
+    '.taz',
+    '.Z',
+    '.taZ',
+    '.bz2',
+    '.tbz',
+    '.tbz2',
+    '.tz2',
+    '.lz',
+    '.lzma',
+    '.tlz',
+    '.lzo',
+    '.xz',
+    '.txz',
+    '.zst',
+    '.zstd',
+    '.tzst',
     '.zip',
-    '.tar.lz',
-    '.tar.gz',
-    '.tar.bz2',
-    '.7z'
+    '.7z' // 7ZIP
 ];
 /**
  * Creates a Gzip compressed file of an original file at the provided temporary filepath location
@@ -1926,7 +1967,7 @@ function createGZipFileOnDisk(originalFilePath, tempFilePath) {
             outputStream.on('error', error => {
                 // eslint-disable-next-line no-console
                 console.log(error);
-                reject;
+                reject(error);
             });
         });
     });
@@ -1940,22 +1981,29 @@ exports.createGZipFileOnDisk = createGZipFileOnDisk;
 function createGZipFileInBuffer(originalFilePath) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-            var e_1, _a;
+            var _a, e_1, _b, _c;
             const inputStream = fs.createReadStream(originalFilePath);
             const gzip = zlib.createGzip();
             inputStream.pipe(gzip);
             // read stream into buffer, using experimental async iterators see https://github.com/nodejs/readable-stream/issues/403#issuecomment-479069043
             const chunks = [];
             try {
-                for (var gzip_1 = __asyncValues(gzip), gzip_1_1; gzip_1_1 = yield gzip_1.next(), !gzip_1_1.done;) {
-                    const chunk = gzip_1_1.value;
-                    chunks.push(chunk);
+                for (var _d = true, gzip_1 = __asyncValues(gzip), gzip_1_1; gzip_1_1 = yield gzip_1.next(), _a = gzip_1_1.done, !_a;) {
+                    _c = gzip_1_1.value;
+                    _d = false;
+                    try {
+                        const chunk = _c;
+                        chunks.push(chunk);
+                    }
+                    finally {
+                        _d = true;
+                    }
                 }
             }
             catch (e_1_1) { e_1 = { error: e_1_1 }; }
             finally {
                 try {
-                    if (gzip_1_1 && !gzip_1_1.done && (_a = gzip_1.return)) yield _a.call(gzip_1);
+                    if (!_d && !_a && (_b = gzip_1.return)) yield _b.call(gzip_1);
                 }
                 finally { if (e_1) throw e_1.error; }
             }
@@ -1975,7 +2023,11 @@ exports.createGZipFileInBuffer = createGZipFileInBuffer;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1988,7 +2040,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -2004,7 +2056,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UploadHttpClient = void 0;
 const fs = __importStar(__nccwpck_require__(7147));
-const core = __importStar(__nccwpck_require__(2186));
+const core = __importStar(__nccwpck_require__(5457));
 const tmp = __importStar(__nccwpck_require__(8065));
 const stream = __importStar(__nccwpck_require__(2781));
 const utils_1 = __nccwpck_require__(6327);
@@ -2017,10 +2069,10 @@ const http_client_1 = __nccwpck_require__(6255);
 const http_manager_1 = __nccwpck_require__(6527);
 const upload_gzip_1 = __nccwpck_require__(606);
 const requestUtils_1 = __nccwpck_require__(755);
-const stat = util_1.promisify(fs.stat);
+const stat = (0, util_1.promisify)(fs.stat);
 class UploadHttpClient {
     constructor() {
-        this.uploadHttpManager = new http_manager_1.HttpManager(config_variables_1.getUploadFileConcurrency(), '@actions/artifact-upload');
+        this.uploadHttpManager = new http_manager_1.HttpManager((0, config_variables_1.getUploadFileConcurrency)(), '@actions/artifact-upload');
         this.statusReporter = new status_reporter_1.StatusReporter(10000);
     }
     /**
@@ -2036,28 +2088,30 @@ class UploadHttpClient {
             };
             // calculate retention period
             if (options && options.retentionDays) {
-                const maxRetentionStr = config_variables_1.getRetentionDays();
-                parameters.RetentionDays = utils_1.getProperRetention(options.retentionDays, maxRetentionStr);
+                const maxRetentionStr = (0, config_variables_1.getRetentionDays)();
+                parameters.RetentionDays = (0, utils_1.getProperRetention)(options.retentionDays, maxRetentionStr);
             }
             const data = JSON.stringify(parameters, null, 2);
-            const artifactUrl = utils_1.getArtifactUrl();
+            const artifactUrl = (0, utils_1.getArtifactUrl)();
             // use the first client from the httpManager, `keep-alive` is not used so the connection will close immediately
             const client = this.uploadHttpManager.getClient(0);
-            const headers = utils_1.getUploadHeaders('application/json', false);
+            const headers = (0, utils_1.getUploadHeaders)('application/json', false);
             // Extra information to display when a particular HTTP code is returned
             // If a 403 is returned when trying to create a file container, the customer has exceeded
             // their storage quota so no new artifact containers can be created
             const customErrorMessages = new Map([
                 [
                     http_client_1.HttpCodes.Forbidden,
-                    'Artifact storage quota has been hit. Unable to upload any new artifacts'
+                    (0, config_variables_1.isGhes)()
+                        ? 'Please reference [Enabling GitHub Actions for GitHub Enterprise Server](https://docs.github.com/en/enterprise-server@3.8/admin/github-actions/enabling-github-actions-for-github-enterprise-server) to ensure Actions storage is configured correctly.'
+                        : 'Artifact storage quota has been hit. Unable to upload any new artifacts'
                 ],
                 [
                     http_client_1.HttpCodes.BadRequest,
                     `The artifact name ${artifactName} is not valid. Request URL ${artifactUrl}`
                 ]
             ]);
-            const response = yield requestUtils_1.retryHttpClientRequest('Create Artifact Container', () => __awaiter(this, void 0, void 0, function* () { return client.post(artifactUrl, data, headers); }), customErrorMessages);
+            const response = yield (0, requestUtils_1.retryHttpClientRequest)('Create Artifact Container', () => __awaiter(this, void 0, void 0, function* () { return client.post(artifactUrl, data, headers); }), customErrorMessages);
             const body = yield response.readBody();
             return JSON.parse(body);
         });
@@ -2070,8 +2124,8 @@ class UploadHttpClient {
      */
     uploadArtifactToFileContainer(uploadUrl, filesToUpload, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            const FILE_CONCURRENCY = config_variables_1.getUploadFileConcurrency();
-            const MAX_CHUNK_SIZE = config_variables_1.getUploadChunkSize();
+            const FILE_CONCURRENCY = (0, config_variables_1.getUploadFileConcurrency)();
+            const MAX_CHUNK_SIZE = (0, config_variables_1.getUploadChunkSize)();
             core.debug(`File Concurrency: ${FILE_CONCURRENCY}, and Chunk Size: ${MAX_CHUNK_SIZE}`);
             const parameters = [];
             // by default, file uploads will continue if there is an error unless specified differently in the options
@@ -2161,7 +2215,7 @@ class UploadHttpClient {
             // with named pipes the file size is reported as zero in that case don't read the file in memory
             if (!isFIFO && totalFileSize < 65536) {
                 core.debug(`${parameters.file} is less than 64k in size. Creating a gzip file in-memory to potentially reduce the upload size`);
-                const buffer = yield upload_gzip_1.createGZipFileInBuffer(parameters.file);
+                const buffer = yield (0, upload_gzip_1.createGZipFileInBuffer)(parameters.file);
                 // An open stream is needed in the event of a failure and we need to retry. If a NodeJS.ReadableStream is directly passed in,
                 // it will not properly get reset to the start of the stream if a chunk upload needs to be retried
                 let openUploadStream;
@@ -2201,7 +2255,7 @@ class UploadHttpClient {
                 const tempFile = yield tmp.file();
                 core.debug(`${parameters.file} is greater than 64k in size. Creating a gzip file on-disk ${tempFile.path} to potentially reduce the upload size`);
                 // create a GZip file of the original file being uploaded, the original file should not be modified in any way
-                uploadFileSize = yield upload_gzip_1.createGZipFileOnDisk(parameters.file, tempFile.path);
+                uploadFileSize = yield (0, upload_gzip_1.createGZipFileOnDisk)(parameters.file, tempFile.path);
                 let uploadFilePath = tempFile.path;
                 // compression did not help with size reduction, use the original file for upload and delete the temp GZip file
                 // for named pipes totalFileSize is zero, this assumes compression did help
@@ -2274,22 +2328,22 @@ class UploadHttpClient {
     uploadChunk(httpClientIndex, resourceUrl, openStream, start, end, uploadFileSize, isGzip, totalFileSize) {
         return __awaiter(this, void 0, void 0, function* () {
             // open a new stream and read it to compute the digest
-            const digest = yield utils_1.digestForStream(openStream());
+            const digest = yield (0, utils_1.digestForStream)(openStream());
             // prepare all the necessary headers before making any http call
-            const headers = utils_1.getUploadHeaders('application/octet-stream', true, isGzip, totalFileSize, end - start + 1, utils_1.getContentRange(start, end, uploadFileSize), digest);
+            const headers = (0, utils_1.getUploadHeaders)('application/octet-stream', true, isGzip, totalFileSize, end - start + 1, (0, utils_1.getContentRange)(start, end, uploadFileSize), digest);
             const uploadChunkRequest = () => __awaiter(this, void 0, void 0, function* () {
                 const client = this.uploadHttpManager.getClient(httpClientIndex);
                 return yield client.sendStream('PUT', resourceUrl, openStream(), headers);
             });
             let retryCount = 0;
-            const retryLimit = config_variables_1.getRetryLimit();
+            const retryLimit = (0, config_variables_1.getRetryLimit)();
             // Increments the current retry count and then checks if the retry limit has been reached
             // If there have been too many retries, fail so the download stops
             const incrementAndCheckRetryLimit = (response) => {
                 retryCount++;
                 if (retryCount > retryLimit) {
                     if (response) {
-                        utils_1.displayHttpDiagnostics(response);
+                        (0, utils_1.displayHttpDiagnostics)(response);
                     }
                     core.info(`Retry limit has been reached for chunk at offset ${start} to ${resourceUrl}`);
                     return true;
@@ -2300,12 +2354,12 @@ class UploadHttpClient {
                 this.uploadHttpManager.disposeAndReplaceClient(httpClientIndex);
                 if (retryAfterValue) {
                     core.info(`Backoff due to too many requests, retry #${retryCount}. Waiting for ${retryAfterValue} milliseconds before continuing the upload`);
-                    yield utils_1.sleep(retryAfterValue);
+                    yield (0, utils_1.sleep)(retryAfterValue);
                 }
                 else {
-                    const backoffTime = utils_1.getExponentialRetryTimeInMilliseconds(retryCount);
+                    const backoffTime = (0, utils_1.getExponentialRetryTimeInMilliseconds)(retryCount);
                     core.info(`Exponential backoff for retry #${retryCount}. Waiting for ${backoffTime} milliseconds before continuing the upload at offset ${start}`);
-                    yield utils_1.sleep(backoffTime);
+                    yield (0, utils_1.sleep)(backoffTime);
                 }
                 core.info(`Finished backoff for retry #${retryCount}, continuing with upload`);
                 return;
@@ -2330,21 +2384,21 @@ class UploadHttpClient {
                 // Always read the body of the response. There is potential for a resource leak if the body is not read which will
                 // result in the connection remaining open along with unintended consequences when trying to dispose of the client
                 yield response.readBody();
-                if (utils_1.isSuccessStatusCode(response.message.statusCode)) {
+                if ((0, utils_1.isSuccessStatusCode)(response.message.statusCode)) {
                     return true;
                 }
-                else if (utils_1.isRetryableStatusCode(response.message.statusCode)) {
+                else if ((0, utils_1.isRetryableStatusCode)(response.message.statusCode)) {
                     core.info(`A ${response.message.statusCode} status code has been received, will attempt to retry the upload`);
                     if (incrementAndCheckRetryLimit(response)) {
                         return false;
                     }
-                    utils_1.isThrottledStatusCode(response.message.statusCode)
-                        ? yield backOff(utils_1.tryGetRetryAfterValueTimeInMilliseconds(response.message.headers))
+                    (0, utils_1.isThrottledStatusCode)(response.message.statusCode)
+                        ? yield backOff((0, utils_1.tryGetRetryAfterValueTimeInMilliseconds)(response.message.headers))
                         : yield backOff();
                 }
                 else {
                     core.error(`Unexpected response. Unable to upload chunk to ${resourceUrl}`);
-                    utils_1.displayHttpDiagnostics(response);
+                    (0, utils_1.displayHttpDiagnostics)(response);
                     return false;
                 }
             }
@@ -2357,14 +2411,14 @@ class UploadHttpClient {
      */
     patchArtifactSize(size, artifactName) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resourceUrl = new url_1.URL(utils_1.getArtifactUrl());
+            const resourceUrl = new url_1.URL((0, utils_1.getArtifactUrl)());
             resourceUrl.searchParams.append('artifactName', artifactName);
             const parameters = { Size: size };
             const data = JSON.stringify(parameters, null, 2);
             core.debug(`URL is ${resourceUrl.toString()}`);
             // use the first client from the httpManager, `keep-alive` is not used so the connection will close immediately
             const client = this.uploadHttpManager.getClient(0);
-            const headers = utils_1.getUploadHeaders('application/json', false);
+            const headers = (0, utils_1.getUploadHeaders)('application/json', false);
             // Extra information to display when a particular HTTP code is returned
             const customErrorMessages = new Map([
                 [
@@ -2373,7 +2427,7 @@ class UploadHttpClient {
                 ]
             ]);
             // TODO retry for all possible response codes, the artifact upload is pretty much complete so it at all costs we should try to finish this
-            const response = yield requestUtils_1.retryHttpClientRequest('Finalize artifact upload', () => __awaiter(this, void 0, void 0, function* () { return client.patch(resourceUrl.toString(), data, headers); }), customErrorMessages);
+            const response = yield (0, requestUtils_1.retryHttpClientRequest)('Finalize artifact upload', () => __awaiter(this, void 0, void 0, function* () { return client.patch(resourceUrl.toString(), data, headers); }), customErrorMessages);
             yield response.readBody();
             core.debug(`Artifact ${artifactName} has been successfully uploaded, total size in bytes: ${size}`);
         });
@@ -2391,7 +2445,11 @@ exports.UploadHttpClient = UploadHttpClient;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -2404,14 +2462,14 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getUploadSpecification = void 0;
 const fs = __importStar(__nccwpck_require__(7147));
-const core_1 = __nccwpck_require__(2186);
+const core_1 = __nccwpck_require__(5457);
 const path_1 = __nccwpck_require__(1017);
 const path_and_artifact_name_validation_1 = __nccwpck_require__(7398);
 /**
@@ -2426,12 +2484,12 @@ function getUploadSpecification(artifactName, rootDirectory, artifactFiles) {
     if (!fs.existsSync(rootDirectory)) {
         throw new Error(`Provided rootDirectory ${rootDirectory} does not exist`);
     }
-    if (!fs.lstatSync(rootDirectory).isDirectory()) {
+    if (!fs.statSync(rootDirectory).isDirectory()) {
         throw new Error(`Provided rootDirectory ${rootDirectory} is not a valid directory`);
     }
     // Normalize and resolve, this allows for either absolute or relative paths to be used
-    rootDirectory = path_1.normalize(rootDirectory);
-    rootDirectory = path_1.resolve(rootDirectory);
+    rootDirectory = (0, path_1.normalize)(rootDirectory);
+    rootDirectory = (0, path_1.resolve)(rootDirectory);
     /*
        Example to demonstrate behavior
        
@@ -2455,16 +2513,16 @@ function getUploadSpecification(artifactName, rootDirectory, artifactFiles) {
         if (!fs.existsSync(file)) {
             throw new Error(`File ${file} does not exist`);
         }
-        if (!fs.lstatSync(file).isDirectory()) {
+        if (!fs.statSync(file).isDirectory()) {
             // Normalize and resolve, this allows for either absolute or relative paths to be used
-            file = path_1.normalize(file);
-            file = path_1.resolve(file);
+            file = (0, path_1.normalize)(file);
+            file = (0, path_1.resolve)(file);
             if (!file.startsWith(rootDirectory)) {
                 throw new Error(`The rootDirectory: ${rootDirectory} is not a parent directory of the file: ${file}`);
             }
             // Check for forbidden characters in file paths that will be rejected during upload
             const uploadPath = file.replace(rootDirectory, '');
-            path_and_artifact_name_validation_1.checkArtifactFilePath(uploadPath);
+            (0, path_and_artifact_name_validation_1.checkArtifactFilePath)(uploadPath);
             /*
               uploadFilePath denotes where the file will be uploaded in the file container on the server. During a run, if multiple artifacts are uploaded, they will all
               be saved in the same container. The artifact name is used as the root directory in the container to separate and distinguish uploaded artifacts
@@ -2477,12 +2535,12 @@ function getUploadSpecification(artifactName, rootDirectory, artifactFiles) {
             */
             specifications.push({
                 absoluteFilePath: file,
-                uploadFilePath: path_1.join(artifactName, uploadPath)
+                uploadFilePath: (0, path_1.join)(artifactName, uploadPath)
             });
         }
         else {
             // Directories are rejected by the server during upload
-            core_1.debug(`Removing ${file} from rawSearchResults because it is a directory`);
+            (0, core_1.debug)(`Removing ${file} from rawSearchResults because it is a directory`);
         }
     }
     return specifications;
@@ -2513,7 +2571,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.digestForStream = exports.sleep = exports.getProperRetention = exports.rmFile = exports.getFileSize = exports.createEmptyFilesForArtifact = exports.createDirectoriesForArtifact = exports.displayHttpDiagnostics = exports.getArtifactUrl = exports.createHttpClient = exports.getUploadHeaders = exports.getDownloadHeaders = exports.getContentRange = exports.tryGetRetryAfterValueTimeInMilliseconds = exports.isThrottledStatusCode = exports.isRetryableStatusCode = exports.isForbiddenStatusCode = exports.isSuccessStatusCode = exports.getApiVersion = exports.parseEnvNumber = exports.getExponentialRetryTimeInMilliseconds = void 0;
 const crypto_1 = __importDefault(__nccwpck_require__(6113));
 const fs_1 = __nccwpck_require__(7147);
-const core_1 = __nccwpck_require__(2186);
+const core_1 = __nccwpck_require__(5457);
 const http_client_1 = __nccwpck_require__(6255);
 const auth_1 = __nccwpck_require__(5526);
 const config_variables_1 = __nccwpck_require__(2222);
@@ -2527,10 +2585,10 @@ function getExponentialRetryTimeInMilliseconds(retryCount) {
         throw new Error('RetryCount should not be negative');
     }
     else if (retryCount === 0) {
-        return config_variables_1.getInitialRetryIntervalInMilliseconds();
+        return (0, config_variables_1.getInitialRetryIntervalInMilliseconds)();
     }
-    const minTime = config_variables_1.getInitialRetryIntervalInMilliseconds() * config_variables_1.getRetryMultiplier() * retryCount;
-    const maxTime = minTime * config_variables_1.getRetryMultiplier();
+    const minTime = (0, config_variables_1.getInitialRetryIntervalInMilliseconds)() * (0, config_variables_1.getRetryMultiplier)() * retryCount;
+    const maxTime = minTime * (0, config_variables_1.getRetryMultiplier)();
     // returns a random number between the minTime (inclusive) and the maxTime (exclusive)
     return Math.trunc(Math.random() * (maxTime - minTime) + minTime);
 }
@@ -2598,13 +2656,13 @@ function tryGetRetryAfterValueTimeInMilliseconds(headers) {
     if (headers['retry-after']) {
         const retryTime = Number(headers['retry-after']);
         if (!isNaN(retryTime)) {
-            core_1.info(`Retry-After header is present with a value of ${retryTime}`);
+            (0, core_1.info)(`Retry-After header is present with a value of ${retryTime}`);
             return retryTime * 1000;
         }
-        core_1.info(`Returned retry-after header value: ${retryTime} is non-numeric and cannot be used`);
+        (0, core_1.info)(`Returned retry-after header value: ${retryTime} is non-numeric and cannot be used`);
         return undefined;
     }
-    core_1.info(`No retry-after header was found. Dumping all headers for diagnostic purposes`);
+    (0, core_1.info)(`No retry-after header was found. Dumping all headers for diagnostic purposes`);
     // eslint-disable-next-line no-console
     console.log(headers);
     return undefined;
@@ -2688,13 +2746,13 @@ function getUploadHeaders(contentType, isKeepAlive, isGzip, uncompressedLength, 
 exports.getUploadHeaders = getUploadHeaders;
 function createHttpClient(userAgent) {
     return new http_client_1.HttpClient(userAgent, [
-        new auth_1.BearerCredentialHandler(config_variables_1.getRuntimeToken())
+        new auth_1.BearerCredentialHandler((0, config_variables_1.getRuntimeToken)())
     ]);
 }
 exports.createHttpClient = createHttpClient;
 function getArtifactUrl() {
-    const artifactUrl = `${config_variables_1.getRuntimeUrl()}_apis/pipelines/workflows/${config_variables_1.getWorkFlowRunId()}/artifacts?api-version=${getApiVersion()}`;
-    core_1.debug(`Artifact Url: ${artifactUrl}`);
+    const artifactUrl = `${(0, config_variables_1.getRuntimeUrl)()}_apis/pipelines/workflows/${(0, config_variables_1.getWorkFlowRunId)()}/artifacts?api-version=${getApiVersion()}`;
+    (0, core_1.debug)(`Artifact Url: ${artifactUrl}`);
     return artifactUrl;
 }
 exports.getArtifactUrl = getArtifactUrl;
@@ -2708,7 +2766,7 @@ exports.getArtifactUrl = getArtifactUrl;
  * Other information such as the headers, the response code and message might be useful, so this is displayed.
  */
 function displayHttpDiagnostics(response) {
-    core_1.info(`##### Begin Diagnostic HTTP information #####
+    (0, core_1.info)(`##### Begin Diagnostic HTTP information #####
 Status Code: ${response.message.statusCode}
 Status Message: ${response.message.statusMessage}
 Header Information: ${JSON.stringify(response.message.headers, undefined, 2)}
@@ -2736,7 +2794,7 @@ exports.createEmptyFilesForArtifact = createEmptyFilesForArtifact;
 function getFileSize(filePath) {
     return __awaiter(this, void 0, void 0, function* () {
         const stats = yield fs_1.promises.stat(filePath);
-        core_1.debug(`${filePath} size:(${stats.size}) blksize:(${stats.blksize}) blocks:(${stats.blocks})`);
+        (0, core_1.debug)(`${filePath} size:(${stats.size}) blksize:(${stats.blksize}) blocks:(${stats.blocks})`);
         return stats.size;
     });
 }
@@ -2755,7 +2813,7 @@ function getProperRetention(retentionInput, retentionSetting) {
     if (retentionSetting) {
         const maxRetention = parseInt(retentionSetting);
         if (!isNaN(maxRetention) && maxRetention < retention) {
-            core_1.warning(`Retention days is greater than the max value allowed by the repository setting, reduce retention to ${maxRetention} days`);
+            (0, core_1.warning)(`Retention days is greater than the max value allowed by the repository setting, reduce retention to ${maxRetention} days`);
             retention = maxRetention;
         }
     }
@@ -2787,6 +2845,999 @@ function digestForStream(stream) {
     });
 }
 exports.digestForStream = digestForStream;
+//# sourceMappingURL=utils.js.map
+
+/***/ }),
+
+/***/ 6270:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.issue = exports.issueCommand = void 0;
+const os = __importStar(__nccwpck_require__(2037));
+const utils_1 = __nccwpck_require__(6700);
+/**
+ * Commands
+ *
+ * Command Format:
+ *   ::name key=value,key=value::message
+ *
+ * Examples:
+ *   ::warning::This is the message
+ *   ::set-env name=MY_VAR::some value
+ */
+function issueCommand(command, properties, message) {
+    const cmd = new Command(command, properties, message);
+    process.stdout.write(cmd.toString() + os.EOL);
+}
+exports.issueCommand = issueCommand;
+function issue(name, message = '') {
+    issueCommand(name, {}, message);
+}
+exports.issue = issue;
+const CMD_STRING = '::';
+class Command {
+    constructor(command, properties, message) {
+        if (!command) {
+            command = 'missing.command';
+        }
+        this.command = command;
+        this.properties = properties;
+        this.message = message;
+    }
+    toString() {
+        let cmdStr = CMD_STRING + this.command;
+        if (this.properties && Object.keys(this.properties).length > 0) {
+            cmdStr += ' ';
+            let first = true;
+            for (const key in this.properties) {
+                if (this.properties.hasOwnProperty(key)) {
+                    const val = this.properties[key];
+                    if (val) {
+                        if (first) {
+                            first = false;
+                        }
+                        else {
+                            cmdStr += ',';
+                        }
+                        cmdStr += `${key}=${escapeProperty(val)}`;
+                    }
+                }
+            }
+        }
+        cmdStr += `${CMD_STRING}${escapeData(this.message)}`;
+        return cmdStr;
+    }
+}
+function escapeData(s) {
+    return utils_1.toCommandValue(s)
+        .replace(/%/g, '%25')
+        .replace(/\r/g, '%0D')
+        .replace(/\n/g, '%0A');
+}
+function escapeProperty(s) {
+    return utils_1.toCommandValue(s)
+        .replace(/%/g, '%25')
+        .replace(/\r/g, '%0D')
+        .replace(/\n/g, '%0A')
+        .replace(/:/g, '%3A')
+        .replace(/,/g, '%2C');
+}
+//# sourceMappingURL=command.js.map
+
+/***/ }),
+
+/***/ 5457:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
+const command_1 = __nccwpck_require__(6270);
+const file_command_1 = __nccwpck_require__(5436);
+const utils_1 = __nccwpck_require__(6700);
+const os = __importStar(__nccwpck_require__(2037));
+const path = __importStar(__nccwpck_require__(1017));
+const oidc_utils_1 = __nccwpck_require__(4759);
+/**
+ * The code to exit an action
+ */
+var ExitCode;
+(function (ExitCode) {
+    /**
+     * A code indicating that the action was successful
+     */
+    ExitCode[ExitCode["Success"] = 0] = "Success";
+    /**
+     * A code indicating that the action was a failure
+     */
+    ExitCode[ExitCode["Failure"] = 1] = "Failure";
+})(ExitCode = exports.ExitCode || (exports.ExitCode = {}));
+//-----------------------------------------------------------------------
+// Variables
+//-----------------------------------------------------------------------
+/**
+ * Sets env variable for this action and future actions in the job
+ * @param name the name of the variable to set
+ * @param val the value of the variable. Non-string values will be converted to a string via JSON.stringify
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function exportVariable(name, val) {
+    const convertedVal = utils_1.toCommandValue(val);
+    process.env[name] = convertedVal;
+    const filePath = process.env['GITHUB_ENV'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('ENV', file_command_1.prepareKeyValueMessage(name, val));
+    }
+    command_1.issueCommand('set-env', { name }, convertedVal);
+}
+exports.exportVariable = exportVariable;
+/**
+ * Registers a secret which will get masked from logs
+ * @param secret value of the secret
+ */
+function setSecret(secret) {
+    command_1.issueCommand('add-mask', {}, secret);
+}
+exports.setSecret = setSecret;
+/**
+ * Prepends inputPath to the PATH (for this action and future actions)
+ * @param inputPath
+ */
+function addPath(inputPath) {
+    const filePath = process.env['GITHUB_PATH'] || '';
+    if (filePath) {
+        file_command_1.issueFileCommand('PATH', inputPath);
+    }
+    else {
+        command_1.issueCommand('add-path', {}, inputPath);
+    }
+    process.env['PATH'] = `${inputPath}${path.delimiter}${process.env['PATH']}`;
+}
+exports.addPath = addPath;
+/**
+ * Gets the value of an input.
+ * Unless trimWhitespace is set to false in InputOptions, the value is also trimmed.
+ * Returns an empty string if the value is not defined.
+ *
+ * @param     name     name of the input to get
+ * @param     options  optional. See InputOptions.
+ * @returns   string
+ */
+function getInput(name, options) {
+    const val = process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`] || '';
+    if (options && options.required && !val) {
+        throw new Error(`Input required and not supplied: ${name}`);
+    }
+    if (options && options.trimWhitespace === false) {
+        return val;
+    }
+    return val.trim();
+}
+exports.getInput = getInput;
+/**
+ * Gets the values of an multiline input.  Each value is also trimmed.
+ *
+ * @param     name     name of the input to get
+ * @param     options  optional. See InputOptions.
+ * @returns   string[]
+ *
+ */
+function getMultilineInput(name, options) {
+    const inputs = getInput(name, options)
+        .split('\n')
+        .filter(x => x !== '');
+    if (options && options.trimWhitespace === false) {
+        return inputs;
+    }
+    return inputs.map(input => input.trim());
+}
+exports.getMultilineInput = getMultilineInput;
+/**
+ * Gets the input value of the boolean type in the YAML 1.2 "core schema" specification.
+ * Support boolean input list: `true | True | TRUE | false | False | FALSE` .
+ * The return value is also in boolean type.
+ * ref: https://yaml.org/spec/1.2/spec.html#id2804923
+ *
+ * @param     name     name of the input to get
+ * @param     options  optional. See InputOptions.
+ * @returns   boolean
+ */
+function getBooleanInput(name, options) {
+    const trueValue = ['true', 'True', 'TRUE'];
+    const falseValue = ['false', 'False', 'FALSE'];
+    const val = getInput(name, options);
+    if (trueValue.includes(val))
+        return true;
+    if (falseValue.includes(val))
+        return false;
+    throw new TypeError(`Input does not meet YAML 1.2 "Core Schema" specification: ${name}\n` +
+        `Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
+}
+exports.getBooleanInput = getBooleanInput;
+/**
+ * Sets the value of an output.
+ *
+ * @param     name     name of the output to set
+ * @param     value    value to store. Non-string values will be converted to a string via JSON.stringify
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function setOutput(name, value) {
+    const filePath = process.env['GITHUB_OUTPUT'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('OUTPUT', file_command_1.prepareKeyValueMessage(name, value));
+    }
+    process.stdout.write(os.EOL);
+    command_1.issueCommand('set-output', { name }, utils_1.toCommandValue(value));
+}
+exports.setOutput = setOutput;
+/**
+ * Enables or disables the echoing of commands into stdout for the rest of the step.
+ * Echoing is disabled by default if ACTIONS_STEP_DEBUG is not set.
+ *
+ */
+function setCommandEcho(enabled) {
+    command_1.issue('echo', enabled ? 'on' : 'off');
+}
+exports.setCommandEcho = setCommandEcho;
+//-----------------------------------------------------------------------
+// Results
+//-----------------------------------------------------------------------
+/**
+ * Sets the action status to failed.
+ * When the action exits it will be with an exit code of 1
+ * @param message add error issue message
+ */
+function setFailed(message) {
+    process.exitCode = ExitCode.Failure;
+    error(message);
+}
+exports.setFailed = setFailed;
+//-----------------------------------------------------------------------
+// Logging Commands
+//-----------------------------------------------------------------------
+/**
+ * Gets whether Actions Step Debug is on or not
+ */
+function isDebug() {
+    return process.env['RUNNER_DEBUG'] === '1';
+}
+exports.isDebug = isDebug;
+/**
+ * Writes debug message to user log
+ * @param message debug message
+ */
+function debug(message) {
+    command_1.issueCommand('debug', {}, message);
+}
+exports.debug = debug;
+/**
+ * Adds an error issue
+ * @param message error issue message. Errors will be converted to string via toString()
+ * @param properties optional properties to add to the annotation.
+ */
+function error(message, properties = {}) {
+    command_1.issueCommand('error', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+}
+exports.error = error;
+/**
+ * Adds a warning issue
+ * @param message warning issue message. Errors will be converted to string via toString()
+ * @param properties optional properties to add to the annotation.
+ */
+function warning(message, properties = {}) {
+    command_1.issueCommand('warning', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+}
+exports.warning = warning;
+/**
+ * Adds a notice issue
+ * @param message notice issue message. Errors will be converted to string via toString()
+ * @param properties optional properties to add to the annotation.
+ */
+function notice(message, properties = {}) {
+    command_1.issueCommand('notice', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+}
+exports.notice = notice;
+/**
+ * Writes info to log with console.log.
+ * @param message info message
+ */
+function info(message) {
+    process.stdout.write(message + os.EOL);
+}
+exports.info = info;
+/**
+ * Begin an output group.
+ *
+ * Output until the next `groupEnd` will be foldable in this group
+ *
+ * @param name The name of the output group
+ */
+function startGroup(name) {
+    command_1.issue('group', name);
+}
+exports.startGroup = startGroup;
+/**
+ * End an output group.
+ */
+function endGroup() {
+    command_1.issue('endgroup');
+}
+exports.endGroup = endGroup;
+/**
+ * Wrap an asynchronous function call in a group.
+ *
+ * Returns the same type as the function itself.
+ *
+ * @param name The name of the group
+ * @param fn The function to wrap in the group
+ */
+function group(name, fn) {
+    return __awaiter(this, void 0, void 0, function* () {
+        startGroup(name);
+        let result;
+        try {
+            result = yield fn();
+        }
+        finally {
+            endGroup();
+        }
+        return result;
+    });
+}
+exports.group = group;
+//-----------------------------------------------------------------------
+// Wrapper action state
+//-----------------------------------------------------------------------
+/**
+ * Saves state for current action, the state can only be retrieved by this action's post job execution.
+ *
+ * @param     name     name of the state to store
+ * @param     value    value to store. Non-string values will be converted to a string via JSON.stringify
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function saveState(name, value) {
+    const filePath = process.env['GITHUB_STATE'] || '';
+    if (filePath) {
+        return file_command_1.issueFileCommand('STATE', file_command_1.prepareKeyValueMessage(name, value));
+    }
+    command_1.issueCommand('save-state', { name }, utils_1.toCommandValue(value));
+}
+exports.saveState = saveState;
+/**
+ * Gets the value of an state set by this action's main execution.
+ *
+ * @param     name     name of the state to get
+ * @returns   string
+ */
+function getState(name) {
+    return process.env[`STATE_${name}`] || '';
+}
+exports.getState = getState;
+function getIDToken(aud) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield oidc_utils_1.OidcClient.getIDToken(aud);
+    });
+}
+exports.getIDToken = getIDToken;
+/**
+ * Summary exports
+ */
+var summary_1 = __nccwpck_require__(7613);
+Object.defineProperty(exports, "summary", ({ enumerable: true, get: function () { return summary_1.summary; } }));
+/**
+ * @deprecated use core.summary
+ */
+var summary_2 = __nccwpck_require__(7613);
+Object.defineProperty(exports, "markdownSummary", ({ enumerable: true, get: function () { return summary_2.markdownSummary; } }));
+/**
+ * Path exports
+ */
+var path_utils_1 = __nccwpck_require__(3849);
+Object.defineProperty(exports, "toPosixPath", ({ enumerable: true, get: function () { return path_utils_1.toPosixPath; } }));
+Object.defineProperty(exports, "toWin32Path", ({ enumerable: true, get: function () { return path_utils_1.toWin32Path; } }));
+Object.defineProperty(exports, "toPlatformPath", ({ enumerable: true, get: function () { return path_utils_1.toPlatformPath; } }));
+//# sourceMappingURL=core.js.map
+
+/***/ }),
+
+/***/ 5436:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+// For internal use, subject to change.
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
+// We use any as a valid input type
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const fs = __importStar(__nccwpck_require__(7147));
+const os = __importStar(__nccwpck_require__(2037));
+const uuid_1 = __nccwpck_require__(5840);
+const utils_1 = __nccwpck_require__(6700);
+function issueFileCommand(command, message) {
+    const filePath = process.env[`GITHUB_${command}`];
+    if (!filePath) {
+        throw new Error(`Unable to find environment variable for file command ${command}`);
+    }
+    if (!fs.existsSync(filePath)) {
+        throw new Error(`Missing file at path: ${filePath}`);
+    }
+    fs.appendFileSync(filePath, `${utils_1.toCommandValue(message)}${os.EOL}`, {
+        encoding: 'utf8'
+    });
+}
+exports.issueFileCommand = issueFileCommand;
+function prepareKeyValueMessage(key, value) {
+    const delimiter = `ghadelimiter_${uuid_1.v4()}`;
+    const convertedValue = utils_1.toCommandValue(value);
+    // These should realistically never happen, but just in case someone finds a
+    // way to exploit uuid generation let's not allow keys or values that contain
+    // the delimiter.
+    if (key.includes(delimiter)) {
+        throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
+    }
+    if (convertedValue.includes(delimiter)) {
+        throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
+    }
+    return `${key}<<${delimiter}${os.EOL}${convertedValue}${os.EOL}${delimiter}`;
+}
+exports.prepareKeyValueMessage = prepareKeyValueMessage;
+//# sourceMappingURL=file-command.js.map
+
+/***/ }),
+
+/***/ 4759:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OidcClient = void 0;
+const http_client_1 = __nccwpck_require__(6255);
+const auth_1 = __nccwpck_require__(5526);
+const core_1 = __nccwpck_require__(5457);
+class OidcClient {
+    static createHttpClient(allowRetry = true, maxRetry = 10) {
+        const requestOptions = {
+            allowRetries: allowRetry,
+            maxRetries: maxRetry
+        };
+        return new http_client_1.HttpClient('actions/oidc-client', [new auth_1.BearerCredentialHandler(OidcClient.getRequestToken())], requestOptions);
+    }
+    static getRequestToken() {
+        const token = process.env['ACTIONS_ID_TOKEN_REQUEST_TOKEN'];
+        if (!token) {
+            throw new Error('Unable to get ACTIONS_ID_TOKEN_REQUEST_TOKEN env variable');
+        }
+        return token;
+    }
+    static getIDTokenUrl() {
+        const runtimeUrl = process.env['ACTIONS_ID_TOKEN_REQUEST_URL'];
+        if (!runtimeUrl) {
+            throw new Error('Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable');
+        }
+        return runtimeUrl;
+    }
+    static getCall(id_token_url) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            const httpclient = OidcClient.createHttpClient();
+            const res = yield httpclient
+                .getJson(id_token_url)
+                .catch(error => {
+                throw new Error(`Failed to get ID Token. \n 
+        Error Code : ${error.statusCode}\n 
+        Error Message: ${error.result.message}`);
+            });
+            const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
+            if (!id_token) {
+                throw new Error('Response json body do not have ID Token field');
+            }
+            return id_token;
+        });
+    }
+    static getIDToken(audience) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // New ID Token is requested from action service
+                let id_token_url = OidcClient.getIDTokenUrl();
+                if (audience) {
+                    const encodedAudience = encodeURIComponent(audience);
+                    id_token_url = `${id_token_url}&audience=${encodedAudience}`;
+                }
+                core_1.debug(`ID token url is ${id_token_url}`);
+                const id_token = yield OidcClient.getCall(id_token_url);
+                core_1.setSecret(id_token);
+                return id_token;
+            }
+            catch (error) {
+                throw new Error(`Error message: ${error.message}`);
+            }
+        });
+    }
+}
+exports.OidcClient = OidcClient;
+//# sourceMappingURL=oidc-utils.js.map
+
+/***/ }),
+
+/***/ 3849:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = void 0;
+const path = __importStar(__nccwpck_require__(1017));
+/**
+ * toPosixPath converts the given path to the posix form. On Windows, \\ will be
+ * replaced with /.
+ *
+ * @param pth. Path to transform.
+ * @return string Posix path.
+ */
+function toPosixPath(pth) {
+    return pth.replace(/[\\]/g, '/');
+}
+exports.toPosixPath = toPosixPath;
+/**
+ * toWin32Path converts the given path to the win32 form. On Linux, / will be
+ * replaced with \\.
+ *
+ * @param pth. Path to transform.
+ * @return string Win32 path.
+ */
+function toWin32Path(pth) {
+    return pth.replace(/[/]/g, '\\');
+}
+exports.toWin32Path = toWin32Path;
+/**
+ * toPlatformPath converts the given path to a platform-specific path. It does
+ * this by replacing instances of / and \ with the platform-specific path
+ * separator.
+ *
+ * @param pth The path to platformize.
+ * @return string The platform-specific path.
+ */
+function toPlatformPath(pth) {
+    return pth.replace(/[/\\]/g, path.sep);
+}
+exports.toPlatformPath = toPlatformPath;
+//# sourceMappingURL=path-utils.js.map
+
+/***/ }),
+
+/***/ 7613:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
+const os_1 = __nccwpck_require__(2037);
+const fs_1 = __nccwpck_require__(7147);
+const { access, appendFile, writeFile } = fs_1.promises;
+exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
+exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
+class Summary {
+    constructor() {
+        this._buffer = '';
+    }
+    /**
+     * Finds the summary file path from the environment, rejects if env var is not found or file does not exist
+     * Also checks r/w permissions.
+     *
+     * @returns step summary file path
+     */
+    filePath() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this._filePath) {
+                return this._filePath;
+            }
+            const pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
+            if (!pathFromEnv) {
+                throw new Error(`Unable to find environment variable for $${exports.SUMMARY_ENV_VAR}. Check if your runtime environment supports job summaries.`);
+            }
+            try {
+                yield access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
+            }
+            catch (_a) {
+                throw new Error(`Unable to access summary file: '${pathFromEnv}'. Check if the file has correct read/write permissions.`);
+            }
+            this._filePath = pathFromEnv;
+            return this._filePath;
+        });
+    }
+    /**
+     * Wraps content in an HTML tag, adding any HTML attributes
+     *
+     * @param {string} tag HTML tag to wrap
+     * @param {string | null} content content within the tag
+     * @param {[attribute: string]: string} attrs key-value list of HTML attributes to add
+     *
+     * @returns {string} content wrapped in HTML element
+     */
+    wrap(tag, content, attrs = {}) {
+        const htmlAttrs = Object.entries(attrs)
+            .map(([key, value]) => ` ${key}="${value}"`)
+            .join('');
+        if (!content) {
+            return `<${tag}${htmlAttrs}>`;
+        }
+        return `<${tag}${htmlAttrs}>${content}</${tag}>`;
+    }
+    /**
+     * Writes text in the buffer to the summary buffer file and empties buffer. Will append by default.
+     *
+     * @param {SummaryWriteOptions} [options] (optional) options for write operation
+     *
+     * @returns {Promise<Summary>} summary instance
+     */
+    write(options) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
+            const filePath = yield this.filePath();
+            const writeFunc = overwrite ? writeFile : appendFile;
+            yield writeFunc(filePath, this._buffer, { encoding: 'utf8' });
+            return this.emptyBuffer();
+        });
+    }
+    /**
+     * Clears the summary buffer and wipes the summary file
+     *
+     * @returns {Summary} summary instance
+     */
+    clear() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.emptyBuffer().write({ overwrite: true });
+        });
+    }
+    /**
+     * Returns the current summary buffer as a string
+     *
+     * @returns {string} string of summary buffer
+     */
+    stringify() {
+        return this._buffer;
+    }
+    /**
+     * If the summary buffer is empty
+     *
+     * @returns {boolen} true if the buffer is empty
+     */
+    isEmptyBuffer() {
+        return this._buffer.length === 0;
+    }
+    /**
+     * Resets the summary buffer without writing to summary file
+     *
+     * @returns {Summary} summary instance
+     */
+    emptyBuffer() {
+        this._buffer = '';
+        return this;
+    }
+    /**
+     * Adds raw text to the summary buffer
+     *
+     * @param {string} text content to add
+     * @param {boolean} [addEOL=false] (optional) append an EOL to the raw text (default: false)
+     *
+     * @returns {Summary} summary instance
+     */
+    addRaw(text, addEOL = false) {
+        this._buffer += text;
+        return addEOL ? this.addEOL() : this;
+    }
+    /**
+     * Adds the operating system-specific end-of-line marker to the buffer
+     *
+     * @returns {Summary} summary instance
+     */
+    addEOL() {
+        return this.addRaw(os_1.EOL);
+    }
+    /**
+     * Adds an HTML codeblock to the summary buffer
+     *
+     * @param {string} code content to render within fenced code block
+     * @param {string} lang (optional) language to syntax highlight code
+     *
+     * @returns {Summary} summary instance
+     */
+    addCodeBlock(code, lang) {
+        const attrs = Object.assign({}, (lang && { lang }));
+        const element = this.wrap('pre', this.wrap('code', code), attrs);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML list to the summary buffer
+     *
+     * @param {string[]} items list of items to render
+     * @param {boolean} [ordered=false] (optional) if the rendered list should be ordered or not (default: false)
+     *
+     * @returns {Summary} summary instance
+     */
+    addList(items, ordered = false) {
+        const tag = ordered ? 'ol' : 'ul';
+        const listItems = items.map(item => this.wrap('li', item)).join('');
+        const element = this.wrap(tag, listItems);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML table to the summary buffer
+     *
+     * @param {SummaryTableCell[]} rows table rows
+     *
+     * @returns {Summary} summary instance
+     */
+    addTable(rows) {
+        const tableBody = rows
+            .map(row => {
+            const cells = row
+                .map(cell => {
+                if (typeof cell === 'string') {
+                    return this.wrap('td', cell);
+                }
+                const { header, data, colspan, rowspan } = cell;
+                const tag = header ? 'th' : 'td';
+                const attrs = Object.assign(Object.assign({}, (colspan && { colspan })), (rowspan && { rowspan }));
+                return this.wrap(tag, data, attrs);
+            })
+                .join('');
+            return this.wrap('tr', cells);
+        })
+            .join('');
+        const element = this.wrap('table', tableBody);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds a collapsable HTML details element to the summary buffer
+     *
+     * @param {string} label text for the closed state
+     * @param {string} content collapsable content
+     *
+     * @returns {Summary} summary instance
+     */
+    addDetails(label, content) {
+        const element = this.wrap('details', this.wrap('summary', label) + content);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML image tag to the summary buffer
+     *
+     * @param {string} src path to the image you to embed
+     * @param {string} alt text description of the image
+     * @param {SummaryImageOptions} options (optional) addition image attributes
+     *
+     * @returns {Summary} summary instance
+     */
+    addImage(src, alt, options) {
+        const { width, height } = options || {};
+        const attrs = Object.assign(Object.assign({}, (width && { width })), (height && { height }));
+        const element = this.wrap('img', null, Object.assign({ src, alt }, attrs));
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML section heading element
+     *
+     * @param {string} text heading text
+     * @param {number | string} [level=1] (optional) the heading level, default: 1
+     *
+     * @returns {Summary} summary instance
+     */
+    addHeading(text, level) {
+        const tag = `h${level}`;
+        const allowedTag = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tag)
+            ? tag
+            : 'h1';
+        const element = this.wrap(allowedTag, text);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML thematic break (<hr>) to the summary buffer
+     *
+     * @returns {Summary} summary instance
+     */
+    addSeparator() {
+        const element = this.wrap('hr', null);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML line break (<br>) to the summary buffer
+     *
+     * @returns {Summary} summary instance
+     */
+    addBreak() {
+        const element = this.wrap('br', null);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML blockquote to the summary buffer
+     *
+     * @param {string} text quote text
+     * @param {string} cite (optional) citation url
+     *
+     * @returns {Summary} summary instance
+     */
+    addQuote(text, cite) {
+        const attrs = Object.assign({}, (cite && { cite }));
+        const element = this.wrap('blockquote', text, attrs);
+        return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML anchor tag to the summary buffer
+     *
+     * @param {string} text link text/content
+     * @param {string} href hyperlink
+     *
+     * @returns {Summary} summary instance
+     */
+    addLink(text, href) {
+        const element = this.wrap('a', text, { href });
+        return this.addRaw(element).addEOL();
+    }
+}
+const _summary = new Summary();
+/**
+ * @deprecated use `core.summary`
+ */
+exports.markdownSummary = _summary;
+exports.summary = _summary;
+//# sourceMappingURL=summary.js.map
+
+/***/ }),
+
+/***/ 6700:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+// We use any as a valid input type
+/* eslint-disable @typescript-eslint/no-explicit-any */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toCommandProperties = exports.toCommandValue = void 0;
+/**
+ * Sanitizes an input into a string so it can be passed into issueCommand safely
+ * @param input input to sanitize into a string
+ */
+function toCommandValue(input) {
+    if (input === null || input === undefined) {
+        return '';
+    }
+    else if (typeof input === 'string' || input instanceof String) {
+        return input;
+    }
+    return JSON.stringify(input);
+}
+exports.toCommandValue = toCommandValue;
+/**
+ *
+ * @param annotationProperties
+ * @returns The command properties to send with the actual annotation command
+ * See IssueCommandProperties: https://github.com/actions/runner/blob/main/src/Runner.Worker/ActionCommandManager.cs#L646
+ */
+function toCommandProperties(annotationProperties) {
+    if (!Object.keys(annotationProperties).length) {
+        return {};
+    }
+    return {
+        title: annotationProperties.title,
+        file: annotationProperties.file,
+        line: annotationProperties.startLine,
+        endLine: annotationProperties.endLine,
+        col: annotationProperties.startColumn,
+        endColumn: annotationProperties.endColumn
+    };
+}
+exports.toCommandProperties = toCommandProperties;
 //# sourceMappingURL=utils.js.map
 
 /***/ }),
@@ -3348,7 +4399,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {

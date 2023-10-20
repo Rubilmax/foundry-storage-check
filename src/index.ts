@@ -20,6 +20,7 @@ const address = core.getInput("address");
 const rpcUrl = core.getInput("rpcUrl");
 const failOnRemoval = core.getInput("failOnRemoval") === "true";
 const workingDirectory = core.getInput("workingDirectory");
+const retryDelay = parseInt(core.getInput("retryDelay"));
 
 const contractAbs = join(workingDirectory, contract);
 const contractEscaped = contractAbs.replace(/\//g, "_").replace(/:/g, "-");
@@ -79,7 +80,7 @@ async function _run() {
   })) {
     const artifact = res.data.find((artifact) => !artifact.expired && artifact.name === baseReport);
     if (!artifact) {
-      await new Promise((resolve) => setTimeout(resolve, 800)); // avoid reaching the API rate limit
+      await new Promise((resolve) => setTimeout(resolve, retryDelay)); // avoid reaching the API rate limit
 
       continue;
     }

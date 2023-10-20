@@ -35,6 +35,10 @@ inputs:
     description: The directory inside which to run forge inspect.
     default: .
     required: false
+  retryDelay:
+    description: The retry delay (in milliseconds) between each GitHub API query.
+    default: 1000
+    required: false
 
 runs:
   using: node16
