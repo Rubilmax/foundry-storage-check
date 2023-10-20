@@ -28,6 +28,7 @@ jobs:
           version: nightly
 
       - name: Check storage layout
-        uses: Rubilmax/foundry-storage-check@main
+        uses: Rubilmax/foundry-storage-check@feat/showcase
         with:
-          contract: contracts/Example.sol:Example
+          contract: Example.sol:Example
+          workingDirectory: contracts/ # optional, could be replaced with `contracts/Example.sol:Example` in the line above
