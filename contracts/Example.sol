@@ -5,8 +5,8 @@ contract Example {
   struct Struct {
     bool a;
     uint256 b;
-    uint16 c;
-    uint16 d;
+    uint64 c;
+    uint64 d;
     address e;
   }
 
@@ -15,7 +15,7 @@ contract Example {
 
   uint256[10] __gap;
 
-  address _owner;
+  address owner;
 
   mapping(address => Struct[]) structOf;
 }

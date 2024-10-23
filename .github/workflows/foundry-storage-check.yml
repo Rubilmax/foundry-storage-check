@@ -24,6 +24,6 @@ jobs:
         uses: foundry-rs/foundry-toolchain@v1.2.0
 
       - name: Check storage layout
-        uses: Rubilmax/foundry-storage-check@main
+        uses: Rubilmax/foundry-storage-check@feat/showcase
         with:
           contract: contracts/Example.sol:Example
