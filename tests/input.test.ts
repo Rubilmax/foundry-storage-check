@@ -4,7 +4,9 @@ import { createLayout, parseLayout, parseSource } from "../src/input";
 
 describe("Input checks", () => {
   it("should execute createLayout from a custom working directory", async () => {
-    const layout = parseLayout(createLayout("StorageRef.sol:Storage", "tests/mocks/basic"));
+    const layout = parseLayout(
+      createLayout("tests/mocks/basic/StorageRef.sol:Storage", "tests/mocks/basic")
+    );
 
     expect(Object.keys(layout.storage)).toHaveLength(9);
     expect(Object.keys(layout.types)).toHaveLength(10);
