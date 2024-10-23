@@ -39,7 +39,7 @@
     "proxy"
   ],
   "dependencies": {
-    "@actions/artifact": "^1.1.2",
+    "@actions/artifact": "^2.1.11",
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
     "@ethersproject/providers": "^5.7.2",

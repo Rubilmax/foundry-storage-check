@@ -2,7 +2,7 @@ import Zip from "adm-zip";
 import * as fs from "fs";
 import { dirname, join, resolve } from "path";
 
-import * as artifact from "@actions/artifact";
+import artifactClient from "@actions/artifact";
 import * as core from "@actions/core";
 import { context, getOctokit } from "@actions/github";
 import { getDefaultProvider } from "@ethersproject/providers";
@@ -31,7 +31,6 @@ const baseReport = getReportPath(baseBranch, contractEscaped);
 const outReport = getReportPath(headBranch, contractEscaped);
 
 const octokit = getOctokit(token);
-const artifactClient = artifact.create();
 
 const { owner, repo } = context.repo;
 const repository = owner + "/" + repo;
@@ -56,13 +55,12 @@ async function _run() {
   const uploadResponse = await artifactClient.uploadArtifact(
     outReport,
     [localReportPath],
-    dirname(localReportPath),
-    { continueOnError: false }
+    dirname(localReportPath)
   );
 
-  if (uploadResponse.failedItems.length > 0) throw Error("Failed to upload storage layout report.");
+  if (uploadResponse.id) throw Error("Failed to upload storage layout report.");
 
-  core.info(`Artifact ${uploadResponse.artifactName} has been successfully uploaded!`);
+  core.info(`Artifact ${uploadResponse.id} has been successfully uploaded!`);
   core.endGroup();
 
   if (context.eventName !== "pull_request") return;
