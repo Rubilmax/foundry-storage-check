@@ -45,8 +45,6 @@ jobs:
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1.2.0
-        with:
-          version: nightly
 
       - name: Check storage layout
         uses: Rubilmax/foundry-storage-check@v3.8

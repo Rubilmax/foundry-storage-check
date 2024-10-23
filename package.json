@@ -47,7 +47,8 @@
     "@octokit/core": "^6.1.2",
     "@solidity-parser/parser": "^0.18.0",
     "js-sha3": "^0.8.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@actions/exec": "^1.1.1",
