@@ -68,9 +68,7 @@ async function _run() {
     { compressionLevel: 9 }
   );
 
-  console.log(uploadResponse);
-
-  if (uploadResponse.id) throw Error("Failed to upload storage layout report.");
+  if (uploadResponse.id == null) throw Error("Failed to upload storage layout report.");
 
   info(`Artifact ${uploadResponse.id} has been successfully uploaded!`);
   endGroup();
