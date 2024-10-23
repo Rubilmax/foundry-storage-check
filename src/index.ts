@@ -64,8 +64,11 @@ async function _run() {
   const uploadResponse = await artifactClient.uploadArtifact(
     outReport,
     [localReportPath],
-    dirname(localReportPath)
+    dirname(localReportPath),
+    { compressionLevel: 9 }
   );
+
+  console.log(uploadResponse);
 
   if (uploadResponse.id) throw Error("Failed to upload storage layout report.");
 
