@@ -23,14 +23,11 @@ jobs:
           node-version: 22
           cache: yarn
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile
 
-      - name: Rebuild the dist/ directory
-        run: yarn release
+      - run: yarn release
 
-      - name: Compare the expected and actual dist/ directories
-        run: |
+      - run: |
           if [ "$(git diff --ignore-space-at-eol --text dist/ | wc -l)" -gt "0" ]; then
             echo "Detected uncommitted changes after build.  See status below:"
             git diff

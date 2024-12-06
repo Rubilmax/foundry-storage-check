@@ -20,10 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1.2.0
+      - uses: foundry-rs/foundry-toolchain@v1.2.0
 
-      - name: Check storage layout
-        uses: Rubilmax/foundry-storage-check@main
+      - uses: Rubilmax/foundry-storage-check@main
         with:
           contract: contracts/Example.sol:Example
