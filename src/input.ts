@@ -19,7 +19,7 @@ const exactify = (variable: StorageVariable): StorageVariableExact => ({
 });
 
 export const createLayout = (contract: string, cwd = ".") => {
-  return execSync(`forge inspect ${contract} storage-layout`, {
+  return execSync(`forge inspect ${contract} storage-layout --json`, {
     encoding: "utf-8",
     cwd,
   });
