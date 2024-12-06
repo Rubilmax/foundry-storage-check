@@ -54,17 +54,17 @@
     "@actions/exec": "^1.1.1",
     "@jest/types": "^29.6.3",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/adm-zip": "^0.5.5",
+    "@types/adm-zip": "^0.5.7",
     "@types/jest": "^29.5.14",
-    "@types/lodash": "^4.17.12",
-    "@types/node": "^22.7.9",
-    "@vercel/ncc": "^0.36.1",
+    "@types/lodash": "^4.17.13",
+    "@types/node": "^22.10.1",
+    "@vercel/ncc": "^0.38.3",
     "adm-zip": "^0.5.16",
     "colors": "^1.4.0",
     "jest": "^29.7.0",
     "prettier": "^2.8.8",
     "ts-jest": "^29.2.5",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "jest": {
     "clearMocks": true,
